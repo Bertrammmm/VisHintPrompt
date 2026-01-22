@@ -1,0 +1,46 @@
+% \section{Introduction}
+
+\section{Introduction}
+\IEEEPARstart{N}{umerical} inference from charts is a fundamental capability that can benefit a wide range of visualization tasks, including chart question answering~\cite{Deplot,ChartQA,PlotQA} and chart redesign~\cite{ReVision}. It requires accurately mapping visual encodings, such as positions, lengths, or angles, to their corresponding numerical values. Prior research primarily addressed chart numerical inference through chart-specific models designed for particular chart types or visual encodings~\cite{ChartOCR,UniChart,cuarbune2024chart}. While these models can achieve competitive performance within their targeted settings, their effectiveness often relies on assumptions about chart structure and encoding styles, limiting their ability to generalize to unseen or structurally diverse charts.
+
+Recent advances in Multimodal Large Language Models (MLLMs) have 
+% attracted significant attention due to their 
+shown
+strong general-purpose visual and linguistic understanding capabilities,
+which motivates growing efforts to adapt MLLMs to chart-related numerical inference tasks through task-specific training, including specialized dataset construction and fine-tuning or instruction tuning~\cite{visrefinstuning,UniChart}. Representative approaches include Deplot~\cite{Deplot}, and ChartSketcher~\cite{ChartSketcher}. While these methods have shown promising performances on chart understanding benchmarks, they rely on substantial task-specific data and training to modify model behavior, often incurring high computational and data collection costs.
+
+An alternative and potentially more lightweight approach is to enhance MLLMs’ chart numerical inference through visual prompting. A recent evaluation study, ChartInsights~\cite{ChartInsights}demonstrates that explicitly augmenting charts with visual cues can significantly enhance models’ ability to analyze data and perform reasoning, without additional training. Beyond chart-specific tasks, a growing body of work in general computer vision has explored visual prompting strategies for object detection, keypoint localization, and spatial reasoning. Methods such as DetToolChain~\cite{DetToolChain}, RedCircle~\cite{shtedritski2023does}, and SCAFFOLD~\cite{lei-etal-2025-scaffolding} provide converging evidence that explicitly externalizing spatial priors through image manipulation, such as zoom-in operations and coordinate-reading cues (e.g., overlaying rulers, compasses, or dot matrices), can effectively guide MLLMs’ attention and improve spatial localization.
+
+However, accurate chart numerical inference fundamentally requires establishing explicit correspondences between visual coordinates and numerical values under axis constraints. 
+While existing visual prompting strategies have shown effectiveness in extracting explicitly annotated values and improving spatial localization, it remains unclear whether and how visual prompting alone can systematically enable pretrained MLLMs to perform fine-grained numerical inference, where values must be inferred from visual encodings via precise alignment with axis scales. 
+This unresolved question motivates the need for a systematic and generic visual prompting strategy for chart numerical inference. 
+
+
+To fill this gap, we propose \toolName{}, a scaffolded visual prompting strategy designed to support fine-grained numerical inference from charts using pretrained MLLMs, without requiring any additional training. The core idea of \toolName{} is to explicitly expose axis-aware spatial structure by introducing and progressively refining grid-based visual references, which serve as a foundation for structured visual hints to guide a more accurate numerical inference (Fig.~\ref{fig:IntroductionFig}). 
+% In particular, we
+Our experiments
+show that explicitly extracting and externalizing \emph{axis priors}, i.e., axis-related structural information such as axis orientation, tick locations, and value scales, provides an effective geometric foundation for guiding fine-grained numerical inference.
+% Grounded in the explicit extraction of axis priors from both Cartesian and polar charts using simple and off-the-shelf image processing algorithms, \toolName{} integrates structured visual hints with multi-round refinement to progressively narrow the effective search space and strengthen spatial grounding during inference. 
+Specifically, \toolName{} consists of three coordinated components: \emph{(1) Axis-Aware Grid Enhancement}, which introduces structure-aligned Cartesian or polar grids to provide a stable reference for mapping visual positions to numerical values; \emph{(2) Iterative Visual Feedback}, which overlays alignment cues derived from intermediate predictions to iteratively correct coarse localization errors; and \emph{(3) Progressive Zoom-in Refinement}, which selectively enlarges regions of interest and applies progressive grid densification to introduce finer axis-aligned references, amplifying subtle mark-axis relationships that are critical for precise value estimation. 
+These components form a coherent strategy that incrementally refines spatial focus and numerical grounding.
+Experiments across diverse chart types on both proprietary and open-source MLLMs show consistent performance gains over standard prompting. Quantitative and qualitative analyses, together with component-wise ablation studies, further validate the complementary roles of each component. Our main contributions are summarized as follows:
+
+
+\begin{itemize}
+    
+    \item \textbf{A scaffolded visual hint prompting strategy (\toolName{}).}
+    We propose \toolName{}, a structured visual prompting framework that integrates Axis-aware Grid Enhancement, Iterative Visual Feedback, and Progressive Zoom-in Refinement. By progressively narrowing the model’s effective search space, \toolName{} enables more precise numerical inference from charts with pretrained MLLMs, without additional training.
+    
+    \item \textbf{A comprehensive evaluation of \toolName{} on numerical inference across different MLLMs and chart types.}
+    We conduct systematic experiments spanning three proprietary and two open-source MLLMs across nine chart types, covering both Cartesian and polar encodings. Our evaluation integrates quantitative results, qualitative analysis, and component-wise ablation studies. The results demonstrate consistent improvements over standard prompting and confirm the role of each component.
+
+\end{itemize}
+
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=\columnwidth, alt={Examples of scatterplot data inference with an MLLM.}]{figs/Introduction.png}
+  \caption{%
+  	An illustrative example of scatterplot data inference using an MLLM with or without visual hints (i.e., the grid here). Black text represents the ground truth, red text highlights large numerical extraction errors, and green text indicates accurate extraction with minimal deviation from the ground truth. Grid hints substantially improve extraction performance.    
+  }
+  \label{fig:IntroductionFig}
+\end{figure}

@@ -1,0 +1,218 @@
+\section{VisHintPrompt}
+% Grounded in explicit extraction of axis priors from both Cartesian and polar charts, 
+We propose \toolName{}, a visual-hint-based prompting strategy to elicit MLLMs’ abilities of numerical inference from charts. It introduces three coordinated visual hint prompting components (Fig.~\ref{teaser}(b)), \emph{(1) Axis-aware Grid Enhancement}, \emph{(2) Iterative Visual Feedback}, and \emph{(3) Progressive Zoom-in Refinement}, which progressively narrow the search region and substantially improve numerical accuracy and robustness across diverse chart types. \toolName{} begins with chart type classification, which determines the appropriate axis prior extraction procedure and the corresponding visual prompting strategy. 
+We consider two coordinate families: Cartesian (bar, line, scatterplot, and bubble charts) and polar (pie, donut, radar, and rose charts).
+
+% This section first describes the three visual hint prompting components of \toolName{}, and then summarizes the overall prompting pipeline used in our experiments. We consider two coordinate families: Cartesian (bar, line, scatter, and bubble charts) and polar (pie, donut, radar, and rose charts).
+
+% While modern MLLMs such as GPT-4o and Gemini achieve notable success in reasoning and recognition, accurate numerical extraction from charts continues to be an underexplored capability. To unleash the potential of MLLMs in this regard, we propose a comprehensive visual prompting strategy, VisHintPrompt, whose workflow is illustrated in \cref{fig:teaser}. A toolkit is devised to assist image processing, including Axis \& Tick Detector, Grid Generator, Visual Feedback Iterator, and Regional Amplifier. In addition, chain-of-thought textual prompts are designed to guide the MLLM in executing the VisHintPrompt pipeline, thereby accomplishing data inference from chart images.
+\subsection{Axis-aware Grid Enhancement}
+\subsubsection{\textbf{Extraction of Axis Priors from Chart Images}}
+Axis-prior extraction (Fig.~\ref{teaser}(a)) aims to obtain high-precision axis information that is readily available from chart images using simple, off-the-shelf image processing algorithms. 
+% In our setting, Cartesian charts include bar, line, scatter, and bubble charts, whereas polar charts refer to plots whose data positions are encoded by angle and/or radius around a common center, such as pie charts, donut charts, rose charts, and radar charts. 
+Specifically, the extracted axis priors across these two coordinate systems comprise the geometric layout (x–y axes or circular frame, axis positions, circle center, and radii) and the associated numeric structure (tick locations, tick labels, and scales), providing a high-precision reference for subsequent visual-hint prompting.
+
+% --------------------- Cartesian ---------------------
+\paragraph{Axis priors in Cartesian coordinates}
+For Cartesian charts, we extract axis priors describing the x–y axis geometry and numeric scale.
+
+\textbf{Extraction of x–y axes.} We begin by detecting candidate horizontal and vertical axis lines using the classical Hough Transform, which is robust for identifying long linear geometric structures. Among the detected lines, we select the pair that satisfies the characteristic property of Cartesian coordinates—one dominant horizontal line and one dominant vertical line that are orthogonal to each other. To additionally ensure robustness across charts with different axis placements, we employ an MLLM to identify the layout of the chart and verify the correct axis pair. This combination of geometric detection and layout validation reliably yields the final axis extraction for Cartesian charts.
+
+\textbf{Alignment of tick values to pixel positions.} Tick marks are first scanned along each extracted axis as short line segments that are perpendicular to the axis line. Because this scanning process may occasionally be affected by background noise or decorative elements, we analyze the distribution of intervals between adjacent detected ticks and identify the interval that appears most frequently as the true tick spacing. Using this dominant spacing, we refine the tick locations and correct potential outliers, which produces a more reliable set of tick positions. 
+% For each refined tick, we apply OCR\pyl{OCR is not utilized in the Cartesian coordinate system currently} to obtain the corresponding numeric label and pair it with its pixel coordinate. 
+Through this refinement procedure, the method produces accurate pixel–value pairs that support stable and precise value interpolation in subsequent components of our prompting framework.
+
+% --------------------- polar ---------------------
+\paragraph{Axis priors in polar coordinates}
+For polar charts, we extract axis priors that capture both the polar geometric layout and the two forms of numeric encoding in polar coordinates: angular encoding in pie and donut charts, and the joint angular–polar encoding used in radar charts.
+
+\textbf{Extraction of circle center and radius.}
+To obtain the geometric parameters of polar charts, we detect the chart center and its outermost circular boundary. The image is converted to grayscale, smoothed with a Gaussian filter, and processed with a Canny operator to enhance structural edges. The resulting edge map is analyzed using the Hough Circle Transform (CHT), which is robust to noise and partial edge loss and returns a set of candidate circles. Because polar charts often contain multiple concentric rings, we select the circle with the largest radius and adopt its center $(x_c, y_c)$ and radius $r_{\text{max}}$ as the geometric parameters of the chart.
+
+\textbf{Alignment of polar values to pixel radii.}
+For pie and donut charts, the polar coordinate structure is fully determined by the center and the outer boundary, since these charts encode values solely through angular spans. In contrast, radar charts and rose diagrams encode data through polar distances, which requires an additional alignment between pixel radii and numeric values. To obtain this polar mapping, we detect two reference circles using CHT and extract the annular region between their radii $r_1$ and $r_2$. This region contains the numeric tick labels corresponding to the two grid circles. The annular patch is provided to the MLLM, which reads the labels and yields the paired observations $(r_1, V_1)$ and $(r_2, V_2)$. With the shared center $(x_c, y_c)$ and these two radius--value pairs, we construct a linear mapping from pixel radius to numeric values. This mapping defines the chart’s radial metric and completes the polar-axis representation for subsequent prompting components.
+
+% --------------------- Unified ---------------------
+\paragraph{Unified axis-prior representation}
+% To support a unified prompting design, we store the extracted axis priors for both Cartesian and polar charts in a common representation. This representation exposes, for each chart, the valid value ranges, orientation of each axis (linear or polar), and the corresponding pixel-to-value mappings. In the following subsections, we use these axis priors to construct visual hints for grid prompting, prediction overlays, and progressive zoom-in refinement in \toolName{}.
+To enable a unified prompting design, we store the extracted axis priors for Cartesian and polar charts in a shared representation that encodes valid value ranges, axis orientation, and pixel-to-value mappings. These priors are then used to construct grid-based visual hints, visual feedback
+% \pyl{The terminology is not aligned with the previous context.}
+, and progressive zoom-in refinement in \toolName{}.
+
+\subsubsection{\textbf{Geometry-aligned Grid Construction}}
+% \pyl{It shares the same name as the main heading.}
+Building on the extracted axis priors, this component overlays geometry-aligned reference grids as explicit visual cues for MLLMs. Depending on the chart type, these grids take the form of orthogonal grids, concentric rings, or angular polar divisions, corresponding to different geometric encoding families 
+% (Fig.~\ref{teaser}(b))
+. 
+By embedding axis-guided visual scaffolds into the chart, the perceptual distance between data marks and nearby reference boundaries is reduced, enabling value inference within a more localized and interpretable neighborhood.
+% \pyl{In my opinion, a discussion integrating global perspectives and region-specific insights of interest could be added to this section, so as to address Yong’s question raised earlier: "Are our approaches also for local regions?"}
+
+% Building on the extracted axis priors, this component constructs a set of 
+% geometry-aligned reference grids that serve as explicit visual cues for 
+% multimodal LLMs. These reference structures include orthogonal grids, concentric 
+% rings, and angular polar divisions, each corresponding to a distinct geometric 
+% encoding family and illustrated in Fig.~\ref{teaser}(b). By embedding such axis-guided visual 
+% scaffolds directly into the chart, the perceptual distance between data marks and 
+% their nearest reference boundaries is substantially reduced, enabling the model to 
+% perform value inference within a narrower, more interpretable local neighborhood.
+
+\paragraph{Orthogonal grid hint}
+This form of prompting applies to charts embedded in Cartesian coordinates, such as 
+bar charts, line charts, scatterplots, and bubble charts. For value-encoded axes, 
+we generate a fine-grained orthogonal grid by subdividing the original tick 
+intervals into visually manageable spans.
+% , approximately 50 pixels in width, as shown in Fig.~\ref{fig:case1-1}(Scatter)\pyl{The figure is excessively distant from the corresponding text.}
+These subdivisions maintain integer tick values whenever 
+possible to avoid excessive floating-point annotations. For categorical axes, only 
+label-aligned guide lines are inserted. Scatterplots and bubble charts adopt the 
+same subdivision strategy symmetrically along both dimensions to preserve the 
+underlying value mapping.
+
+\paragraph{Concentric ring hint}
+Charts such as radar and rose plots encode data magnitudes along polar directions. 
+For these chart families, we construct a hierarchy of concentric rings by 
+subdividing the polar axis, thereby generating finer reference levels around the 
+original polar ticks.
+% , as illustrated in Fig.~\ref{fig:case}(Rose)\pyl{The figure is excessively distant from the corresponding text.}. 
+These rings preserve the polar 
+geometry while supplying clearer reference distances for the model to interpret 
+polar magnitudes.
+
+\paragraph{Polar-division hint}
+Donut and pie charts encode proportional information through angular spans. For 
+these charts, we construct polar-division prompting by inserting angular 
+divisions aligned with the chart’s outer radius, as shown in Fig.~\ref{fig:case1} (Donut). These 
+divisions are optionally annotated with angle values, enabling the model to directly 
+read start and end angles for proportion estimation.
+% in a geometrically explicit manner.
+
+Together, these geometry-specific prompting structures form a unified 
+axis-guided reference framework that extends across Cartesian and polar chart 
+families. By providing clear, geometry-aligned visual anchors, this component 
+substantially enhances the model’s ability to localize, interpret, and quantify 
+underlying chart encodings.
+
+% \subsubsection{Axis-Guided Grid Prompting}
+% Build on the axis priors extraction, Axis-Guided Grid Prompting aims to provide more explicit reference with extra or more fine-grained localization axis information by overlaying lines, polars and arcs with tick value on the original chart image, as depicted in Fig. 3. The auxiliary grid hints enable MLLMs to output accurate data values with the help of more nearest/direct accessible references overlaid in the chart image. This tick-related marks minum the distance data marke and reference tick line, allowing MLLMs to in a more little span to predict the accurate data values. Across charts with different axis style, the construction of specific axis-guided grid is detailed as follows:\\
+% Cartesian charts here includes bar line scatterplot bubble charts. Divided by the dimension of data mapping, bar/line charts only mapping data in one value axis, for that the grid hint is emphasized to the value axis. As shown in fig.3(a), to ensure the more fine-grained grids and the tick values visible not overlapping, we set the grid span to be around 50 pixel. In addition, the span is set by dividing the original span, to keep the fine-grained  grid with int tick value, avoid too many float tick value annotation. For class axis, the lines only need to render from the label. For the scatterplot and bubble charts, the two value axis follow the same rule to curate expected grid hints.\\
+% To construct the grid prompting for polar(ploar) charts, there is different from the donut chart and pie chart to radar chart and rose chart due to their different data mapping, as shown in fig.3(b). For the chart which mapping propotion data, such as donut and pie chart, we construct a circular lines that align with polar direction to enable MLLMs read the start and end angles directly to compute the data value. Different from this, radar and rose chart is mapping data with polar, in which we follow the original arc axis to fine-grained the tick lines, as shown in fig.3(c).
+
+\begin{figure}[b]
+  \centering
+  \includegraphics[width=\columnwidth, alt={Examples of scatterplot data inference with an MLLM.}]{figs/grid-refine.png}
+  \caption{
+  % \pyl{The vertical line segment of the solid line for R3 is missing in this plot. Although R3 may theoretically overlap with the ground truth (GT), the solid line style of R3 should not be completely obscured by the dashed line style of GT.}  
+    An illustration of the Progressive Zoom-in Refinement mechanism on a horizontal
+    bar chart and a donut chart. Successive regions (R1, R2, R3) show how the
+    model iteratively crops closer to the target region, enabling increasingly
+    precise numerical inference.
+    }
+
+  \label{fig:Refinement}
+\end{figure}
+
+\subsection{Iterative Visual Feedback}
+
+With the axis priors already extracted, this component introduces an explicit form of 
+visual feedback by overlaying the model's previous prediction onto the original 
+chart. The key idea is to render the predicted data position back into the chart 
+space so that the model can visually compare its estimate against the true 
+geometric layout. This prediction-overlay mechanism provides a direct and 
+interpretable hint that constrains subsequent inference and reduces ambiguity in 
+the model's internal representation of the chart.
+
+Given a prediction $p_{t}$ obtained from the previous iteration, we project 
+$p_{t}$ back to chart coordinates using the extracted axis mapping and generate a 
+visual overlay that marks the predicted location. This feedback overlay is defined as
+\begin{equation}
+F_{t} = \mathcal{O}(I, p_{t}, P_{\text{axis}}),
+\end{equation}
+where $\mathcal{O}$ denotes the overlay operator and $P_{\text{axis}}$ denotes the axis priors. The operator renders a chart-type–specific visual cue (e.g., marker, line, or angular indicator) at the predicted position. The resulting feedback-augmented visualization $F_t$ is then fed into the MLLM for the next iteration.
+
+This visual feedback serves two complementary functions. First, it makes the 
+model's own uncertainty explicit by exposing the discrepancy between the predicted 
+and the actual data location in the chart. Second, it creates a stable and 
+geometry-aligned visual anchor that guides the model to re-evaluate its earlier 
+prediction and adjust it toward the correct value. As a result, the 
+prediction-overlay feedback forms a self-correcting loop that enhances the model's 
+ability to align numerical inference with the chart’s spatial encoding.
+
+
+
+\subsection{Progressive Zoom-in Refinement}
+To further elevate numerical inference accuracy, we introduce a 
+\textit{Self-evolving Visual Refinement} mechanism that performs progressively 
+localized zoom-in reasoning based on axis priors anchored in the preceding component. 
+These axis-aware geometric priors provide a calibrated coordinate frame that 
+supports a more disciplined and increasingly discriminative localization process.
+
+Each refinement iteration treats the model's previous prediction as an endogenous 
+cue, effectively a self-generated supervisory signal that guides the construction of 
+tighter visual constraints through localized cropping, magnification, and grid 
+densification. We formalize these operations through an iterative region-refinement 
+operator. Let $p_{t}$ denote the model's numerical prediction at iteration $t$. The 
+refined visual region is defined as
+
+\begin{equation}
+R_{t} = \mathcal{G}\big(\mathcal{M}(\mathcal{C}(I, p_{t}))\big),
+\label{eq:refine-region-3.2.3}
+\end{equation}
+
+where $\mathcal{C}(I, p_{t})$ crops a region centered at the current predicted location $p_{t}$, $\mathcal{M}(\cdot)$ scales this crop, and $\mathcal{G}(\cdot)$ overlays a denser grid based on the axis priors.
+
+
+Given the refined region $R_{t}$, the model updates its prediction through
+
+\begin{equation}
+p_{t+1} = f_{\theta}(R_{t}),
+\label{eq:update-prediction-3.2.3}
+\end{equation}
+
+where $f_{\theta}$ denotes the multimodal model.
+
+To ensure correctness, a self-verification criterion is introduced to check whether 
+the cropped region still encloses the target chart element:
+
+\begin{equation}
+\mathcal{V}(R_{t}) =
+\begin{cases}
+1, & \text{if the target element lies within } R_{t}, \\
+0, & \text{otherwise}.
+\end{cases}
+\label{eq:verification-3.2.3}
+\end{equation}
+
+If $\mathcal{V}(R_{t}) = 0$, the cropping region is adaptively expanded and 
+re-centered before refinement continues. Formally, the system updates
+
+\begin{equation}
+R_{t} \leftarrow \mathcal{C}\big(I, p_{t}; \alpha \cdot s_{t}\big),
+\label{eq:adaptive-expand-3.2.3}
+\end{equation}
+
+where $s_{t}$ is the current crop scale and $\alpha > 1$ controls the expansion 
+ratio. Only when $\mathcal{V}(R_{t}) = 1$ does the algorithm proceed to compute 
+$p_{t+1}$.
+
+The complete refinement sequence forms a perceptual narrowing trajectory
+
+\begin{equation}
+p_{0} \rightarrow p_{1} \rightarrow \cdots \rightarrow p_{T},
+\end{equation}
+
+which empirically converges to a high-confidence estimate $p^{*}$ that minimizes 
+prediction error:
+
+\begin{equation}
+p^{*} = \arg\min_{p} \|p - p_{\text{true}}\|.
+\end{equation}
+In practice, we run at most $T = 3$ refinement iterations.
+% , or stop earlier if the predicted value changes by less than $\epsilon$.\pyl{No basis for determining the value of $\epsilon$ is defined.}
+Through the interplay between self-evolving localization and verification-driven 
+correction, this refinement component produces progressively tighter value estimates and 
+steers the model toward precise and reliable numerical predictions.
+
+
+
+
+

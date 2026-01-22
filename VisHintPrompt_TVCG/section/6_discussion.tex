@@ -1,0 +1,65 @@
+
+
+\section{Discussion}
+This work demonstrates that explicitly structured visual scaffolding, through axis-aware grids, visual feedback, and progressive zoom-in refinement, substantially improves numerical inference from charts in MLLMs. 
+Beyond empirical accuracy gains, our findings shed light on how current models internalize chart geometry, why different elicitation components contribute at distinct levels of abstraction, and how structured visual guidance can support more reliable visual reasoning beyond standard chart settings. 
+% We discuss these implications below.
+
+\subsection{Insights and Broader Implications}
+% \paragraph{Differential priors in MLLMs for chart geometry}
+\subsubsection{\textbf{Uneven Geometric Familiarity in MLLMs}}
+% \wy{what are differential priors here?}
+% Our results indicate that MLLMs exhibit a structured hierarchy of difficulty across chart types that reflects underlying geometric properties.
+Our results indicate that MLLMs differ systematically in their numerical inference performance across chart types. 
+Models show more inherent familiarity with chart types where values are mapped to direct and perceptually salient spatial positions, consistent with dominant visual and linguistic conventions in natural image–text data. 
+In contrast, chart types that rely on less canonical encodings, including mappings along non-dominant axes as well as area- or angle-based representations, exhibit weaker geometric familiarity. 
+These encodings are associated with higher baseline errors and larger performance gains under \toolName{}. 
+Overall, these findings suggest that numerical inference in MLLMs is shaped by an interaction between the complexity of value-to-geometry mappings and biases in the model’s training data exposure.
+
+
+
+
+\subsubsection{\textbf{Distinct Roles of Visual Scaffolding Components}}
+Our findings suggest that effective numerical inference in MLLMs requires a clear division of labor across different forms of visual scaffolding. 
+Global grid cues and visual feedback primarily operate at a coarse level by making chart structure and approximate value ranges explicit, which helps stabilize initial localization. 
+Progressive zoom-in refinement, in contrast, provides the fine-grained spatial resolution needed to translate this coarse localization into accurate numerical estimates. 
+This separation of roles explains why global structural guidance alone can identify relevant regions but lacks numerical precision, while local refinement alone is prone to unstable localization, making their combination essential for reliable numerical reasoning.
+
+
+
+\subsubsection{\textbf{Externalizing Structured Priors as Visual Scaffolds}}
+The design of \toolName{} illustrates a broader methodological principle for structured visual reasoning tasks. 
+Many visual representations, particularly charts, engineered schematics, and other diagrammatic artifacts, rely on explicit structural conventions that humans readily exploit but that MLLMs do not reliably infer from raw pixels alone. 
+By rendering this structure directly in the input through grids, overlays, and localized refinements, the prompting pipeline functions as an inference-time scaffold that constrains reasoning within a well-defined geometric frame. 
+This principle is likely to generalize to domains such as circuit diagrams, process flows, and technical schematics, where consistent visual grammars exist but are underrepresented in model training data. 
+Externalizing such structure provides a lightweight and domain-adaptable mechanism for enhancing multimodal reasoning without modifying model parameters.
+
+
+
+\subsection{Limitations and Future Work}
+
+\subsubsection{\textbf{Dependence on Mark Count and Labeling Density}}
+Our strategy assumes that visual elements remain distinguishable under
+progressive crops. Charts with extremely dense marks or overlapping
+labels challenge this assumption. In such cases, the refinement component may
+struggle to preserve semantic correspondence between the cropped region
+and the original chart. A potential solution is a two-step labeling
+pipeline: the model first proposes a coarse identity tag for each mark
+(e.g., region, item, or category), and the refinement procedure then
+operates relative to these inferred identities. Preliminary experiments
+on scatterplots with off-center labels suggest that this approach can
+help maintain stable grounding even under dense or cluttered layouts.
+
+
+\subsubsection{\textbf{Inference-time Efficiency}}
+The visual hint prompting strategy introduces additional inference-time overhead due to multi-round prompting, iterative visual feedback and progressive zoom-in refinement. 
+While this design is essential for improving numerical precision, it may limit scalability in latency-sensitive or large-scale deployment settings.
+
+
+\subsubsection{\textbf{Future Work}}
+Several promising directions for future research are worth exploring. 
+First, integrating \toolName{} into end-to-end chart understanding systems would enable evaluation on large-scale, naturally occurring datasets and more complex analytical tasks. 
+Second, extending structured visual scaffolding to other schematic domains, such as technical diagrams or process flows, could further assess the generality of axis externalization and coarse-to-fine refinement. 
+Finally, future work may explore hybrid prompting strategies that incorporate adaptive or learned zoom policies within an inference-time visual scaffolding framework, aiming to better balance numerical accuracy and inference efficiency.
+
+

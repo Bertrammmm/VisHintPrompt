@@ -1,0 +1,853 @@
+\begin{table*}[htbp]
+\centering
+\caption{
+Main experimental results across five MLLMs on nine chart types.
+We report Range-Normalized Error (RNE) and Relative Error (RE; lower is better) for both 
+the baseline (original charts) and our VisHintPrompt method.
+}
+\label{tab:mllms_comparison}
+\small
+\setlength{\tabcolsep}{3.6pt}
+\renewcommand{\arraystretch}{1.22}
+
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{
+    m{2.8cm}<{\centering} 
+    m{1.9cm}<{\centering} 
+    % *{20}{S[table-format=2.2]}
+    *{18}{S[table-format=2.2]}
+    | % ← 只在这里加
+    *{2}{S[table-format=2.2]}
+}
+\toprule
+\multirow{2}{*}{\textbf{MLLMs}} &
+\multirow{2}{*}{\textbf{Setting}} &
+\multicolumn{2}{c}{Scatterplot} &
+\multicolumn{2}{c}{Bubble} &
+% \multicolumn{2}{c}{v$-$Bar} &
+% \multicolumn{2}{c}{h$-$Bar} &
+\multicolumn{2}{c}{Vertical Bar} &
+\multicolumn{2}{c}{Horizontal Bar} &
+\multicolumn{2}{c}{Line} &
+\multicolumn{2}{c}{Radar} &
+\multicolumn{2}{c}{Rose} &
+\multicolumn{2}{c}{Pie} &
+\multicolumn{2}{c}{Donut} &
+\multicolumn{2}{|c}{Avg.} \\
+
+
+
+\cmidrule(lr){3-4}   % Scatter
+\cmidrule(lr){5-6}   % Bubble
+\cmidrule(lr){7-8}   % v-Bar
+\cmidrule(lr){9-10}  % h-Bar
+\cmidrule(lr){11-12} % Line
+\cmidrule(lr){13-14} % Radar
+\cmidrule(lr){15-16} % Rose
+\cmidrule(lr){17-18} % Pie
+\cmidrule(lr){19-20} % Donut
+\cmidrule(lr){21-22} % Avg
+& & {RNE} & {RE} & {RNE} & {RE} & {RNE} & {RE} & {RNE} & {RE} &
+      {RNE} & {RE} & {RNE} & {RE} & {RNE} & {RE} & {RNE} & {RE} & {RNE} & {RE}  & {RNE} & {RE}\\
+\cmidrule(lr){1-2}   % MLLMs
+\cmidrule(lr){3-4}   % Scatter
+\cmidrule(lr){5-6}   % Bubble
+\cmidrule(lr){7-8}   % v-Bar
+\cmidrule(lr){9-10}  % h-Bar
+\cmidrule(lr){11-12} % Line
+\cmidrule(lr){13-14} % Radar
+\cmidrule(lr){15-16} % Rose
+\cmidrule(lr){17-18} % Pie
+\cmidrule(lr){19-20} % Donut
+\cmidrule(lr){21-22} % Avg
+
+% \midrule
+
+% GPT-4o
+\multirow{2}{*}{GPT-4o}
+& Baseline 
+    & 6.72 & 4.69 & 6.63 & 25.34 & 5.7 & 14.22 & 9.05 & 49.44 & 3.84 & 9.77 & 25.54 & 55.71 & 16.58 & 22.64 & \textbf{3.72} & \textbf{25.72} & \textbf{2.64} & \textbf{30.93} & 8.94 & 26.5\\
+& \cellcolor{gray!15}VisHintPrompt
+    & \cellcolor{gray!15}\textbf{3.44} & \cellcolor{gray!15}\textbf{2.23} 
+    & \cellcolor{gray!15}\textbf{3.38} & \cellcolor{gray!15}\textbf{10.90}
+    & \cellcolor{gray!15}\textbf{3.03} & \cellcolor{gray!15}\textbf{6.91}
+    & \cellcolor{gray!15}\textbf{1.94} & \cellcolor{gray!15}\textbf{9.22}   %h-bar
+    & \cellcolor{gray!15}\textbf{2.13} & \cellcolor{gray!15}\textbf{4.11} %line
+    & \cellcolor{gray!15}\textbf{11.92} & \cellcolor{gray!15}\textbf{32.14}
+    & \cellcolor{gray!15}\textbf{9.99} & \cellcolor{gray!15}\textbf{13.4}
+    & \cellcolor{gray!15}12.52 & \cellcolor{gray!15}43.81
+    & \cellcolor{gray!15}7.94 & \cellcolor{gray!15}67.15
+    & \cellcolor{gray!15}\textbf{6.25} & \cellcolor{gray!15}\textbf{21.1}\\
+
+% Gemini 2.0 Flash
+\multirow{2}{*}{Gemini 2.0 Flash}
+& Baseline 
+     & 3.08 & 13.43 & 3.03 & 12.79 & \textbf{0.67} & \textbf{0.26} & 5.43 & 14.03 & \textbf{0.31} & \textbf{1.02} & 20.63 & 50.21 & 18.9 & 25.94 & 3.8 & 23.53 & 2.81 & 27.84 & 6.52 & 18.78\\
+& \cellcolor{gray!15}VisHintPrompt
+    & \cellcolor{gray!15}\textbf{1.38} & \cellcolor{gray!15}\textbf{4.30}
+    & \cellcolor{gray!15}\textbf{1.41} & \cellcolor{gray!15}\textbf{4.06}
+    & \cellcolor{gray!15}1.65 & \cellcolor{gray!15}0.64
+    & \cellcolor{gray!15}\textbf{1.65} & \cellcolor{gray!15}\textbf{4.56} %h-bar
+    & \cellcolor{gray!15}0.81 & \cellcolor{gray!15}1.66 %line
+    & \cellcolor{gray!15}\textbf{6.93} & \cellcolor{gray!15}\textbf{21.77}
+    & \cellcolor{gray!15}\textbf{10.0} & \cellcolor{gray!15}\textbf{13.57}
+    & \cellcolor{gray!15}\textbf{3.03} & \cellcolor{gray!15}\textbf{15.63}
+    & \cellcolor{gray!15}\textbf{1.75} & \cellcolor{gray!15}\textbf{16.92}
+    & \cellcolor{gray!15}\textbf{3.18} & \cellcolor{gray!15}\textbf{9.23}\\
+
+% Gemini 2.5 Flash
+\multirow{2}{*}{Gemini 2.5 Flash}
+& Baseline 
+    & 3.19 & 9.44 & 3.31 & 10.37 & 2.21 & 5.49 & 3.41 & 37.02 & \textbf{0.54} & \textbf{1.84} & 27.46 & 52.0 & 12.23 & 16.83 & 2.92 & 13.83 & 2.45 & 21.56 & 6.41 & 19.79 \\
+& \cellcolor{gray!15}VisHintPrompt
+    & \cellcolor{gray!15}\textbf{2.62} & \cellcolor{gray!15}\textbf{7.20}
+    & \cellcolor{gray!15}\textbf{3.10} & \cellcolor{gray!15}\textbf{7.89}
+    & \cellcolor{gray!15}\textbf{0.95} & \cellcolor{gray!15}\textbf{2.78}
+    & \cellcolor{gray!15}\textbf{0.77} & \cellcolor{gray!15}\textbf{5.42} %h-bar
+    & \cellcolor{gray!15}1.84 & \cellcolor{gray!15}3.56 %line chart
+    & \cellcolor{gray!15}\textbf{6.63} & \cellcolor{gray!15}\textbf{21.6}
+    & \cellcolor{gray!15}\textbf{7.16} & \cellcolor{gray!15}\textbf{10.45}
+    & \cellcolor{gray!15}\textbf{1.89} & \cellcolor{gray!15}\textbf{9.07}
+    & \cellcolor{gray!15}\textbf{1.47} & \cellcolor{gray!15}\textbf{13.38}
+    & \cellcolor{gray!15}\textbf{2.94} & \cellcolor{gray!15}\textbf{9.04}\\
+
+% InternVL3-78B
+\multirow{2}{*}{InternVL3-78B}
+& Baseline 
+    & 3.30 & 2.19 & 5.04 & 12.47 & \textbf{1.27} & 4.35 & 5.39 & 16.69 & \textbf{0.83} & \textbf{2.07} & 16.25 & 37.0 & 11.73 & 16.97 & \textbf{3.62} & 25.72 & \textbf{2.28} & 29.89 & 5.52 & 16.37\\
+& \cellcolor{gray!15}VisHintPrompt   % Acc / RE
+    & \cellcolor{gray!15}\textbf{1.45} & \cellcolor{gray!15}\textbf{1.01}
+    & \cellcolor{gray!15}\textbf{3.79} & \cellcolor{gray!15}\textbf{9.95} % bubble
+    & \cellcolor{gray!15}1.40 & \cellcolor{gray!15}\textbf{4.19}  % V-Bar
+    & \cellcolor{gray!15}\textbf{0.64} & \cellcolor{gray!15}\textbf{5.43}    % H-bar
+    & \cellcolor{gray!15}1.77 & \cellcolor{gray!15}3.79    % Line
+    & \cellcolor{gray!15}\textbf{6.78} & \cellcolor{gray!15}\textbf{15.85} % radar
+    & \cellcolor{gray!15}\textbf{8.97} & \cellcolor{gray!15}\textbf{13.09} % rose
+    & \cellcolor{gray!15}4.94 & \cellcolor{gray!15}\textbf{18.73}    % pie
+    & \cellcolor{gray!15}3.02 & \cellcolor{gray!15}\textbf{26.95}
+    & \cellcolor{gray!15}\textbf{3.64} & \cellcolor{gray!15}\textbf{11.0}\\    % donut
+
+% Pixtral-12B-2409
+\multirow{2}{*}{Pixtral-12B-2409}
+& Baseline 
+    & 7.38 & 4.86 & 6.69 & 18.92 & \textbf{2.03} & \textbf{3.27} & \textbf{6.98} & 43.43 & \textbf{2.62} & 7.38 & 33.15 & 72.36 & 34.57 & 46.68 & \textbf{6.13} & 55.04 & 9.73 & 84.60 & 12.14 & 37.4 \\
+& \cellcolor{gray!15}VisHintPrompt   % Acc / RE
+    & \cellcolor{gray!15}\textbf{4.73} & \cellcolor{gray!15}\textbf{3.22}
+    & \cellcolor{gray!15}\textbf{6.36} & \cellcolor{gray!15}\textbf{9.32} % bubble
+    & \cellcolor{gray!15}15.26 & \cellcolor{gray!15}24.6  % V-Bar
+    & \cellcolor{gray!15}9.28 & \cellcolor{gray!15}\textbf{36.29}    % H-bar
+    & \cellcolor{gray!15}2.95 & \cellcolor{gray!15}\textbf{6.99}    % Line
+    & \cellcolor{gray!15}\textbf{15.56} & \cellcolor{gray!15}\textbf{44.2}      % radar
+    & \cellcolor{gray!15}\textbf{11.89} & \cellcolor{gray!15}\textbf{17.16} % rose
+    & \cellcolor{gray!15}13.31 & \cellcolor{gray!15}\textbf{50.28}    % pie
+    & \cellcolor{gray!15}\textbf{6.15} & \cellcolor{gray!15}\textbf{44.82} 
+    & \cellcolor{gray!15}\textbf{9.50} & \cellcolor{gray!15}\textbf{26.32}\\    % donut
+
+\midrule
+\multirow{2}{*}{\shortstack{Avg.}}
+& Baseline 
+    & 4.73 & 6.92 & 4.94 & 15.98 & \textbf{2.38} & \textbf{5.52} & 6.05 & 32.12 & \textbf{1.63} & 4.42 & 24.61 & 53.46 & 18.8 & 25.81 & \textbf{4.04} & 30.71 & \textbf{3.98} & 38.96 & 7.91 & 23.77 \\
+& \cellcolor{gray!15}VisHintPrompt
+    & \cellcolor{gray!15}\textbf{2.72} & \cellcolor{gray!15}\textbf{3.59}
+    & \cellcolor{gray!15}\textbf{3.61} & \cellcolor{gray!15}\textbf{8.42}
+    & \cellcolor{gray!15}4.46 & \cellcolor{gray!15}7.82
+    & \cellcolor{gray!15}\textbf{2.86} & \cellcolor{gray!15}\textbf{12.18}
+    & \cellcolor{gray!15}1.9 & \cellcolor{gray!15}\textbf{4.02}
+    & \cellcolor{gray!15}\textbf{9.56} & \cellcolor{gray!15}\textbf{27.11}
+    & \cellcolor{gray!15}\textbf{9.6} & \cellcolor{gray!15}\textbf{13.53}
+    & \cellcolor{gray!15}7.14 & \cellcolor{gray!15}\textbf{27.5}
+    & \cellcolor{gray!15}4.07 & \cellcolor{gray!15}\textbf{33.84} 
+    & \cellcolor{gray!15}\textbf{5.1} & \cellcolor{gray!15}\textbf{15.34}\\
+
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+\section{Results and Analysis}
+
+\subsection{Quantitative Evaluation}
+
+This section presents the quantitative performance of MLLMs under our
+proposed \emph{\toolName{}}. The evaluation covers more than 4,000
+point-level prediction instances across Cartesian and polar chart families.
+Unless otherwise specified, all reported errors are RNE and RE as defined in Section~\ref{sec:experiments}, obtained by averaging point-wise errors over charts within each
+chart type and reported as percentages.  
+Importantly, none of the benchmark charts include explicit numeric labels
+on the visual marks, precluding trivial solutions based on OCR.
+% \pyl{Conflict with the OCR method mentioned earlier in III.A.1)‘Alignment of tick values to pixel positions’}
+Consequently, all predictions must rely on visual inference from geometric
+cues such as bar height, scatter-point position, angular extent, and polar
+distance.
+
+\subsubsection{\textbf{Overall Performance}}
+As shown in Table~\ref{tab:mllms_comparison}, averaged over five MLLMs and nine chart types, \toolName{} leads to overall reductions in numerical error (RNE and RE) compared to the baseline. These reductions are observed across all five evaluated MLLMs.
+% As shown in Table~\ref{tab:mllms_comparison}, \toolName{} consistently improves numerical accuracy across all evaluated MLLMs.
+% \wy{1. How do you know this from Table II? 2.VisHintPrompt is NOT always for all (see pie and donut chart).}
+%
+%
+Specifically, across all model–chart type combinations, type-level RNE and RE decrease in 32 of the 45 cases, with closed-source MLLMs achieve improvements on at least 7 of the 9 chart types, while open-source MLLMs also improve on at least 5 of the 9. 
+% Across model-chart combinations, type-level RNE decreases in 38 of 54 cases, with no systematic degradation observed in the remainder. \wy{what do you mean by ``no systematic degradation''? error or accuracy?}
+% These gains are consistent across both RNE and RE and are of practical magnitude.
+
+
+% As shown in Table~\ref{tab:mllms_comparison}, \toolName{} consistently
+% improves numerical accuracy across all evaluated MLLMs. Considering all
+% model--chart combinations, type-level RNE decreases under \toolName{} on
+% 38 out of 54 combinations, and we do not observe any systematic degradation
+% on the remaining cases. These improvements are reflected in both RNE and RE
+% and are typically of practical magnitude.
+
+Closed-source MLLMs achieve the lowest post-prompting type-level RNE and
+RE. For example, for Gemini-2.5-Flash, the mean type-level RNE across chart
+types drops from 6.41\% to 2.94\% and the mean type-level RE from 19.79\%
+to 9.04\%, reflecting its stronger visual--language integration.
+Open-source models, in contrast, often exhibit larger \emph{relative}
+reductions in error. For a representative open-source model,
+Pixtral-12B-2409, the mean type-level RNE across chart
+types drops from 12.14\% to 9.5\% and the mean type-level RE from 37.4\%
+to 26.32\%, suggesting that scaffolded visual hints can
+partially compensate for weaker geometric priors rather than merely
+amplifying existing strengths. The fact that these gains appear across
+heterogeneous architectures indicates that the proposed strategy behaves
+largely model-agnostically.
+% For a representative open-source model
+% (Pixtral-12B-2409), the type-level RNE on structurally demanding chart types
+% such as horizontal bar, bubble, and donut charts is reduced by roughly
+% $16.44\%\text{--}47.02\%$, suggesting that scaffolded visual hints can
+% partially compensate for weaker geometric priors rather than merely
+% amplifying existing strengths. The fact that these gains appear across
+% heterogeneous architectures indicates that the proposed strategy behaves
+% largely model-agnostically.
+
+\textbf{Overall, \toolName{} reduces numerical error across five MLLMs and nine chart types, with lower chart-averaged errors observed for each open-source and closed-source MLLM.}
+Taken together, these results confirm the effectiveness of \toolName{} in improving numerical inference from charts across diverse chart types and MLLMs.
+
+% Overall, the aggregate results demonstrate that \toolName{} delivers robust
+% and consistent accuracy improvements across 5 open- and closed- source MLLMs, providing a strong
+% basis for examining how these gains vary across specific chart families.
+% \wy{Highlight the key conclusion or sentence(s) in this paragraph.}
+
+% \subsection{Quantitative Evaluation}
+
+% This section presents the quantitative performance of MLLMs under our proposed \emph{\toolName{}}. The evaluation covers more than 4,000 point-level prediction instances across Cartesian and polar chart families. Unless otherwise specified, all reported errors are type-level
+% Range-Normalized Error (RNE) and Relative Error (RE) as defined in
+% Section~4, obtained by averaging point-wise errors over charts within each
+% chart type and reported as percentages.  
+% Importantly, none of the benchmark charts include explicit numeric labels on the visual marks, precluding trivial solutions based on OCR. Consequently, all predictions must rely on visual inference from geometric cues such as bar height, scatter-point position, angular extent, and polar distance.
+
+% \subsubsection{Overall Performance}
+
+% As shown in Table~\ref{tab:mllms_comparison}, \toolName{} consistently
+% improves numerical accuracy across all evaluated MLLMs. Considering all
+% model--type combinations, type-level RNE decreases under \toolName{} on
+% 50 out of 54 combinations, and we do not observe any systematic
+% degradation on the remaining cases. These improvements are reflected in
+% both RNE and RE and are typically of practical magnitude.
+
+% Closed-source models achieve the lowest post-prompting type-level RNE and RE
+% (e.g., for Gemini-2.5-Flash, the mean type-level RNE across chart types
+% drops from 6.07\% to 2.95\% and the mean type-level RE from 15.78\% to
+% 8.58\%), reflecting its stronger visual--language integration. Open-source
+% models, in contrast, often exhibit larger \emph{relative} reductions in
+% error. For a representative open-source model (Pixtral-12B-2409),
+% type-level RNE on structurally demanding chart types such as horizontal
+% bar, bubble, and donut charts is reduced by roughly
+% $16.44\%\text{--}47.02\%$, suggesting that scaffolded visual hints can
+% partially compensate for weaker geometric priors rather than merely
+% amplifying existing strengths. The fact that these gains appear across
+% heterogeneous architectures indicates that the proposed strategy behaves
+% largely model-agnostically.
+
+% Overall, the aggregate results demonstrate that \toolName{} delivers robust
+% and consistent accuracy improvements at the model level, providing a strong
+% basis for examining how these gains vary across specific chart families.
+
+
+\subsubsection{\textbf{Performance Across Chart Types}}
+% To analyze how \toolName{} performs across different chart types, 
+We group the nine chart types into three categories for focused analysis: charts with high baseline accuracy (vertical bar and line charts), charts with visually complex structures (horizontal bar, scatterplot, bubble, radar, and rose charts), and charts involving proportion-based encodings, for which \toolName{} introduces a grid-based angle estimation strategy for proportion inference (pie and donut charts).
+
+
+% To examine how visual design affects \toolName{}, we analyze performance across chart types, revealing a systematic difficulty structure in multimodal chart reasoning tied to visual regularity, spatial encoding, and geometric complexity.
+
+% To understand how visual design shapes the effectiveness of \toolName{}, we
+% next analyze performance across chart types. This analysis reveals a
+% systematic difficulty structure in multimodal chart reasoning that is
+% closely tied to the visual regularity, spatial encoding, and geometric
+% demands inherent to each chart family.
+
+\paragraph{Charts with high baseline accuracy}
+\textbf{Highly prevalent vertical bar and line charts with dense, grid-aligned structures exhibit the strongest baseline performance across both closed- and open-source MLLMs, resulting in limited room for improvement under \toolName{}.}
+ Most cases that do not show clear improvements arise from this group. For example, in one of the strongest closed-source models, Gemini-2.0-Flash, baseline errors on these chart types are already extremely low, with RNE below 0.67\% and 0.31\% and RE below 0.26\% and 1.02\% for vertical bar and line charts, respectively. Under such near-saturated conditions, \toolName{} yields only marginal changes, and minor fluctuations may occasionally appear. Model-specific differences can nevertheless be observed. While Pixtral-12B-2409 shows limited gains on vertical bar charts, GPT-4o and Gemini-2.5 Flash still benefit from \toolName{} due to their relatively higher baseline errors. In one specific case, Pixtral-12B-2409 on vertical bar charts, \toolName{} may introduce slight degradations, which can be explained by near-saturated baseline performance and sensitivity to additional visual cues.
+
+% Vertical bar charts and line charts tend to achieve the strongest baseline
+% performance across closed- and open- source MLLMs. 7 exception cases which don't achieve improvements are from this.
+% For one of the strongest closed-source models
+% (Gemini-2.0-Flash), baseline type-level errors on these two chart types are
+% already extremely low, with RNE below 0.67\% and 0.31\% and RE below 0.26\%
+% and 1.02\% on vertical bar and line charts, respectively. 
+% Under such
+% near-saturated conditions, \toolName{} produces negligible changes for
+% MLLMs, including a few minor fluctuations that occasionally appear as
+% slight degradations. But, the performance of Pixtral-12B-2409 on vetical bar charts is worse a lot. 
+% In contrast, GPT-4o exhibits substantially higher
+% baseline errors on both vertical bar and line charts, and Gemini 2.5 Flash on vertical bar, still benefit from our
+% strategy. We explain this phenomenon by for the simple charts, the MLLMs most activate the chart OCR ability to conduct numerical inference, because already exist model able to achieve excellent estimation for vertical bar charts and line charts. The influence introducing by \toolName{} bring some negative.
+% % : for these models, \toolName{} typically yields modest but consistent reductions in type-level RNE (on the order of 20\%--50\%). 
+% Overall, the limited gains and occasional small regressions on
+% bar and line charts are better explained by saturation effects than by a
+% lack of usefulness of the visual hints.
+% \wy{What are the core observations or conclusions here? It is a bit hard to follow. 
+% Suggestions:
+% 1. Highlight the key message/sentences;
+% 2. Which part of Table II supports the observations?}
+ 
+
+
+
+\paragraph{Structurally demanding chart families}
+% \pyl{Why not directly adopt the term charts with visually complex structures from the preceding section 2) Performance Across Chart Types for consistency between the front and back content?}
+\textbf{Structurally complex chart types, including horizontal bar, scatterplot, bubble, radar, and rose charts, exhibit substantially higher baseline errors, yet consistently benefit from \toolName{}, with pronounced error reductions observed across all evaluated open-source and closed-source MLLMs.}
+When averaged across MLLMs, all five structurally demanding chart types exhibit approximately 50\% relative reductions in both RNE and RE compared to their baseline errors.
+% Specifically, from the average results across MLLM types, we can see that these five type charts all achieve 50\% improvements relate to baseline estimation errors. 
+At the chart–MLLM combination level, \toolName{} typically reduces type-level RNE by approximately 2\%–6\% and RE by 5\%–10\% for most models.
+More pronounced improvements are observed for polar charts. On radar charts, type-level RNE across models decreases from approximately 25\%–70\% to 6\%–27\%, with a median reduction of around 8\%. Similarly, on rose charts, RNE is reduced from roughly 10\%–30\% to 7\%–10\%, again with median reductions close to 8\%. Comparable trends are observed for scatterplot and bubble charts.
+Horizontal bar charts exhibit the largest gains. For example, two closed-source MLLMs (Gemini~2.0~Flash and Gemini~2.5~Flash) and one open-source MLLM (InternVL3-78B) reduce RE from approximately 10\%–40\% at baseline to around 5\% under \toolName{}.
+Taken together, these results provide strong empirical evidence that \toolName{} effectively enhances numerical inference under challenging visual structures where baseline model performance is limited.
+% At the chart-MLLM combination level, 
+% % Across these structurally demanding families, 
+% \toolName{} typically
+% reduces type-level RNE and RE by roughly 2\%--6\%, and 5\%--10\% for most models. For
+% example, on radar charts, type-level RNE across models decreases from
+% approximately 25\%--70\% to 6\%--27\% (with a median reduction around
+% 8\%), and on rose charts from 10\%--30\% to 7\%--10\% (median reduction
+% around 8\%), with similar patterns observed for scatter and bubble charts. In particular, \toolName{} on horizontal bar charts achieves most improvements, in which two closed-source MLLMs, Gemini 2.0 Flash and Gemini 2.5 Flash, and a open-source MLLM, InternVL3-78B, all reduction RE from 10\%--40\% to around 5\% errors.
+% % These patterns highlight that scaffolded visual hints are
+% % particularly effective for chart families requiring non-trivial geometric
+% % interpretation, such as angular reasoning, polar geometry, or multi-axis
+% % alignment.
+% These results provide strong empirical evidence that \toolName{} effectively enhances numerical inference under challenging visual structures where baseline model performance is limited.
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=\textwidth,
+                   alt={case-2}]{figs/case1-1.png}
+  \caption{Qualitative examples illustrating grid-aware enhancement and iterative visual feedback (Case~1) on three chart types: bubble, horizontal bar, and donut. Colored crosshairs denote predictions from different stages: baseline (blue), grid-aware enhancement (red, also the round-0 of visual feedback), and the first and second feedback rounds (purple and yellow). Grid enhancement reduces coarse localization ambiguity, while iterative feedback further corrects large residual deviations and stabilizes predictions across chart types. The corresponding numerical values for these examples are reported in Table~\ref{tab:case_results_feed}.}
+  % \pyl{The category order here (b,a,c) conflicts with the predefined sequence (a,b,c) in Section V.A.2 and Fig.5. Please reorder to a,b,c for consistency.}
+  % \pyl{Formula (6) in Section III and Fig. 3 both specify three rounds of feedback, but only two rounds are mentioned here. Is additional clarification needed?}
+
+  \label{fig:case1}
+\end{figure*}
+
+
+
+\paragraph{Proportion-based charts with angle estimation}
+\textbf{For proportion-based charts (pie and donut), \toolName{} introduces an angle-based proportion inference strategy under which Gemini-series MLLMs achieve substantial error reductions, revealing clear evidence of structured visual reasoning in this previously underexplored setting, while other models show less consistent or incomplete improvements.}
+Quantitatively, Gemini-series MLLMs show consistent and substantial improvements on proportion-based charts under \toolName{}. For example, on pie and donut charts, Gemini~2.0~Flash reduces RE from 23.53\% to 15.63\% and RNE from 3.80\% to 3.03\%, while Gemini~2.5~Flash further reduces RE from 21.56\% to 13.38\% and RNE from 2.92\% to 1.89\%. 
+% These consistent reductions across both metrics and model versions indicate effective adaptation to angle-based proportion inference enabled by \toolName{}.
+In contrast, GPT-4o shows less consistent improvements on pie and donut charts under \toolName{}. A closer inspection reveals that its errors often stem from systematic misinterpretation of angular direction, particularly confusing clockwise and counterclockwise readings after sector-level zoom-in. This suggests that, for GPT-4o, orientation-sensitive angle reasoning remains a challenge. 
+% For the two evaluated open-source MLLMs, \toolName{} consistently reduces RE on pie and donut charts, while improvements in RNE are less consistent. 
+For the two evaluated open-source MLLMs, \toolName{} consistently reduces RE on pie and donut charts, indicating improved accuracy in estimating small proportions. In contrast, improvements in RNE are less consistent, suggesting that open-source models still face challenges in fully adapting to this new angle-based reasoning task. 
+This improvement in RE is likely supported by the zoom-in refinement employed by \toolName{}, which appears to benefit the recognition of small targets, consistent with prior work showing that magnification can facilitate visual understanding. Taken together, these results highlight the effectiveness of \toolName{} for angle-based proportion inference, while also revealing meaningful differences in how current MLLMs adapt to this new visual reasoning setting.
+
+
+
+% \textbf{Donut charts} depend on accurate estimation of angular boundaries, where small localization errors directly translate into value errors.
+
+% \subsubsection{\textbf{Summary}}
+% Taken together, the type-level results show that \toolName{} delivers its
+% greatest benefits on chart families that impose complex geometric
+% reasoning, while still offering modest but reliable refinements on visually
+% simpler chart types. The resulting performance distribution delineates the
+% visual structures that current multimodal models naturally handle well and
+% those for which targeted visual prompting remains essential. 
+
+
+
+
+% \subsubsection{Overall Performance}
+% As shown in Table \ref{tab:mllms_comparison},
+% across most models and chart families, the final visual-hint prompting strategy yields consistent and meaningful accuracy improvements. The magnitude of these gains varies with chart complexity.  
+% Visually simpler charts---including vertical bar, line, and pie charts---already exhibit strong baseline performance due to their regular layouts and salient geometric cues. While the prompting strategy still delivers measurable refinement, the absolute improvement margins remain smaller because baseline accuracy is already high.
+
+% In contrast, chart families with more complex geometric structures show substantially lower baseline accuracy and correspondingly larger error reductions. Closed-source models achieve the strongest absolute accuracy under the final strategy, reflecting their more advanced visual--language integration. Open-source models exhibit the largest proportional improvements, suggesting that structured visual hints help compensate for weaker geometric priors rather than merely reinforcing existing strengths.  
+% The consistency of improvements across heterogeneous architectures indicates that the method is largely model-agnostic.
+
+% Taken together, these results outline a stable performance landscape: the visual-hint prompting strategy reliably enhances predictions on chart types aligned with current model priors and provides substantial benefits on charts that impose more demanding geometric reasoning.
+
+% \subsubsection{Performance Across Chart Types}
+
+% A breakdown by chart type reveals a clear difficulty structure in multimodal chart reasoning. This structure emerges from the visual regularity, spatial encoding, and geometric demands inherent to each chart family.
+
+% \paragraph{Charts with High Baseline Accuracy.}
+% Pie charts, line charts, and vertical bar charts tend to achieve strong baseline accuracy. Their geometric regularity---clear axes, clean categorical boundaries, and straightforward value mappings---facilitates robust visual inference even in the absence of explicit numeric labels.  
+% Although the visual-hint prompting strategy still yields measurable refinements, improvement margins remain limited because models already operate near saturation on these chart types.
+
+% \paragraph{Structurally Demanding Chart Families.}
+% More complex chart types exhibit markedly lower baseline accuracy and substantially larger gains under the proposed strategy:
+% \begin{itemize}
+%     \item \textbf{Horizontal bar charts} require reinterpreting directional mappings when the value axis is rotated.
+%     \item \textbf{Donut charts} rely on accurate estimation of angular boundaries and color transitions.
+%     \item \textbf{Rose charts} combine angular segmentation with polarly varying segment lengths, introducing irregular polar geometries that are difficult to parse.
+%     \item \textbf{Radar charts} involve multiple polar axes with heterogeneous scales, requiring models to identify both the correct axis and the corresponding polar position.
+% \end{itemize}
+
+% Across these structurally complex families, the final visual-hint prompting strategy typically reduces error-over-range by approximately 30--50\% for both closed-source and open-source models. The magnitude and consistency of these gains highlight that structured visual induction is especially effective for chart types requiring non-trivial geometric interpretation.
+
+% \paragraph{Summary.}
+% These findings indicate that the proposed visual-hint prompting strategy delivers the greatest benefit on chart families that impose angular reasoning, polar geometry, or multi-axis alignment, while still offering modest refinement on visually simpler chart types. The resulting performance distribution highlights the types of visual structures multimodal models naturally manage well and those for which targeted prompting remains essential.
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Qualitative Analysis}
+To illustrate how \toolName{} operates and how its components contribute to numerical inference, we present a qualitative analysis with two representative cases. Case~1 examines the effect of axis-aware grid enhancement and iterative visual feedback, showing how structured visual scaffolds progressively reduce localization ambiguity and stabilize value estimation. Case~2 focuses on the zoom-in refinement mechanism, illustrating how progressive amplification enables increasingly fine-grained value discrimination.
+
+
+
+
+\subsubsection{\textbf{Case1. Grid-aware Enhancement and Iterative Visual Feedback}}
+We qualitatively examine the effects of grid-aware enhancement and iterative visual feedback using three representative chart instances: a bubble chart, a bar chart, and a donut chart.
+% We examine the effects of grid augmentation and iterative visual feedback using three representative chart types: bubble charts, bar charts, and donut charts. 
+% As shown in Fig.~\ref{fig:case1}, predictions are encoded as colored crosshairs by inference stage: baseline (blue), grid-aware enhancement (red), and the first and second rounds of visual feedback (purple and yellow).
+As shown in Fig.~\ref{fig:case1}, predictions are encoded as colored crosshairs by inference stage: baseline (blue), grid-aware enhancement as the initial (round-0) visual feedback (red), followed by the first and second rounds of visual feedback (purple and yellow).
+% \pyl{Formula (6) in Section III and Fig. 3 both specify three rounds of feedback, but only two rounds are mentioned here. Is additional clarification needed?}
+Overall, grid-aware enhancement improves prediction quality over the baseline across both bubble and horizontal bar charts. 
+In the bubble chart case, the grid-enhanced predictions are consistently closer to the true bubble centers than the baseline predictions, indicating that all examined data points benefit from grid augmentation.
+The horizontal bar chart contains multiple category groups. To avoid visual clutter and occlusion, we display only one representative group (Group~2) in the figure for clarity. 
+% Grid-aware enhancement improves predictions for more than half of the data points. 
+The grid-enhanced predictions align more closely with the true bar endpoints than the baseline, particularly for bars that exhibit larger estimation errors under the baseline setting. For example, bars corresponding to labels C and I (Fig.~\ref{fig:case1} (Horizontal Bar)) show noticeable over-estimation in the baseline predictions, while grid augmentation stabilizes these predictions within a much narrower error range.
+% As shown in the Fig.~\ref{fig:case-feedback}, predictions from baseline, grid-aware enhancement and feedback rounds are encoded using colored crosshairs.
+% % , following the same visual convention as in the actual iterative feedback process. 
+% Specifically, predictions are color-coded by inference stage: baseline (blue), grid-aware enhancement (red), and the first and second rounds of visual feedback (purple and yellow).
+% Specifically, blue denotes the baseline prediction, red corresponds to predictions made on grid-aware enhancement images, and purple and yellow indicate predictions obtained after the first and second rounds of visual feedback, respectively.
+
+
+% For the horizontal bar chart, grid-aware enhancement improves predictions for more than half of the data points. Visually, the grid-enhanced predictions align more closely with the true bar endpoints than the baseline, particularly for bars located between adjacent tick marks or near the middle of the axis range, where length estimation is less well anchored under the baseline setting. The remaining cases exhibit only minor changes, suggesting that grid augmentation primarily benefits bars whose values are harder to judge without explicit reference lines.
+
+% Overall, compared to the baseline, grid-aware enhancement improves prediction quality in most cases across both bubble and bar chart types. A closer inspection reveals that for the bubble chart, in which red crosshairs are closer to the true center of corresponding bubble than blue crosshairs, which indicates all examined data points benefit from grid enhancement relative to the baseline. 
+% For the horizontal bar chart, the introduction of grids also yields positive effects for more than half of the data points.
+% \wy{How should we find the correspondence between the findings here and what is shown in Figure 5? It is not that clear to me.}
+% For donut charts, a closer inspection of the baseline results reveals that the grid-based angular reference also helps reduce ambiguity in angle reading, leading to more accurate initial estimates.
+
+Building on the grid-enhanced predictions, we further examine the effect of iterative visual feedback, which provides localized corrective cues to refine residual errors that remain after grid-aware enhancement.
+% Building on the grid-enhanced predictions, we illustrate the effect of iterative visual feedback across different chart types. 
+For the bubble chart, as shown in Fig.~\ref{fig:case1} (Bubble), the final predictions obtained after visual feedback are closer to the true centers of most bubbles than the grid-enhanced predictions. Representative examples include bubbles corresponding to \textit{E08} and \textit{D05}, where visual feedback effectively corrects substantial deviations that persist after the grid-based step.
+% For the bubble chart, we can see in Fig.~\ref{fig:case-feedback} (bubble), the final predictions from visual feedback get closer to the true center of most bubbles than grid-enhanced prediction. In addition, representative example including the bubbles representing \textit{E08} and \textit{D05}, where feedback further corrects a substantial deviation that remains after grid enhancement.
+% In most cases, feedback contributes positively by progressively adjusting predictions toward the ground truth positions. Across chart types, this effect is primarily reflected in the correction of large localization errors that persist after grid enhancement. \wy{Pls check my Chinese comments.}
+For the bar chart, iterative visual feedback results in small fluctuations around the grid-enhanced predictions that are occasionally unfavorable in direction but remain bounded within the large baseline error range. As most bars already converge to stable predictions after the grid-based step, visual feedback does not yield additional systematic improvements in this case.
+% For the bar chart, predictions from visual feedback present little changes after with the grid-aware enhancement, most bars reach a stable prediction.  
+% \wy{where is ``the \textit{C, Group~3} data point'' in Figure 5??? Are you referring to the bar? }
+% illustrates a similar pattern: grid enhancement alone was insufficient to correct a large deviation, while after one round of feedback, the prediction returned to a reasonable error range. \wy{How do we know that from Figure 5??}
+For the donut chart, visual feedback further refines angle-based proportion inference by addressing several characteristic error patterns. As illustrated in Fig.~\ref{fig:case1} (Donut), feedback mitigates large angular errors (e.g., Sector~B) and reduces confusion between start and end angles in Sectors such as C and E, which can arise under the newly introduced angle-based numerical inference setting.
+% For the donut chart, we illustrate three representative changes present at sectors repressenting labbel B, C and E.
+% feedback not only mitigates large angular errors (Sector B) but also reduces the likelihood of confusing start and end angles introduced by the new numerical inference with angel estimation.
+% , as illustrated by data point \textit{B}.
+% \wy{How do we know that from Figure 5?? Where should we look at?}
+
+
+% We further analyze the effect of iterative feedback across different chart types. In most cases, feedback contributes positively by progressively adjusting predictions toward the ground-truth positions. For example, for the \textit{XX} data point in the bar chart, neither the initial prediction nor grid enhancement alone was sufficient to correct a large deviation; however, after one round of feedback, the prediction returned to a reasonable error range. A similar corrective effect can be observed for data point \textit{E08} in the bubble chart. For donut charts, feedback not only mitigates large angular errors but also reduces the likelihood of confusing start and end angles, as illustrated by data point \textit{XX}.
+
+% At the same time, feedback does not uniformly lead to monotonic error reduction for all data points. For instance, for the data point \textit{C, Group~3} in the bar chart, while feedback corrects a large initial deviation, the second feedback round results in a slightly larger error relative to the first. This observation is consistent with our ablation results, indicating that feedback alone provides limited accuracy gains. Nevertheless, by improving localization reliability, feedback enables subsequent zoom-in refinement to further improve overall prediction accuracy.
+
+% Nevertheless, by improving localization reliability, feedback serves as a critical intermediate step that enables subsequent zoom-in amplification to further enhance overall prediction performance. 
+
+Importantly, a comparison of the point-wise ground truth coordinates, baseline predictions, and \toolName{} predictions reported in Table~\ref{tab:case_results_feed} shows that, despite occasional non-monotonic behavior at intermediate feedback rounds and a small number of non-optimal cases (e.g., in the donut chart), the final predictions produced by \toolName{} yield lower errors than the baseline for most of the examined data points.
+
+% case-feedback table
+\begin{table}[htbp]
+\centering
+\caption{
+% Qualitative comparison on a bubble chart, a horizontal bar chart, and a donut chart.
+% For each chart type, we report the ground-truth values alongside the baseline
+% MLLM predictions and the outputs of \toolName{}.
+Qualitative comparison on a bubble chart, a horizontal bar chart, and a donut chart shown in Case~1 (Fig.~\ref{fig:case1}). 
+For each chart type, we report the ground truth values alongside the baseline MLLM predictions and the outputs of \toolName{}.
+% \pyl{The category order here (b,a,c) conflicts with the predefined sequence (a,b,c) in Section V.A.2 and Fig.5. Please reorder to a,b,c for consistency.}
+}
+\label{tab:case_results_feed}
+\scriptsize
+% \small
+\setlength{\tabcolsep}{1.8pt}
+\renewcommand{\arraystretch}{1.15}
+
+\begin{adjustbox}{max width=0.85\textwidth}
+\begin{tabular}{m{2.3cm}<{\centering} *{10}{c}}
+\toprule
+\multicolumn{10}{c}{\textbf{Bubble}}\\
+\midrule
+\diagbox[width=2.6cm,height=0.8cm]{\textbf{Setting}}{\textbf{Point Name}} 
+   &       & D01   & D02   & E03   & A04   & D05   & D06   & C07   & E08 \\
+\midrule
+\multirow{2}{*}{Ground Truth}
+  & X & 13.22 & 82.65 & 3.90  & 48.22 & 52.20 & 22.95 & 58.90 & 9.77 \\
+  & Y &  1.66 & 60.55 & 78.39 & 13.03 & 37.04 & 80.23 & 74.14 & 13.39 \\
+\midrule
+\multirow{2}{*}{Baseline}
+  & X &  9.25 & 79.75 & -2.00 & 43.00 & 48.75 & 20.50 & 65.50 & \textbf{9.25} \\
+  & Y & -4.00 & 63.50 & 86.00 & 18.50 & 41.00 & 86.00 & \textbf{74.75} & 18.50 \\
+\midrule
+\multirow{2}{*}{\textbf{VisHintPrompt}}
+  & X & \cellcolor{gray!15}\textbf{13.52} & \cellcolor{gray!15}\textbf{82.45} & 
+        \cellcolor{gray!15}\textbf{4.27}  & \cellcolor{gray!15}\textbf{47.98} & 
+        \cellcolor{gray!15}\textbf{54.25} & \cellcolor{gray!15}\textbf{24.06} & 
+        \cellcolor{gray!15}\textbf{59.23} & \cellcolor{gray!15}10.75 \\
+  & Y & \cellcolor{gray!15}\textbf{3.23}  & \cellcolor{gray!15}\textbf{60.82} & 
+        \cellcolor{gray!15}\textbf{78.97} & \cellcolor{gray!15}\textbf{11.94} & 
+        \cellcolor{gray!15}\textbf{36.98} & \cellcolor{gray!15}\textbf{80.00} & 
+        \cellcolor{gray!15}\textbf{74.75} & \cellcolor{gray!15}\textbf{13.47} \\
+        
+\midrule[1pt]
+\multicolumn{10}{c}{\textbf{Horizontal Bar (Group 2)}} \\
+\midrule
+\textbf{Setting} 
+ & A & B & C & D 
+  & E & F & G & H & I & J \\
+\midrule
+Ground Truth    
+ & 64.00 & 40.00 & 34.00 & 25.00 
+  & 17.00 & 27.00 & 15.00 & 17.00 & 7.00 & 14.00 \\
+Baseline        
+  & \textbf{64.00} & \textbf{40.00} & 39.00 & \textbf{25.00} 
+  & \textbf{17.00} & \textbf{27.00} & \textbf{15.00} & \textbf{17.00} & 14.00 & 15.00 \\
+\textbf{VisHintPrompt} 
+ & \cellcolor{gray!15}\textbf{64.00} 
+    & \cellcolor{gray!15}\textbf{40.00} 
+    & \cellcolor{gray!15}\textbf{34.00} 
+    & \cellcolor{gray!15}\textbf{25.00} 
+    & \cellcolor{gray!15}\textbf{17.00} 
+    & \cellcolor{gray!15}\textbf{27.00} 
+    & \cellcolor{gray!15}\textbf{15.00} 
+    & \cellcolor{gray!15}\textbf{17.00} 
+    & \cellcolor{gray!15}\textbf{7.00} 
+    & \cellcolor{gray!15}\textbf{13.75} \\
+  
+\midrule[1pt]
+\multicolumn{10}{c}{\textbf{Donut}} \\
+\midrule
+\textbf{Setting} 
+  & &  A & B & C & D
+  & E & F & G & H \\
+\midrule
+Ground Truth    
+  & & 0.060 & 0.190 & 0.100 & 0.050 
+  & 0.050 & 0.200 & 0.260 & 0.090 \\
+Baseline  
+  & & 0.083 & 0.160 & 0.120 & \textbf{0.063} 
+  & \textbf{0.055} & 0.250 & \textbf{0.250} & 0.120 \\
+\textbf{VisHintPrompt} & 
+  & \cellcolor{gray!15}\textbf{0.056} & \cellcolor{gray!15}\textbf{0.192} &
+    \cellcolor{gray!15}\textbf{0.106} & \cellcolor{gray!15}0.067 &
+    \cellcolor{gray!15}0.083 & \cellcolor{gray!15}\textbf{0.200} &
+    \cellcolor{gray!15}0.233 & \cellcolor{gray!15}\textbf{0.111} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+% Importantly, a comparison of the point-wise ground truth coordinates, baseline predictions, and \toolName{} predictions reported in Table \ref{tab:case_results_feed} 
+% % \wy{It should be Table III.}
+% shows that, despite non-monotonic behavior at intermediate feedback rounds, the final predictions achieved by \toolName{} are substantially more accurate than the baseline across the examined data points.
+
+
+% To more concretely illustrate how the proposed scaffolded visual-hint
+% prompting strategy operates across heterogeneous chart families, we perform
+% a qualitative analysis on three representative chart types: scatter plots
+% (Cartesian) and donut and rose charts (polar) with distinct value-encoding
+% styles. For each case, we visualize the iterative refinement trajectory
+% across the feedback and amplifier stages, using the final feedback
+% prediction as the anchor for the initial crop that seeds the first round of
+% zoom-in refinement.
+
+\begin{figure*}[tb]
+  \centering
+  \includegraphics[width=\textwidth,
+                   alt={Examples of scatterplot data inference with an MLLM.}]{figs/case1.png}
+  \caption{%
+    Qualitative examples of \toolName{} on four chart
+families: horizontal bar, scatterplot, donut, and rose. Each dashed
+red box highlights the iterative zoom-in process guided by the feedback
+prediction, illustrating how the model progressively converges to the
+correct region in the final refinement component.
+  }
+  \label{fig:case}
+\end{figure*}
+
+
+% \wy{Please revise Case 2 by checking and addressing similar issues existing in Case 1.}
+
+% case-amp table
+\begin{table*}[htbp]
+\centering
+\caption{
+Qualitative comparison on a horizontal bar chart, a scatterplot, a donut, and a rose chart shown in Case~2 (Fig.~\ref{fig:case}).
+For each chart type, the table reports the ground truth coordinates of the labeled visual marks in the corresponding charts, together with the baseline MLLM predictions and the outputs of \toolName{}.
+}
+\label{tab:case_results}
+\small
+\setlength{\tabcolsep}{3.3pt}
+\renewcommand{\arraystretch}{1.25}
+
+\begin{adjustbox}{max width=\textwidth, center}
+\begin{tabular}{m{2.3cm}<{\centering} *{12}{m{1.6cm}<{\centering}}}
+% \toprule
+\specialrule{1.3pt}{0pt}{0pt}
+\multicolumn{13}{c}{\textbf{Horizontal Bar Chart}}\\
+\midrule
+\textbf{Setting} 
+& Municipal 
+& Cooperative 
+& Retail power marketer 
+& Investor owned 
+& Political subdivision 
+& Wholesale power marketer 
+& Transmission 
+& Community choice aggregator 
+& State 
+& Municipal marketing authority 
+& Behind the meter 
+& Federal \\
+\midrule
+Ground Truth 
+& 950 & 853 & 266 & 178 & 131 & 32 & 20 & 19 & 17 & 14 & 15 & 9 \\
+Baseline 
+& 945 & \textbf{850} & \textbf{270} & 188 & \textbf{130} & 40 & 25 & 25 & 25 & 20 & 25 & 20 \\
+\textbf{VisHintPrompt} 
+& \cellcolor{gray!15}\textbf{950} 
+& \cellcolor{gray!15}\textbf{850} 
+& \cellcolor{gray!15}\textbf{270} 
+& \cellcolor{gray!15}\textbf{180} 
+& \cellcolor{gray!15}\textbf{130} 
+& \cellcolor{gray!15}\textbf{31} 
+& \cellcolor{gray!15}\textbf{19.5} 
+& \cellcolor{gray!15}\textbf{19} 
+& \cellcolor{gray!15}\textbf{20} 
+& \cellcolor{gray!15}\textbf{12.5} 
+& \cellcolor{gray!15}\textbf{17.5} 
+& \cellcolor{gray!15}\textbf{10} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+
+% \vspace{1.0em} % 与下方原始表格稍微拉开一点距离
+
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{m{2.3cm}<{\centering} *{16}{c}}
+% \toprule
+\specialrule{0.1pt}{0pt}{0pt}
+\multicolumn{16}{c}{\textbf{Scatterplot}}\\
+\midrule
+\diagbox[width=2.6cm,height=0.8cm]{\textbf{Setting}}{\textbf{Point Name}} &  & GBR & ESP & AUS & PHL & POL & ITA & ARG & CHN & EGY & MEX & THA & SAU & IND & COL & IRN \\
+\midrule
+\multirow{2}{*}{Ground Truth} 
+ & X & 61.78 & 52.08 & 58.29 & 66.99 & 66.63 & 65.01 & 59.55 & 69.51 & 62.48 & 67.34 & 58.85 & 63.68 & 70.48 & 64.62 & 66.54 \\
+ & Y & 1779.98 & 1104.30 & 1462.91 & 1220.70 & 1371.76 & 1854.68 & 1616.10 & 1297.37 & 1255.41 & 1806.33 & 1536.34 & 1177.09 & 1209.53 & 1701.17 & 1894.95 \\
+\midrule
+\multirow{2}{*}{Baseline} 
+ & X & 62.00 & \textbf{52.00} & 57.30 & 66.74 & 66.50 & 65.10 & \textbf{59.50} & 68.50 & 62.00 & 67.00 & \textbf{59.01} & 63.10 & 70.97 & 64.50 & 67.00 \\
+ & Y & 1740.00 & \textbf{1100.00} & 1475.76 & \textbf{1222.73} & 1333.85 & 1857.60 & \textbf{1619.70} & \textbf{1300.00} & 1278.79 & 1750.00 & 1524.62 & 1140.00 & 1160.00 & \textbf{1700.00} & 1874.24 \\
+\midrule
+\multirow{2}{*}{\textbf{VisHintPrompt}} 
+ & X & \cellcolor{gray!15}\textbf{61.70} & \cellcolor{gray!15}\textbf{52.00} & \cellcolor{gray!15}\textbf{58.39} & \cellcolor{gray!15}\textbf{67.00} & \cellcolor{gray!15}\textbf{66.72} & \cellcolor{gray!15}\textbf{64.92} & \cellcolor{gray!15}59.67 & \cellcolor{gray!15}\textbf{69.50} & \cellcolor{gray!15}\textbf{62.44} & \cellcolor{gray!15}\textbf{67.42} & \cellcolor{gray!15}59.22 & \cellcolor{gray!15}\textbf{63.66} & \cellcolor{gray!15}\textbf{70.47} & \cellcolor{gray!15}\textbf{64.64} & \cellcolor{gray!15}\textbf{66.67} \\
+ & Y & \cellcolor{gray!15}\textbf{1772.73} & \cellcolor{gray!15}\textbf{1100.00} & \cellcolor{gray!15}\textbf{1466.09} & \cellcolor{gray!15}1224.24 & \cellcolor{gray!15}\textbf{1377.27} & \cellcolor{gray!15}\textbf{1854.55} & \cellcolor{gray!15}1627.27 & \cellcolor{gray!15}1290.00 & \cellcolor{gray!15}\textbf{1263.64} & \cellcolor{gray!15}\textbf{1800.00} & \cellcolor{gray!15}\textbf{1545.45} & \cellcolor{gray!15}\textbf{1186.36} & \cellcolor{gray!15}\textbf{1211.37} & \cellcolor{gray!15}\textbf{1700.00} & \cellcolor{gray!15}\textbf{1900.00} \\
+\midrule[1pt]
+
+% Donut Chart (Left) + Rose Chart (Right)
+\multicolumn{8}{c}{\textbf{Donut Chart}} & \multicolumn{8}{c}{\textbf{Rose Chart}}\\
+\midrule
+\textbf{Setting} & & A & B & C & D & E & F &  & FIFF & LQVB & WMIZ & KEZD & RC & EMVG & TJ & YAP \\
+\midrule
+Ground Truth & & 0.090 & 0.180 & 0.130 & 0.200 & 0.230 & 0.180 &  & 0.52 & 0.95 & 1.00 & 0.58 & 0.96 & 0.92 & 0.63 & 0.73 \\
+Baseline & & 0.167 & 0.167 & 0.167 & \textbf{0.170} & 0.170 & 0.170 &  & 0.40 & 0.80 & \textbf{1.00} & 0.82 & 0.60 & 0.66 & 0.30 & 0.30 \\
+\textbf{VisHintPrompt} & & \cellcolor{gray!15}\textbf{0.097} & \cellcolor{gray!15}\textbf{0.175} & \cellcolor{gray!15}\textbf{0.125} & \cellcolor{gray!15}0.167 & \cellcolor{gray!15}\textbf{0.233} & \cellcolor{gray!15}\textbf{0.172} &  & \cellcolor{gray!15}\textbf{0.54} & \cellcolor{gray!15}\textbf{0.91} & \cellcolor{gray!15}0.97 & \cellcolor{gray!15}\textbf{0.50} & \cellcolor{gray!15}\textbf{0.81} & \cellcolor{gray!15}\textbf{0.90} & \cellcolor{gray!15}\textbf{0.59} & \cellcolor{gray!15}\textbf{0.53} \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+
+
+
+\subsubsection{\textbf{Case2. Progressive Zoom-in Refinement}}
+
+Four chart types are used to illustrate progressive zoom-in refinement, namely a horizontal bar chart, a scatterplot, a donut chart, and a rose chart.
+The refinement crop is generated around the model’s prediction from the previous round. Accordingly, for horizontal bar charts, scatterplots, and rose charts, correctness is indicated when the target mark lies near the geometric center of the cropped region.
+For donut charts, correctness is indicated when the target sector is centered in the cropped view, with the left and right sectors arising only from the symmetric angular tolerance added to the previous prediction.
+
+Fig.~\ref{fig:case} summarizes the refinement trajectories by illustrating the iterative evolution of model predictions, while Table~\ref{tab:case_results} reports the corresponding ground truth values together with the baseline and \toolName{} predictions.
+
+Across both Cartesian and polar coordinate systems, the qualitative evidence is consistent with the quantitative findings. 
+For all four chart types, refinement starts from the model’s feedback-based prediction in the previous round, and successive zoom-in steps progressively move the prediction closer to the geometric center of the cropped region, even when the initial feedback prediction exhibits large deviations. 
+This progressive zoom-in process visibly reduces spatial uncertainty in the qualitative trajectories shown in Fig.~\ref{fig:case}, while the corresponding numerical improvements after fine-grained refinement are reflected in Table~\ref{tab:case_results}. 
+These qualitative and quantitative observations demonstrate the robustness, generality, and cross-family applicability of \toolName{} under progressive zoom-in refinement. 
+
+
+We present a detailed analysis for each chart type as follows:
+
+\begin{itemize}
+    \item \textbf{Horizontal Bar Chart.} 
+    % As shown in Fig.~\ref{fig:case} (horizontal bar) and the corresponding entries in Table~\ref{tab:case_results}, all bars in the horizontal bar chart exhibit improved prediction accuracy under \toolName{}.
+    We first illustrate a challenging horizontal bar chart containing several bars with very short lengths, which pose substantial challenges to the baseline model, as shown in Fig.~\ref{fig:case} and the corresponding entries in Table~\ref{tab:case_results}.
+    The progressive zoom-in refinement enables increasingly fine-grained numerical inference, as predictions for all bars progressively move toward the center of the cropped region, including both bars of moderate length and those encoding extremely small values.
+    % Notably, this includes bars encoding very small values, which are typically more challenging to estimate accurately.
+    Representative examples include the bars corresponding to \textit{Behind the meter}, \textit{Political subdivision}, and \textit{Transmission}, which encode extremely small values that are difficult for the baseline model to estimate accurately, and are progressively corrected through successive zoom-in refinement.    
+    This case highlights the importance of progressive zoom-in refinement for fine-grained numerical inference in horizontal bar charts, particularly when estimating values encoded by very short bars.
+    % This case illustrates that progressive zoom-in refinement in \toolName{} is particularly effective for improving numerical estimation of short bars and small values, where baseline predictions are more prone to error.
+    \item \textbf{Scatterplot.} 
+    We use this scatterplot case to illustrate how progressive refinement operates in two-dimensional numerical prediction. 
+    As shown in Fig.~\ref{fig:case} (Scatterplot), the predicted scatter points progressively converge toward the center of the cropped region over refinement iterations, yielding effective fine-grained numerical inference that is consistent with the accuracy improvements reported for \toolName{} in Table~\ref{tab:case_results}.
+    In particular, points labeled \textit{AUS}, \textit{ITA}, and \textit{IND}, highlighted with red bounding boxes, exhibit more challenging initial deviations, with feedback predictions noticeably offset from the crop center, yet are progressively corrected through successive refinement iterations. 
+    This demonstrates the effectiveness of progressive refinement in transforming coarse, error-prone point estimates into stable and fine-grained numerical predictions in two-dimensional space.
+
+
+    
+    \item \textbf{Donut chart.} 
+    This donut chart case is used to illustrate how progressive refinement performs in proportion prediction using a novel angle-based numerical prediction approach. 
+    As shown in Fig.~\ref{fig:case} (Donut), successive refinement components progressively bring the target sector toward the center of the cropped view. 
+    In particular, labels \textit{A}, \textit{C}, and \textit{F} illustrate typical correction patterns: although the initial angular estimates are noticeably misaligned, progressive zoom-in refinement incrementally steers the prediction toward the correct angular boundaries. 
+    In the final crops, the target sectors appear symmetrically framed by their neighboring sectors. 
+    Overall, this donut chart case illustrates the effectiveness of progressive refinement in transforming coarse angular estimates into stable and fine-grained proportion predictions.
+
+    \item \textbf{Rose chart.} 
+    % Rose charts combine angular segmentation with polarly varying magnitudes, making them considerably more challenging than scatterplot or donut charts.
+    This rose chart case is used to illustrate how progressive refinement performs under more complex polar structures that combine angular segmentation with radially varying magnitudes, a setting in which baseline predictions exhibit large deviation errors, as shown in Table~\ref{tab:case_results} (Rose). 
+    Despite this inherent difficulty, the final predictions after progressive refinement achieve substantial improvements for most data items.      
+    As shown in Fig.~\ref{fig:case} (Rose), even after grid-aware enhancement and visual feedback, the initial predictions can remain noticeably offset from the center of the cropped region for challenging examples such as \textit{EMVG}, \textit{TJ}, and \textit{LQVB}, but are progressively corrected toward the crop center over successive refinement iterations.    
+    Notably, for example \textit{EMVG}, the cropping window does not shrink monotonically in the second refinement round. When the refined window no longer contains the target sector, the verification mechanism adaptively enlarges the crop to reestablish a valid context, allowing subsequent refinement to proceed from a valid region and recover from severe initial errors.    
+    Overall, this rose chart case illustrates the effectiveness of progressive zoom-in refinement in reducing large initial deviations and enabling fine-grained numerical prediction in more complex polar chart structures.
+
+
+    
+\end{itemize}
+% \paragraph*{Horizontal Bar Chart (Cartesian)}
+
+
+\subsection{Ablation Study}
+
+We examine the contribution of each 
+elicitation component 
+% \wy{Pls use the same descriptions for the same thing across the whole paper! Components or stages???}
+in
+\toolName{} by conducting ablations on one representative chart type per
+coordinate family: horizontal bar, donut and radar charts. 
+% All variants use the same backbone model (Gemini-2.0-Flash) and prompt template.
+Due to the computational cost of multi-round inference, the ablation study is conducted on a randomly sampled 40\% subset of the evaluation data for each chart type. 
+All variants are evaluated using Gemini-2.0-Flash with the same prompt template, and differ only in the activated elicitation components.
+We consider the following settings:
+\begin{itemize}
+    \item \textbf{Baseline} uses a single forward pass of the vanilla model.
+
+    % \item \textbf{Baseline} applies the vanilla model in a single forward pass.
+
+    \item \textbf{w/o Grid Enhancement} removes the initial axis-guided global
+    grid. To keep local refinement meaningful, we retain the fine-grained
+    grids drawn inside cropped regions for all variants that use local
+    amplification. This ablation therefore isolates the additional benefit
+    of global axis priors beyond the grids that are intrinsically coupled
+    with progressive zoom-in refinement.
+    \item \textbf{w/o Visual Feedback} keeps global grid prompting but
+    disables prediction overlay iterations. The model observes the gridded
+    chart once and directly outputs values, and the progressive zoom-in refinement
+    component uses this single global estimate as its starting point.
+    \item \textbf{w/o Zoom-in Refinement} retains global grid hint and visual feedback, while performing all inference at the original resolution.
+    % \item \textbf{w/o Zoom-in Refinement} retains global grid prompting and
+    % visual feedback but removes the crop-zoom-fine-grid stage, so all
+    % inference happens at the original global resolution.
+    \item \textbf{\toolName{}} combines all three components: Axis-aware
+    Grid Enhancement, Iterative Visual Feedback, and Progressive Zoom-in Refinement
+    with fine-grained grids in the cropped regions.
+\end{itemize}
+
+\begin{table}[t]
+\centering
+\caption{
+Ablation study of major elicitation components.
+We report  RNE and RE (lower is better) on one
+representative chart type from each coordinate family.
+}
+\label{tab:ablation}
+\small
+\resizebox{\columnwidth}{!}{%
+    {\renewcommand{\arraystretch}{1.2}%
+    \setlength{\tabcolsep}{3pt}%
+    \begin{tabular}{@{} >{\centering\arraybackslash}m{3.2cm}cccccc@{}}
+    \toprule
+    \multirow{2}{*}{\textbf{Method Variant}} 
+    & \multicolumn{2}{c}{Horizontal Bar} 
+    & \multicolumn{2}{c}{Donut} 
+    & \multicolumn{2}{c}{Radar}  
+    \\
+    \cmidrule(lr){2-3}
+    \cmidrule(lr){4-5}
+    \cmidrule(lr){6-7}
+    & {RNE} & {RE} & {RNE} & {RE} & {RNE} & {RE}  \\
+    \cmidrule(lr){1-1}
+    \cmidrule(lr){2-3}
+    \cmidrule(lr){4-5}
+    \cmidrule(lr){6-7}
+    % \midrule
+    Baseline (Gemini-2.0-Flash) & 5.4 & 14   & 2.88 & 26.86   & 27.1 & 51.7   \\
+    w/o Grid Enhancement          & 0.25 & \textbf{0.88}   & --- & ---   & 7.5 & 24.1   \\
+    % w/o Grid Prompting          & 0.15 / 0.88   & 2.65 / 31.78   & 7.5 / 14.1   \\
+    w/o Visual Feedback         & 0.17 & 1.8   & 2.3 & 26.62   & 7.3 & 22.6  \\
+    w/o Zoom-in Refinement    & 4.5 & 23  & 4.04 & 38.9   & 16.4 & 48.0  \\
+    \textbf{\toolName{}}  & \cellcolor{gray!15}\textbf{0.15} 
+    & \cellcolor{gray!15}0.9 & \cellcolor{gray!15}\textbf{1.99} & \cellcolor{gray!15}\textbf{17.77} & 
+    \cellcolor{gray!15}\textbf{7.2} & 
+    \cellcolor{gray!15}\textbf{22.3 } \\
+    \bottomrule
+    \end{tabular}%
+    }
+}
+\end{table}
+
+Table~\ref{tab:ablation} reports RNE and RE (lower is better) for these
+variants on the three chart types. 
+% \wy{Three or four???}
+Overall, every component contributes to the
+final performance on RNE: removing any single component degrades results relative
+to the full strategy.
+
+% , although the magnitude of the drop differs across components and chart families. 
+% The most pronounced effect comes from disabling
+% progressive zoom-in refinement. On each type charts, the w/o progressive zoom-in refinement
+% variant shows large increases in RNE and RE, indicating that it is the main driver component of precise numerical gains. Without
+% this component, the model cannot reliably convert coarse geometric
+% understanding into accurate value estimates.
+\textbf{Progressive zoom-in refinement is the dominant contributor to numerical accuracy.}
+Disabling progressive zoom-in refinement results in the most pronounced performance drop across all chart types. 
+For each chart, the w/o progressive zoom-in refinement variant exhibits substantial increases in both RNE and RE, indicating that this component is the primary driver of precise numerical gains. 
+Without zoom-in refinement, the model struggles to reliably translate coarse geometric understanding into accurate value estimates.
+
+% \textbf{Grid-aware enhancement provides complementary but geometry-dependent benefits.}
+\textbf{Axis-aware grid enhancement provides complementary benefits with varying strength across chart geometries.}
+Relative to the full \toolName{}, disabling grid prompting leads to overall performance degradation, indicating the effectiveness of the grid component. 
+On horizontal bar charts, removing the grid results in higher RNE but a slightly lower RE, suggesting that while grid prompting may not uniformly improve all error metrics in simple Cartesian layouts, it still plays a role in stabilizing range-normalized errors. 
+On radar charts, disabling grid prompting leads to more pronounced increases in both RNE and RE. 
+This suggests that as chart geometry shifts from simple and intuitive Cartesian layouts to more complex polar structures, numerical inference becomes more challenging, making explicit grid-based axis priors increasingly critical.
+
+\textbf{Iterative visual feedback consistently improves numerical inference across chart types.}
+Relative to the full \toolName{}, disabling visual feedback leads to clear error increases on all three chart types, demonstrating that the visual feedback component contributes meaningfully to the overall numerical inference process. 
+The degradation is particularly pronounced on donut charts, where numerical values are inferred through a novel angle-based proportion prediction formulation, highlighting the importance of visual feedback for stabilizing angular estimation in this setting.
+
+
+ 
+The three elicitation components provide complementary and synergistic benefits.
+Taken together, these ablations demonstrate that grid-aware enhancement, visual feedback, and progressive zoom-in refinement each play distinct yet complementary roles. 
+Grid prompting and visual feedback guide coarse geometric reasoning and stabilize the entry point into the refinement pipeline, while zoom-in refinement is essential for converting these coarse cues into accurate numerical predictions. 
+As a result, the full \toolName{} achieves the strongest overall performance across both Cartesian and polar coordinate families, with the most substantial gains observed when all three components are jointly enabled.
+
+
+
+
+
+
+
+

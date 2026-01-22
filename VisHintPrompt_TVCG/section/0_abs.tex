@@ -1,0 +1,22 @@
+%% Abstract section.
+\begin{abstract}
+Numerical inference from charts underpins many visualization tasks, including chart question answering and chart redesign. Although many chart-specific models have been developed for numerical extraction, their reliance on the chart types and visual encodings represented in training data limits their 
+% generalization. 
+generalizability.
+Modern Multimodal Large Language Models (MLLMs) possess competitive general-purpose visual understanding, offering the potential for numerical inference without additional 
+% raining. 
+training.
+Yet how to reliably elicit such fine-grained numerical inference from pretrained MLLMs via visual prompting remains largely unexplored. To address this gap, we propose \toolName{}, a scaffolded visual hint prompting strategy grounded in the explicit extraction of axis priors from both Cartesian and polar charts. \toolName{} elicits the latent numerical inference abilities of MLLMs by progressively narrowing the search region. It supplies structured visual cues that guide the model toward accurate quantitative interpretation. The strategy consists of three coordinated components: \emph{Axis-aware Grid Enhancement}, which 
+% exposes 
+extracts
+fine-grained axis priors and further exposes them as structure-aligned grids; \emph{Iterative Visual Feedback}, which overlays
+% model-informed 
+alignment cues derived from intermediate predictions to enhance the next prediction; and \emph{Progressive Zoom-in Refinement}, which enlarges the region of interest and applies progressive
+grid densification to enhance local detail for precise value estimation. \toolName{} is visual-centric and applies to both Cartesian charts (e.g., bar, scatterplot) and polar charts (e.g., pie, radar).
+Experiments across diverse chart types on both proprietary and open-source MLLMs demonstrate consistent improvements over standard prompting. Quantitative and qualitative analyses, along with ablation studies, validate the effectiveness and essential role of each component. These results underscore the broad applicability of \toolName{} in enabling reliable and more accurate numerical inference from charts.
+\end{abstract}
+\begin{IEEEkeywords}
+Chart understanding, multimodal large language models, visual prompting, data inference, and information visualization.
+\end{IEEEkeywords}
+
+

@@ -1,0 +1,220 @@
+\documentclass[lettersize,journal]{IEEEtran}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{cite}
+\hyphenation{op-tical net-works semi-conduc-tor IEEE-Xplore}
+% updated with editorial comments 8/9/2021
+% % 额外包
+\usepackage{multirow}   % 跨行
+\usepackage{graphicx}   % 调整表格大小
+\usepackage{booktabs}      % 专业三线表
+\usepackage{array}         % 支持 m{宽度} 列
+\usepackage{makecell}      % 表头换行
+\usepackage{siunitx}       % 数字对齐
+\usepackage{adjustbox}     % 调整表格到页宽
+\usepackage{siunitx}  % for S column type alignment
+\usepackage[table]{xcolor} % 在导言区引入
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{diagbox}
+\usepackage{hyperref} 
+\usepackage{cleveref}
+
+% \usepackage{amsmath,amssymb}
+% \usepackage{algorithm}
+% \usepackage{algpseudocode} % algorithmicx
+% \algrenewcommand\algorithmicrequire{\textbf{Input:}}
+% \algrenewcommand\algorithmicensure{\textbf{Output:}}
+% \algrenewcommand\algorithmiccomment[1]{\hfill\(\triangleright\)~#1}
+
+% 定义一个宏，用于自动给第二列及后续列加灰底
+\newcommand{\visrow}[2]{%
+  & \cellcolor{gray!15}#1 & \cellcolor{gray!15}#2 \\
+}
+\newcommand{\toolName}[1]{\textit{VisHintPrompt}}
+
+% % siunitx 设置
+\sisetup{
+  table-number-alignment=center,
+  table-format=2.2,  % 两位整数+两位小数
+  detect-all
+}
+
+\usepackage{pifont} % for check marks
+\newcommand{\cmark}{\ding{51}} % ✓
+\newcommand{\xmark}{\ding{55}} % ✗
+
+%% We encourage the use of mathptmx for consistent usage of times font
+%% throughout the proceedings. However, if you encounter conflicts
+%% with other math-related packages, you may want to disable it.
+\usepackage{mathptmx}                  % use matching math font
+\usepackage{soul}
+\newcommand{\yumeng}[1]{
+    \textbf{\color{purple}[yumeng: #1]}
+}
+\newcommand{\wy}[1]{\textcolor{brown}{[Yong: #1]}}
+
+\newcommand{\pyl}[1]{
+    \textbf{\color{blue}[Peng: #1]}
+}
+
+
+\begin{document}
+
+\title{VisHintPrompt: A Visual Hint Prompting Strategy for Numerical Inference from Charts}
+
+\author{
+Fengling Zheng, Yongle Peng, Zi Rong, Chenyun Cai, Yumeng He, Dekun Qian,\\
+Zhiguang Zhou, Yigang Wang, and Yong Wang% <-this % stops a space
+\thanks{Fengling Zheng is with Hangzhou Dianzi University and Nanyang Technological University. A part of this work was done when she was a visiting student supervised by Yong Wang at Nanyang Technological University. E-mail: \{fenglingzheng\}@hdu.edu.cn.}%
+\thanks{Yongle Peng, Zi Rong, Chenyun Cai, Dekun Qian, Zhiguang Zhou, and Yigang Wang are with Hangzhou Dianzi University, Hangzhou, China. E-mail: \{22330236, rongzizi, 23280129, qiandekun, zhgzhou, yigang.wang\}@hdu.edu.cn.}%
+\thanks{Yumeng He is with the Viterbi School of Engineering, University of Southern California, United States of America. E-mail: heyumeng@usc.edu.}%
+\thanks{Yong Wang is with Nanyang Technological University, Singapore. E-mail: yong-wang@ntu.edu.sg.}%
+\thanks{(Corresponding authors: Yong Wang and Zhiguang Zhou.)}%
+}
+
+% \author{IEEE Publication Technology,~\IEEEmembership{Staff,~IEEE,}
+%         % <-this % stops a space
+% \thanks{This paper was produced by the IEEE Publication Technology Group. They are in Piscataway, NJ.}% <-this % stops a space
+% \thanks{Manuscript received April 19, 2021; revised August 16, 2021.}}
+
+% The paper headers
+\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2021}%
+{Shell \MakeLowercase{\textit{et al.}}: A Sample Article Using IEEEtran.cls for IEEE Journals}
+
+% \IEEEpubid{0000--0000/00\$00.00~\copyright~2021 IEEE}
+% Remember, if you use this you must call \IEEEpubidadjcol in the second
+% column for its text to clear the IEEEpubid mark.
+
+\maketitle
+
+
+
+% A teaser figure can be included as follows
+% \begin{figure*}[t]
+%   \centering
+%   \includegraphics[width=\linewidth]{figs/teaser.png}
+%   \caption{
+%    Overview of \toolName{}, a visual hint prompt engineering framework for data inference from charts.
+%   The method operates in three stages:
+%   (1) \emph{axis-aware grid enhancement}, which exposes fine-grained axis priors by overlaying grids aligned with the chart’s underlying structure;
+%   (2) \emph{visual feedback prompting}, which introduces model-informed alignment cues to refine intermediate predictions; and
+%   (3) \emph{progressive zoom-in refinement}, which enlarges the relevant region to provide high-resolution visual detail for fine-grained and reliable value inference across both Cartesian and radial charts.
+%   }
+%   \label{teaser}
+% \end{figure*}
+
+\input{section/0_abs}
+\input{section/1_intro}
+\input{section/2_related}
+\input{section/3_vishintprompt}
+\input{section/4_experiment}
+\input{section/5_result}
+\input{section/6_discussion}
+\input{section/7_conclusion}
+
+
+% \section*{Acknowledgments}
+% This should be a simple paragraph before the References to thank those individuals and institutions who have supported your work on this article.
+
+
+
+% {\appendix[Proof of the Zonklar Equations]
+% Use $\backslash${\tt{appendix}} if you have a single appendix:
+% Do not use $\backslash${\tt{section}} anymore after $\backslash${\tt{appendix}}, only $\backslash${\tt{section*}}.
+% If you have multiple appendixes use $\backslash${\tt{appendices}} then use $\backslash${\tt{section}} to start each appendix.
+% You must declare a $\backslash${\tt{section}} before using any $\backslash${\tt{subsection}} or using $\backslash${\tt{label}} ($\backslash${\tt{appendices}} by itself
+%  starts a section numbered zero.)}
+
+
+
+%{\appendices
+%\section*{Proof of the First Zonklar Equation}
+%Appendix one text goes here.
+% You can choose not to have a title for an appendix if you want by leaving the argument blank
+%\section*{Proof of the Second Zonklar Equation}
+%Appendix two text goes here.}
+
+
+
+% \section{References Section}
+% You can use a bibliography generated by BibTeX as a .bbl file.
+%  BibTeX documentation can be easily obtained at:
+%  http://mirror.ctan.org/biblio/bibtex/contrib/doc/
+%  The IEEEtran BibTeX style support page is:
+%  http://www.michaelshell.org/tex/ieeetran/bibtex/
+ 
+
+% 参考文献
+\bibliographystyle{IEEEtran}
+\bibliography{template}
+
+
+% \newpage
+
+% \section{Biography Section}
+% If you have an EPS/PDF photo (graphicx package needed), extra braces are
+%  needed around the contents of the optional argument to biography to prevent
+%  the LaTeX parser from getting confused when it sees the complicated
+%  $\backslash${\tt{includegraphics}} command within an optional argument. (You can create
+%  your own custom macro containing the $\backslash${\tt{includegraphics}} command to make things
+%  simpler here.)
+ 
+
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/ZHENG FENGLING_photo.jpg}}]{Fengling Zheng}
+is currently a PhD in the School of Computer Science, Hangzhou Dianzi University, and a researcher in Big Data Visualization and Human Computer Collaborative Intelligent Laboratory. Her research interests include interactive visualization, visual analytics and knowledge graph.
+\end{IEEEbiography}
+\vspace{-1.0\baselineskip}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/pengyongle.png}}]{Yongle Peng}
+is currently a senior undergraduate student majoring in Digital Media Technology at the School of Humanities, Arts and Digital Media, Hangzhou Dianzi University. His research interests include multimodal large language models, computer vision, and visual analytics.
+\end{IEEEbiography}
+\vspace{-1.0\baselineskip}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/rongzi.png}}]{Zi Rong}
+is currently a Master’s student in the School of Humanities, Arts and Digital Media, Hangzhou Dianzi University, and a researcher in Big Data Visualization and Human Computer Collaborative Intelligent Laboratory. Her research interests include chart understanding, data visualization, and human–computer interaction.
+\end{IEEEbiography}
+\vspace{-1.0\baselineskip}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/caichengyun.jpg}}]{Chenyun Cai}
+is currently an undergraduate student in Digital Media Technology at Hangzhou Dianzi University. Concurrently, he is a Research Assistant at the Lab of Big Data Visualization and Human-Computer Collaborative Intelligence, where his research focuses on knowledge graphs and interactive visualization.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/heyumeng.jpg}}]{Yumeng He}
+is a Master’s student in Computer Science at the University of Southern California, advised by Dr. Jernej Barbič. Her research interests lie at the intersection of computer vision, computer graphics, and robotics, with a focus on image and video understanding, 3D and 3DGS generation, physics-based simulation, real-to-sim pipelines, and embodied policy learning.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/qiandekun.jpg}}]{Dekun Qian}
+is currently a Master student in the School of Humanities, Arts and Digital Media, Hangzhou Dianzi University, and a researcher in Big Data Visualization and Human Computer Collaborative Intelligent Laboratory. His research interests include human-computer interaction and digital media technology.
+\end{IEEEbiography}
+
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/zhouzhig.png}}]{Zhiguang Zhou}
+is currently a professor in School of Humanities, Arts and Digital Media, and serves as the dean of Digital Media Technology Research Institute at Hangzhou Dianzi University. His research interests include data visualization, visual analytics and knowledge graph mining. He received his Ph.D. in Computer Science from the state key Laboratory of CAD\&CG in Zhejiang University. 
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/wangyigang.jpg}}]{Yigang Wang} 
+received the MS and PhD degrees in applied mathematics from Zhejiang University, Hangzhou, China. He is currently a professor with the School of Media and Design, Hangzhou Dianzi University, Hangzhou, China. His interests include image processing, computer vision, pattern recognition, and computer graphics.
+\end{IEEEbiography}
+
+
+\begin{IEEEbiography}[{\includegraphics[width=1.0in,height=1.25in,clip,keepaspectratio]{photos/wangyong.png}}]{Yong Wang}
+is currently an assistant professor in the College of Computing and Data Science, Nanyang Technological University. Before that, he worked as an assistant professor at Singapore Management University from 2020 to 2024. His research interests include information visualization, visual analytics and human-AI collaboration, with an emphasis on their application to FinTech, quantum computing and online learning. He obtained his Ph.D. in Computer Science from Hong Kong University of Science and Technology. He received his B.E. and M.E. from Harbin Institute of Technology and Huazhong University of Science and Technology, respectively. For more details, please refer to \url{http://yong-wang.org}.
+\end{IEEEbiography}
+
+\vfill
+
+\end{document}
+
+

@@ -1,0 +1,48 @@
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figs/teaser.png}
+  \caption{
+   An overview of \toolName{}, a visual hint prompting strategy for numerical inference from charts.
+  The method operates in three components:
+  (1) \emph{Axis-aware Grid Enhancement}, which exposes fine-grained axis priors by overlaying grids aligned with the chart’s underlying structure;
+  (2) \emph{Iterative Visual Feedback}, which introduces model-informed alignment cues to refine intermediate predictions; and
+  (3) \emph{Progressive Zoom-in Refinement}, which enlarges the relevant region to provide high-resolution visual detail for fine-grained and reliable numerical inference across both Cartesian and polar charts.
+  }
+  \label{teaser}
+\end{figure*}
+
+
+
+\section{Related Work}
+
+In this section, we review three lines of research most relevant to our work: (1) traditional chart information extraction approaches, and
+% that reconstruct structured data from chart images;
+(2) chart understanding enhancement strategies for MLLMs from two perspectives: model-centric approaches that enhance chart understanding via pretraining or instruction tuning and visual-centric prompting strategies that guide MLLMs without changing model parameters.
+
+
+\subsection{Traditional Chart Information Extraction Approaches}
+For decades, researchers have devoted efforts to extracting structural information from chart images to recover their underlying structured data, thereby supporting downstream tasks such as chart understanding and analysis. Early approaches typically adopted multi-stage parsing pipelines. The core idea was to first detect chart elements using image processing and OCR techniques, and then reconstruct values based on geometric or semantic relationships. Since different chart types are defined by distinct graphical primitives, these methods often relied on predefined rules to locate components through color continuity and edge features, followed by graphical mark extraction\cite{ReVision}. For example, \textit{ReVision}\cite{ReVision} employed edge detection and pattern recognition techniques to separate axes, data marks, and legends, thereby recovering data from bar and pie chart images. \textit{ChartSense}\cite{ChartSense} leveraged a mixed-initiative design that combined image processing with guided user interaction to achieve fast and accurate data extraction. \textit{ChartKG}\cite{ChartKG} integrated object recognition, OCR, and rule-based parsing of graphical marks, and organized the recovered data in the form of a knowledge graph. Although such approaches provide interpretability, they depend on complicated pipelines, where errors can be amplified across multiple stages, ultimately limiting robustness. With the advent of deep learning, research has shifted toward end-to-end frameworks for chart data extraction, aiming to directly predict structured outputs from chart images. \textit{Scatteract}\cite{Scatteract} automatically recovered data points from scatter plots. \textit{DVQA}\cite{DVQA} proposed a deep dual-network model to parse values directly from bar chart images. \textit{ChartOCR}\cite{ChartOCR} combined deep learning with rule-based methods, extracting key points of chart elements to support data extraction from three common chart types. However, these algorithms were often tailored to specific chart types and only covered a limited set of formats (e.g., line, bar, and pie charts), showing clear limitations in handling the diversity and complexity of real-world charts. More recent studies have introduced end-to-end Vision–Language Models\cite{Pix2Struct, MatCha, UniChart, ChartT5}, which learn mappings from chart images to structured tables via vision encoders and autoregressive decoders. By leveraging weak supervision or self-supervision for cross-modal alignment, these methods aim to achieve direct chart understanding from images. However, in the absence of explicit numeric annotations or under diverse chart styles, their ability to extract visual structural information and to generalize remains limited, which will be addressed in this work.
+
+
+% \subsection{Enhancing MLLMs for Chart Understanding}
+\subsection{Chart Understanding Enhancement Strategies for MLLMs}
+% \wy{Fengling, pls check if the change is aligned with your intent, and revise the paragraphs below.}
+
+The emergence of MLLMs such as GPT-4o, Gemini, and LLaVA has further transformed the paradigm of chart understanding, with end-to-end reasoning becoming increasingly mainstream. A variety of strategies have been proposed to improve their performance in chart data inference, which can be broadly categorized into \textit{model-centric enhancements} and \textit{visual-centric prompting strategies}.
+
+% \wy{For the following paragraphs, 1) the introduction of existing work can be condensed; 2) the difference between prior work and our approach is a bit redundant and can be shortened.}
+\subsubsection{\textbf{Model-centric Enhancements}}
+
+Model-centric approaches improve chart understanding primarily through large-scale pretraining, instruction tuning, or architectural adaptation using chart-specific data~\cite{CharXiv,NLDataset,NovaChart,ChartInstruct,QwenChart}. Representative methods fine-tune or pretrain MLLMs on synthetic or curated chart–table pairs to align visual and tabular modalities~\cite{han2023chartllama,ChartAssistant,MMC}, or construct high-quality instruction datasets with diverse visual details to strengthen fine-grained perception~\cite{EffectTrainingData}. Other studies explore efficiency-oriented or structural enhancements. TinyChart~\cite{TinyChart} introduces a lightweight model and a parameter-free visual instruction merging module to reduce the computational burden of high-resolution inputs. Visualization-referenced instruction tuning~\cite{visrefinstuning} enhances fine-grained perception by partially unfreezing vision encoders and adopting hybrid-resolution strategies. OneChart~\cite{Onechart} incorporates auxiliary tokens to guide attention toward critical chart components, while CHOPINLLM~\cite{PretrainingMLLM} integrates original data alignment during pretraining and explicitly extracts chart data before question answering. ChartGemma~\cite{ChartGemma} trains directly on instruction data generated from chart images without relying on underlying data tables, and ChartMoE~\cite{ChartMoE} leverages a mixture-of-experts architecture to improve multi-task alignment. Chart-r1~\cite{Chart-r1} calibrates numerical sensitivity via reinforcement fine-tuning.
+ 
+While these approaches have achieved remarkable advances, they either incur high training and deployment costs or are intrinsically proprietary and impossible to conduct training.
+
+
+
+\subsubsection{\textbf{Visual-centric Prompting Strategies}}
+
+Visual-centric prompting strategies enhance chart understanding by injecting structured visual cues into the input and guiding MLLMs to perform step-by-step reasoning without modifying model parameters~\cite{DetToolChain}. Early work such as ChartThinker~\cite{ChartThinker} introduced chain-of-thought reasoning for charts, but primarily focused on textual decomposition rather than explicit visual parsing. Subsequent approaches increasingly integrate visual guidance to complement textual reasoning. ChartInsights~\cite{ChartInsights} and VisualCoT~\cite{VisualCoT} employ region-focused visual cues and cropping strategies to improve local visual grounding. DetToolChain~\cite{DetToolChain} further introduces detection-based prompting with staged visual hints, coordinate measurement, and self-verification to enhance consistency across iterations. VProChart~\cite{VProChart} models human-inspired visual alignment principles, such as spatial proximity and crosshair alignment, to significantly improve numerical inference accuracy.
+
+These methods show that localized visual cues can effectively support chart reasoning, but they typically focus on isolated regions or task-specific scenes. 
+In contrast, our approach introduces an axis-aware visual scaffold that enables coarse-to-fine numerical inference by combining global structural context with localized refinement.
+
