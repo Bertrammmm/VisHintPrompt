@@ -72,6 +72,78 @@ function copyBibTeX() {
     }
 }
 
+// Language switching functionality
+let currentLanguage = localStorage.getItem('language') || 'zh'; // Default to Chinese
+
+function toggleLanguage() {
+    currentLanguage = currentLanguage === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('language', currentLanguage);
+    updateLanguage();
+}
+
+function updateLanguage() {
+    const langText = document.getElementById('langText');
+    if (langText) {
+        langText.textContent = currentLanguage === 'zh' ? 'English' : '中文';
+    }
+    
+    // Update all elements with data-en and data-zh attributes
+    const elements = document.querySelectorAll('[data-en][data-zh]');
+    elements.forEach(element => {
+        const content = currentLanguage === 'zh' ? element.getAttribute('data-zh') : element.getAttribute('data-en');
+        
+        // Check if element has title attributes
+        if (element.hasAttribute('data-en-title') || element.hasAttribute('data-zh-title')) {
+            const titleContent = currentLanguage === 'zh' ? element.getAttribute('data-zh-title') : element.getAttribute('data-en-title');
+            if (titleContent) {
+                element.setAttribute('title', titleContent);
+            }
+        }
+        
+        // For elements that should use innerHTML (contain HTML tags)
+        if (element.tagName === 'P' || element.tagName === 'LI' || 
+            (element.tagName === 'SPAN' && content.includes('<')) ||
+            content.includes('<strong>') || content.includes('<em>') || 
+            content.includes('<sub>') || content.includes('<sup>') ||
+            content.includes('<ul>') || content.includes('<li>')) {
+            element.innerHTML = content;
+        } else {
+            // For simple text elements
+            element.textContent = content;
+        }
+    });
+    
+    // Update document language attribute
+    document.documentElement.lang = currentLanguage === 'zh' ? 'zh-CN' : 'en';
+}
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateLanguage();
+});
+
+// Grid tab switching functionality
+function switchGridTab(tabName) {
+    // Hide all tab contents
+    const cartesianDemo = document.getElementById('cartesian-grid-demo');
+    const polarDemo = document.getElementById('polar-grid-demo');
+    const tabItems = document.querySelectorAll('.tabs ul li');
+    
+    // Remove active class from all tabs
+    tabItems.forEach(item => item.classList.remove('is-active'));
+    
+    // Show selected tab content and activate corresponding tab
+    if (tabName === 'cartesian') {
+        if (cartesianDemo) cartesianDemo.style.display = 'block';
+        if (polarDemo) polarDemo.style.display = 'none';
+        if (tabItems[0]) tabItems[0].classList.add('is-active');
+    } else if (tabName === 'polar') {
+        if (cartesianDemo) cartesianDemo.style.display = 'none';
+        if (polarDemo) polarDemo.style.display = 'block';
+        if (tabItems[1]) tabItems[1].classList.add('is-active');
+    }
+}
+
 // Scroll to top functionality
 function scrollToTop() {
     window.scrollTo({
