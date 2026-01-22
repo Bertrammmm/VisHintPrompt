@@ -797,6 +797,12 @@ a:focus {
   border-radius: var(--border-radius);
 }
 
+/* Section subtitle spacing - consistent with other sections */
+.section-subtitle {
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
 /* Results table styles - minimal and high contrast */
 .table-container {
   margin: 2rem 0;
@@ -954,19 +960,19 @@ a:focus {
     width: 100% !important;
   }
   
-  /* Dataset Construction section mobile fixes */
-  .section .columns.is-vcentered .column.is-half {
-    width: 100% !important;
-    margin-bottom: 1.5rem;
-  }
-  
-  .section.hero.is-light .columns.is-vcentered .column.is-half {
+  /* Dataset Construction section mobile fixes - match Method Overview */
+  .section.hero.is-light .columns .column.is-half {
     width: 100% !important;
     margin-bottom: 1.5rem;
   }
   
   .section.hero.is-light .box {
     margin-top: 1rem;
+  }
+  
+  /* Consistent spacing for section subtitles */
+  .section-subtitle {
+    margin-top: 1.5rem !important;
   }
   
   /* Tabs center alignment on mobile */
@@ -1005,14 +1011,19 @@ a:focus {
     margin-bottom: 1.5rem;
   }
   
-  /* Quantitative Results section mobile */
+  /* Quantitative Results section mobile - consistent with other sections */
   .section.hero.is-light .table-container {
-    margin: 1rem 0;
+    margin: 1.5rem 0;
   }
   
-  /* Quantitative Results - Key Findings columns */
+  /* Quantitative Results - Key Findings columns stack on mobile */
   .section.hero.is-light .columns .column.is-half {
     width: 100% !important;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Ensure consistent box spacing in Quantitative Results */
+  .section.hero.is-light .box {
     margin-bottom: 1rem;
   }
   

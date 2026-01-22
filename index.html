@@ -545,7 +545,7 @@
             </div>
           </div>
           
-          <div class="columns is-vcentered" style="margin-top: 2rem;">
+          <div class="columns" style="margin-top: 2rem;">
             <div class="column is-half">
               <h3 class="title is-4" data-en="Dataset Composition" data-zh="数据集组成">数据集组成</h3>
               <ul>
@@ -818,14 +818,14 @@
             This section presents the quantitative performance of MLLMs under VisHintPrompt. The evaluation covers more than 4,000 point-level prediction instances across Cartesian and polar chart families. All reported errors are Range-Normalized Error (RNE) and Relative Error (RE) as percentages, with lower values indicating better performance.
           </p>
 
-          <h3 class="title is-4" style="margin-top: 2rem;" data-en="Overall Performance" data-zh="整体性能">Overall Performance</h3>
+          <h3 class="title is-4 section-subtitle" data-en="Overall Performance" data-zh="整体性能">Overall Performance</h3>
           <p data-en="Averaged over five MLLMs and nine chart types, VisHintPrompt leads to overall reductions in numerical error (RNE and RE) compared to the baseline. These reductions are observed across all five evaluated MLLMs. Specifically, across all model–chart type combinations, type-level RNE and RE decrease in 32 of the 45 cases, with closed-source MLLMs achieving improvements on at least 7 of the 9 chart types, while open-source MLLMs also improve on at least 5 of the 9." data-zh="在五个 MLLM 和九种图表类型上平均，VisHintPrompt 相比基线方法在数值误差（RNE 和 RE）上实现了整体降低。这些降低在所有五个评估的 MLLM 中都观察到。具体而言，在所有模型-图表类型组合中，类型级 RNE 和 RE 在 45 个案例中有 32 个降低，闭源 MLLM 在至少 7 种图表类型上实现改进，而开源 MLLM 也在至少 5 种图表类型上实现改进。">
             Averaged over five MLLMs and nine chart types, VisHintPrompt leads to overall reductions in numerical error (RNE and RE) compared to the baseline. These reductions are observed across all five evaluated MLLMs. Specifically, across all model–chart type combinations, type-level RNE and RE decrease in 32 of the 45 cases, with closed-source MLLMs achieving improvements on at least 7 of the 9 chart types, while open-source MLLMs also improve on at least 5 of the 9.
           </p>
 
           <!-- Main Results Table -->
-          <div class="table-container" style="overflow-x: auto; margin: 2rem 0;">
-            <table class="table is-bordered is-striped is-narrow is-hoverable" style="font-size: 0.85rem; width: 100%;">
+          <div class="table-container">
+            <table class="table is-bordered is-striped is-narrow is-hoverable">
               <thead>
                 <tr>
                   <th rowspan="2" data-en="MLLMs" data-zh="模型">MLLMs</th>
@@ -1024,7 +1024,7 @@
             Main experimental results across five MLLMs on nine chart types. We report Range-Normalized Error (RNE) and Relative Error (RE; lower is better) for both the baseline (original charts) and our VisHintPrompt method. Bold numbers indicate improvements over baseline.
           </p>
 
-          <h3 class="title is-4" style="margin-top: 3rem;" data-en="Key Findings" data-zh="主要发现">Key Findings</h3>
+          <h3 class="title is-4 section-subtitle" data-en="Key Findings" data-zh="主要发现">Key Findings</h3>
           <div class="columns">
             <div class="column is-half">
               <div class="box">
@@ -1044,7 +1044,7 @@
             </div>
           </div>
 
-          <h3 class="title is-4" style="margin-top: 2rem;" data-en="Ablation Study" data-zh="消融研究">Ablation Study</h3>
+          <h3 class="title is-4 section-subtitle" data-en="Ablation Study" data-zh="消融研究">Ablation Study</h3>
           <p data-en="We examine the contribution of each component in VisHintPrompt by conducting ablations on representative chart types from each coordinate family." data-zh="我们通过对每个坐标系家族的代表性图表类型进行消融研究，检验 VisHintPrompt 中每个组件的贡献。">
             We examine the contribution of each component in VisHintPrompt by conducting ablations on representative chart types from each coordinate family.
           </p>
