@@ -754,9 +754,17 @@ a:focus {
   margin-bottom: 2rem;
 }
 
+.tabs.is-centered {
+  display: flex;
+  justify-content: center;
+}
+
 .tabs ul {
   border-bottom: 2px solid var(--border-color);
   margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .tab-item {
@@ -824,11 +832,19 @@ a:focus {
   background-color: #f5f5f5;
   color: #333;
   font-weight: 600;
-  text-align: center;
+  text-align: center !important;
   vertical-align: middle;
   border: 1px solid #ddd;
   padding: 0.75rem 0.5rem;
   font-size: 0.9rem;
+}
+
+/* 确保表头文字在所有情况下都居中 */
+.table thead th,
+.table thead th[colspan],
+.table thead th[rowspan] {
+  text-align: center !important;
+  text-align-last: center;
 }
 
 .table tbody td {
@@ -850,6 +866,19 @@ a:focus {
 .table tbody td strong {
   color: #000;
   font-weight: 700;
+}
+
+/* Version info in footer */
+.version-info {
+  text-align: center;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.version-number {
+  font-size: 0.65rem;
+  color: #999;
+  opacity: 0.7;
 }
 
 /* Responsive Design */
@@ -897,6 +926,7 @@ a:focus {
   .table thead th {
     padding: 0.5rem 0.3rem;
     font-size: 0.7rem;
+    text-align: center !important;
   }
   
   .table tbody td {
@@ -924,14 +954,103 @@ a:focus {
     width: 100% !important;
   }
   
-  /* Grid demo tabs */
+  /* Dataset Construction section mobile fixes */
+  .section .columns.is-vcentered .column.is-half {
+    width: 100% !important;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section.hero.is-light .columns.is-vcentered .column.is-half {
+    width: 100% !important;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section.hero.is-light .box {
+    margin-top: 1rem;
+  }
+  
+  /* Tabs center alignment on mobile */
+  .tabs.is-centered {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .tabs.is-centered ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .tabs.is-centered li {
+    flex: 0 0 auto;
+  }
+  
+  .tabs li a {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  
+  /* Grid demo content mobile */
+  .grid-demo-content {
+    padding: 1rem !important;
+  }
+  
+  .grid-demo-content .columns.is-vcentered {
+    flex-direction: column;
+  }
+  
+  .grid-demo-content .column.is-half {
+    width: 100% !important;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Quantitative Results section mobile */
+  .section.hero.is-light .table-container {
+    margin: 1rem 0;
+  }
+  
+  /* Quantitative Results - Key Findings columns */
+  .section.hero.is-light .columns .column.is-half {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+  
+  /* Qualitative Results images mobile */
+  .section.hero .columns.is-centered {
+    margin: 1rem 0 !important;
+  }
+  
+  .section.hero .column.is-full {
+    padding: 0.5rem;
+  }
+  
+  .section.hero .column.is-full figure {
+    margin: 0.5rem 0;
+  }
+  
+  /* Grid demo tabs - center alignment */
+  .tabs.is-centered {
+    display: flex;
+    justify-content: center;
+  }
+  
   .tabs ul {
     flex-wrap: wrap;
+    justify-content: center;
+    display: flex;
+    width: 100%;
   }
   
   .tabs li {
-    flex: 1 1 auto;
-    min-width: 50%;
+    flex: 0 0 auto;
+    min-width: auto;
+  }
+  
+  .tabs li a {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
   }
   
   /* Images */
@@ -994,6 +1113,10 @@ a:focus {
     font-size: 0.65rem;
   }
   
+  .table thead th {
+    text-align: center !important;
+  }
+  
   .title.is-1 {
     font-size: 1.75rem !important;
   }
@@ -1025,6 +1148,10 @@ a:focus {
   .table thead th,
   .table tbody td {
     padding: 0.5rem 0.4rem;
+  }
+  
+  .table thead th {
+    text-align: center !important;
   }
   
   .columns .column.is-one-third {

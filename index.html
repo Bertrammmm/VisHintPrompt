@@ -24,7 +24,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="VisHintPrompt - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:published_time" content="2025-01-01T00:00:00.000Z">
   <meta property="article:author" content="Fengling Zheng">
   <meta property="article:section" content="Research">
   <meta property="article:tag" content="Chart Understanding">
@@ -53,7 +53,7 @@
   <meta name="citation_author" content="Zhou, Zhiguang">
   <meta name="citation_author" content="Wang, Yigang">
   <meta name="citation_author" content="Wang, Yong">
-  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_publication_date" content="2025">
   <meta name="citation_conference_title" content="IEEE Transactions on Visualization and Computer Graphics">
   <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
   
@@ -99,6 +99,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Defer non-critical JavaScript -->
+  <!-- 配置文件 - 必须最先加载，不使用defer以确保在index.js之前执行 -->
+  <script src="static/js/config.js"></script>
   <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
@@ -187,7 +189,7 @@
         }
       }
     ],
-    "datePublished": "2024-01-01",
+    "datePublished": "2025-01-01",
     "publisher": {
       "@type": "Organization",
       "name": "IEEE Transactions on Visualization and Computer Graphics"
@@ -196,7 +198,7 @@
     "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
     "keywords": ["Chart Understanding", "Multimodal Large Language Models", "Visual Prompting", "Data Inference", "Information Visualization"],
     "abstract": "Numerical inference from charts underpins many visualization tasks, including chart question answering and chart redesign. Although many chart-specific models have been developed for numerical extraction, their reliance on the chart types and visual encodings represented in training data limits their generalizability. Modern Multimodal Large Language Models (MLLMs) possess competitive general-purpose visual understanding, offering the potential for numerical inference without additional training. Yet how to reliably elicit such fine-grained numerical inference from pretrained MLLMs via visual prompting remains largely unexplored. To address this gap, we propose VisHintPrompt, a scaffolded visual hint prompting strategy grounded in the explicit extraction of axis priors from both Cartesian and polar charts. VisHintPrompt elicits the latent numerical inference abilities of MLLMs by progressively narrowing the search region. It supplies structured visual cues that guide the model toward accurate quantitative interpretation. The strategy consists of three coordinated components: Axis-aware Grid Enhancement, which extracts fine-grained axis priors and further exposes them as structure-aligned grids; Iterative Visual Feedback, which overlays alignment cues derived from intermediate predictions to enhance the next prediction; and Progressive Zoom-in Refinement, which enlarges the region of interest and applies progressive grid densification to enhance local detail for precise value estimation. VisHintPrompt is visual-centric and applies to both Cartesian charts (e.g., bar, scatterplot) and polar charts (e.g., pie, radar). Experiments across diverse chart types on both proprietary and open-source MLLMs demonstrate consistent improvements over standard prompting. Quantitative and qualitative analyses, along with ablation studies, validate the effectiveness and essential role of each component. These results underscore the broad applicability of VisHintPrompt in enabling reliable and more accurate numerical inference from charts.",
-    "citation": "@article{VisHintPrompt2024, title={VisHintPrompt: A Visual Hint Prompting Strategy for Numerical Inference from Charts}, author={Zheng, Fengling and Peng, Yongle and Rong, Zi and Cai, Chenyun and He, Yumeng and Qian, Dekun and Zhou, Zhiguang and Wang, Yigang and Wang, Yong}, journal={IEEE Transactions on Visualization and Computer Graphics}, year={2024}}",
+    "citation": "@article{VisHintPrompt2025, title={VisHintPrompt: A Visual Hint Prompting Strategy for Numerical Inference from Charts}, author={Zheng, Fengling and Peng, Yongle and Rong, Zi and Cai, Chenyun and He, Yumeng and Qian, Dekun and Zhou, Zhiguang and Wang, Yigang and Wang, Yong}, journal={IEEE Transactions on Visualization and Computer Graphics}, year={2025}}",
     "isAccessibleForFree": true,
     "license": "https://creativecommons.org/licenses/by/4.0/",
     "mainEntity": {
@@ -267,7 +269,7 @@
             <!-- TODO: Replace with brief description -->
             <p>Brief description of the work and its main contribution.</p>
             <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
+            <span class="work-venue">Conference/Journal 2025</span>
           </div>
           <i class="fas fa-external-link-alt"></i>
         </a>
@@ -276,7 +278,7 @@
           <div class="work-info">
             <h5>Paper Title 2</h5>
             <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
+            <span class="work-venue">Conference/Journal 2025</span>
           </div>
           <i class="fas fa-external-link-alt"></i>
         </a>
@@ -284,7 +286,7 @@
           <div class="work-info">
             <h5>Paper Title 3</h5>
             <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
+            <span class="work-venue">Conference/Journal 2025</span>
           </div>
           <i class="fas fa-external-link-alt"></i>
         </a>
@@ -322,7 +324,7 @@
                   </div>
 
                   <div class="is-size-5 publication-authors">
-              <span class="author-block">Hangzhou Dianzi University, Nanyang Technological University, University of Southern California<br>IEEE Transactions on Visualization and Computer Graphics (TVCG) 2024</span>
+              <span class="author-block">Hangzhou Dianzi University, Nanyang Technological University, University of Southern California<br>IEEE Transactions on Visualization and Computer Graphics (TVCG) 2025</span>
                   </div>
 
                   <div class="column has-text-centered">
@@ -1245,11 +1247,11 @@
           <span class="copy-text">Copy</span>
         </button>
       </div>
-      <pre id="bibtex-code"><code>@article{VisHintPrompt2024,
+      <pre id="bibtex-code"><code>@article{VisHintPrompt2025,
   title={VisHintPrompt: A Visual Hint Prompting Strategy for Numerical Inference from Charts},
   author={Zheng, Fengling and Peng, Yongle and Rong, Zi and Cai, Chenyun and He, Yumeng and Qian, Dekun and Zhou, Zhiguang and Wang, Yigang and Wang, Yong},
   journal={IEEE Transactions on Visualization and Computer Graphics},
-  year={2024},
+  year={2025},
   url={https://your-domain.com/your-project-page}
 }</code></pre>
     </div>
@@ -1264,13 +1266,16 @@
         <div class="content">
 
           <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
             You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license noopener" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
 
         </div>
       </div>
+    </div>
+    <div class="version-info">
+      <span class="version-number">V2.2</span>
     </div>
   </div>
 </footer>

@@ -191,7 +191,135 @@ function setupVideoCarouselAutoplay() {
     });
 }
 
+// 从配置文件更新所有链接和版本信息
+function updateLinksFromConfig() {
+    if (typeof SITE_CONFIG === 'undefined') {
+        console.warn('SITE_CONFIG not found. Make sure config.js is loaded.');
+        return;
+    }
+
+    const config = SITE_CONFIG;
+
+    // 更新版本号
+    const versionElement = document.querySelector('.version-number');
+    if (versionElement) {
+        versionElement.textContent = 'V' + config.version;
+    }
+
+    // 更新Meta标签中的URL
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) ogUrl.setAttribute('content', config.domain.fullUrl);
+    
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage) ogImage.setAttribute('content', config.domain.main + '/' + config.images.socialPreview);
+    
+    const twitterImage = document.querySelector('meta[name="twitter:image"]');
+    if (twitterImage) twitterImage.setAttribute('content', config.domain.main + '/' + config.images.socialPreview);
+    
+    const citationPdf = document.querySelector('meta[name="citation_pdf_url"]');
+    if (citationPdf) citationPdf.setAttribute('content', config.domain.main + '/' + config.paper.pdfLocal);
+
+    // 更新JSON-LD中的URL
+    const jsonLd = document.querySelector('script[type="application/ld+json"]');
+    if (jsonLd) {
+        try {
+            const data = JSON.parse(jsonLd.textContent);
+            if (data.url) data.url = config.domain.fullUrl;
+            if (data.image) data.image = config.domain.main + '/' + config.images.socialPreview;
+            if (data.license) data.license = config.template.schemaLicense;
+            if (data.mainEntity && data.mainEntity['@id']) {
+                data.mainEntity['@id'] = config.domain.fullUrl;
+            }
+            jsonLd.textContent = JSON.stringify(data, null, 2);
+        } catch (e) {
+            console.warn('Failed to update JSON-LD:', e);
+        }
+    }
+
+    // 更新作者主页链接
+    const yongWangLink = document.querySelector('a[href="http://yong-wang.org"]');
+    if (yongWangLink) yongWangLink.setAttribute('href', config.authors.yongWang);
+
+    // 更新论文PDF链接
+    const arxivPdfLinks = document.querySelectorAll('a[href*="arxiv.org/pdf"]');
+    arxivPdfLinks.forEach(link => {
+        if (link.getAttribute('href').includes('<ARXIV')) {
+            link.setAttribute('href', config.paper.arxivPdf);
+        }
+    });
+
+    // 更新ArXiv摘要链接
+    const arxivAbsLinks = document.querySelectorAll('a[href*="arxiv.org/abs"]');
+    arxivAbsLinks.forEach(link => {
+        if (link.getAttribute('href').includes('<ARXIV')) {
+            link.setAttribute('href', config.paper.arxivAbs);
+        }
+    });
+
+    // 更新GitHub仓库链接
+    const githubLinks = document.querySelectorAll('a[href*="github.com"]');
+    githubLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href.includes('YOUR REPO HERE') || href.includes('YOUR_REPO')) {
+            link.setAttribute('href', config.repositories.github);
+        } else if (href.includes('VisHintPrompt_datasets')) {
+            link.setAttribute('href', config.repositories.dataset);
+        }
+    });
+
+    // 更新数据集链接
+    const datasetLinks = document.querySelectorAll('a[href*="VisHintPrompt_datasets"]');
+    datasetLinks.forEach(link => {
+        link.setAttribute('href', config.repositories.dataset);
+        if (link.textContent.includes('github.com')) {
+            link.textContent = config.repositories.dataset;
+        }
+    });
+
+    // 更新YouTube视频
+    const youtubeIframe = document.querySelector('iframe[src*="youtube.com"]');
+    if (youtubeIframe) {
+        youtubeIframe.setAttribute('src', config.videos.youtubeUrl);
+    }
+
+    // 更新相关论文链接
+    const workLinks = document.querySelectorAll('.work-item');
+    workLinks.forEach((link, index) => {
+        const workKey = 'work' + (index + 1);
+        if (config.relatedWorks[workKey]) {
+            const work = config.relatedWorks[workKey];
+            link.setAttribute('href', work.link);
+            const titleEl = link.querySelector('h5');
+            if (titleEl) titleEl.textContent = work.title;
+            const descEl = link.querySelector('p');
+            if (descEl) descEl.textContent = work.description;
+            const venueEl = link.querySelector('.work-venue');
+            if (venueEl) venueEl.textContent = work.venue;
+        }
+    });
+
+    // 更新BibTeX中的URL
+    const bibtexCode = document.querySelector('#bibtex-code code');
+    if (bibtexCode) {
+        let bibtexText = bibtexCode.textContent;
+        bibtexText = bibtexText.replace(/url=\{https:\/\/your-domain\.com[^}]*\}/, 
+            `url={${config.domain.fullUrl}}`);
+        bibtexCode.textContent = bibtexText;
+    }
+
+    // 更新机构链接
+    const hduLinks = document.querySelectorAll('a[href*="hdu.edu.cn"]');
+    hduLinks.forEach(link => {
+        if (link.getAttribute('href').includes('www.hdu.edu.cn')) {
+            link.setAttribute('href', config.institutions.hdu);
+        }
+    });
+}
+
 $(document).ready(function() {
+    // 首先更新所有链接
+    updateLinksFromConfig();
+
     // Check for click events on the navbar burger icon
 
     var options = {
