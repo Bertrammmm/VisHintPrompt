@@ -73,7 +73,7 @@ function copyBibTeX() {
 }
 
 // Language switching functionality
-let currentLanguage = localStorage.getItem('language') || 'zh'; // Default to Chinese
+let currentLanguage = localStorage.getItem('language') || 'en'; // Default to English
 
 function toggleLanguage() {
     currentLanguage = currentLanguage === 'zh' ? 'en' : 'zh';

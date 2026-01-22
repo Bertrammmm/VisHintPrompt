@@ -36,6 +36,23 @@ body {
   background-color: var(--background-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure.image {
+  margin: 0;
+}
+
+figure.image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 
@@ -776,6 +793,25 @@ a:focus {
 .table-container {
   margin: 2rem 0;
   overflow-x: auto;
+  position: relative;
+}
+
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .table {
@@ -814,6 +850,197 @@ a:focus {
 .table tbody td strong {
   color: #000;
   font-weight: 700;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  /* Mobile adjustments */
+  body {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .title.is-1 {
+    font-size: 2rem !important;
+  }
+  
+  .title.is-2 {
+    font-size: 1.75rem !important;
+  }
+  
+  .title.is-3 {
+    font-size: 1.5rem !important;
+  }
+  
+  .title.is-4 {
+    font-size: 1.25rem !important;
+  }
+  
+  .title.is-5 {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Table responsive */
+  .table-container {
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+  
+  .table {
+    font-size: 0.75rem;
+    min-width: 800px;
+  }
+  
+  .table thead th {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.7rem;
+  }
+  
+  .table tbody td {
+    padding: 0.4rem 0.3rem;
+    font-size: 0.7rem;
+  }
+  
+  /* Language switcher */
+  .language-switcher {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .lang-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Columns stack on mobile */
+  .columns.is-vcentered {
+    flex-direction: column;
+  }
+  
+  .columns.is-vcentered .column.is-half {
+    width: 100% !important;
+  }
+  
+  /* Grid demo tabs */
+  .tabs ul {
+    flex-wrap: wrap;
+  }
+  
+  .tabs li {
+    flex: 1 1 auto;
+    min-width: 50%;
+  }
+  
+  /* Images */
+  .image img {
+    border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  figure.image {
+    margin: 1rem 0;
+  }
+  
+  /* Box padding */
+  .box {
+    padding: 1rem !important;
+  }
+  
+  /* Hero sections */
+  .hero-body {
+    padding: 2rem 1rem !important;
+  }
+  
+  /* Method overview boxes */
+  .columns .column.is-one-third {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+  
+  /* Video iframe */
+  .publication-video iframe {
+    height: 250px;
+  }
+  
+  /* Abstract and content */
+  .content p {
+    margin-bottom: 1rem;
+  }
+  
+  /* Footer */
+  .footer {
+    padding: 2rem 1rem !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Extra small devices */
+  body {
+    font-size: 13px;
+  }
+  
+  .table {
+    font-size: 0.65rem;
+    min-width: 700px;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.3rem 0.2rem;
+    font-size: 0.65rem;
+  }
+  
+  .title.is-1 {
+    font-size: 1.75rem !important;
+  }
+  
+  .title.is-2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .title.is-3 {
+    font-size: 1.25rem !important;
+  }
+  
+  .lang-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  
+  .publication-video iframe {
+    height: 200px;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet adjustments */
+  .table {
+    font-size: 0.85rem;
+  }
+  
+  .table thead th,
+  .table tbody td {
+    padding: 0.5rem 0.4rem;
+  }
+  
+  .columns .column.is-one-third {
+    width: 50% !important;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  /* Desktop - ensure proper max width */
+  .container.is-max-desktop {
+    max-width: 1200px;
+  }
+  
+  .table-container {
+    max-width: 100%;
+  }
 }
 
 /* Language Switcher Styles */
