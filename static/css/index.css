@@ -1,38 +1,23 @@
 /* Modern CSS Variables for consistent theming */
 :root {
-  /* Primary colors from paper palette */
-  --primary-color: #8899D9;
-  --primary-hover: #6B7FC4;
-  --secondary-color: #A89ED3;
-  --accent-color: #BE8C9C;
-  --accent-secondary: #C19A8B;
-  --accent-tertiary: #C29763;
-  --accent-blue: #96A5D8;
-  
-  /* Text colors - maintaining readability */
-  --text-primary: #2D2D3A;
-  --text-secondary: #5A5A6B;
-  --text-light: #8B8B9E;
-  
-  /* Background colors - using light tints from palette */
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --secondary-color: #64748b;
+  --accent-color: #0ea5e9;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #94a3b8;
   --background-primary: #ffffff;
-  --background-secondary: #F8F7FC;
-  --background-accent: #F3F2F8;
-  --background-warm: #FDF8F6;
-  
-  /* Border and shadow */
-  --border-color: #E5E3ED;
-  --shadow-sm: 0 1px 2px 0 rgba(136, 153, 217, 0.08);
-  --shadow-md: 0 4px 6px -1px rgba(136, 153, 217, 0.12), 0 2px 4px -2px rgba(136, 153, 217, 0.08);
-  --shadow-lg: 0 10px 15px -3px rgba(136, 153, 217, 0.15), 0 4px 6px -4px rgba(136, 153, 217, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(136, 153, 217, 0.18), 0 8px 10px -6px rgba(136, 153, 217, 0.12);
-  
-  /* Gradients using palette colors */
-  --gradient-primary: linear-gradient(135deg, #8899D9 0%, #A89ED3 100%);
-  --gradient-accent: linear-gradient(135deg, #BE8C9C 0%, #C19A8B 100%);
-  --gradient-subtle: linear-gradient(135deg, #F8F7FC 0%, #F3F2F8 100%);
-  --gradient-warm: linear-gradient(135deg, #FDF8F6 0%, #F8F4F0 100%);
-  
+  --background-secondary: #f8fafc;
+  --background-accent: #f1f5f9;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-subtle: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
   --border-radius: 12px;
   --border-radius-lg: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -91,7 +76,7 @@ figure.image img {
 .button.is-dark:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: var(--secondary-color) !important;
+  background: var(--primary-color) !important;
 }
 
 .button.is-dark:active {
@@ -129,7 +114,6 @@ figure.image img {
   background: var(--background-secondary);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  background-image: linear-gradient(to bottom, var(--background-secondary), var(--background-accent));
 }
 
 .hero-body {
@@ -221,7 +205,7 @@ figure.image img {
     height: 2px;
     bottom: -2px;
     left: 0;
-    background: var(--gradient-primary);
+    background: var(--gradient-accent);
     transition: var(--transition);
 }
 
@@ -325,13 +309,13 @@ figure.image img {
 
 /* Pagination and Misc Improvements */
 .slider-pagination .slider-page {
-  background: var(--accent-color);
+  background: var(--primary-color);
   border-radius: 50%;
   transition: var(--transition);
 }
 
 .slider-pagination .slider-page.is-active {
-  background: var(--primary-color);
+  background: var(--primary-hover);
   transform: scale(1.2);
 }
 
@@ -359,7 +343,7 @@ figure.image img {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: var(--gradient-primary);
+  background: var(--gradient-accent);
   border-radius: 2px;
 }
 
@@ -444,7 +428,7 @@ code {
 }
 
 .copy-bibtex-btn.copied {
-  background: var(--accent-secondary);
+  background: #10b981;
 }
 
 .copy-bibtex-btn.copied .copy-text::after {
@@ -778,9 +762,11 @@ a:focus {
 .tabs ul {
   border-bottom: 2px solid var(--border-color);
   margin-bottom: 0;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  width: 100%;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tab-item {
@@ -797,7 +783,7 @@ a:focus {
 
 .tab-item.is-active a {
   color: var(--primary-color);
-  border-bottom-color: var(--secondary-color);
+  border-bottom-color: var(--primary-color);
   font-weight: 600;
 }
 
@@ -809,23 +795,8 @@ a:focus {
 .grid-demo-content {
   margin-top: 2rem;
   padding: 1.5rem;
-  background-color: var(--background-accent);
+  background-color: var(--background-secondary);
   border-radius: var(--border-radius);
-  border: 1px solid var(--border-color);
-}
-
-/* Box styling with new color scheme */
-.box {
-  background-color: var(--background-primary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition);
-}
-
-.box:hover {
-  border-color: var(--primary-color);
-  box-shadow: var(--shadow-md);
 }
 
 /* Section subtitle spacing - consistent with other sections */
@@ -834,7 +805,35 @@ a:focus {
   margin-bottom: 1rem !important;
 }
 
-/* Results table styles - minimal and high contrast */
+/* Quantitative Results box styling with paper color palette */
+.section.hero.is-light .box {
+  background: linear-gradient(135deg, rgba(168, 158, 211, 0.1) 0%, rgba(150, 165, 216, 0.1) 100%);
+  border-left: 4px solid #8899D9;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.section.hero.is-light .box:hover {
+  background: linear-gradient(135deg, rgba(168, 158, 211, 0.15) 0%, rgba(150, 165, 216, 0.15) 100%);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.section.hero.is-light .box .title.is-5 {
+  color: #8899D9;
+  font-weight: 700;
+}
+
+.section.hero.is-light .box[style*="background-color"] {
+  background: linear-gradient(135deg, rgba(190, 140, 156, 0.12) 0%, rgba(193, 154, 139, 0.12) 100%) !important;
+  border-left-color: #BE8C9C;
+}
+
+.section.hero.is-light .box[style*="background-color"] .title.is-5 {
+  color: #BE8C9C;
+}
+
+/* Results table styles - using paper color palette */
 .table-container {
   margin: 2rem 0;
   overflow-x: auto;
@@ -846,17 +845,17 @@ a:focus {
 }
 
 .table-container::-webkit-scrollbar-track {
-  background: var(--background-accent);
+  background: #f1f1f1;
   border-radius: 4px;
 }
 
 .table-container::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
+  background: #96A5D8;
   border-radius: 4px;
 }
 
 .table-container::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
+  background: #8899D9;
 }
 
 .table {
@@ -866,12 +865,14 @@ a:focus {
 }
 
 .table thead th {
-  background: linear-gradient(135deg, var(--background-accent) 0%, var(--background-secondary) 100%);
+  /* Lighter, paper-like header tint (avoid heavy dark gradient) */
+  background: linear-gradient(135deg, rgba(168, 158, 211, 0.22) 0%, rgba(136, 153, 217, 0.18) 100%);
   color: var(--text-primary);
   font-weight: 600;
   text-align: center !important;
   vertical-align: middle;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(136, 153, 217, 0.25);
+  box-shadow: inset 0 -1px 0 rgba(136, 153, 217, 0.22);
   padding: 0.75rem 0.5rem;
   font-size: 0.9rem;
 }
@@ -888,21 +889,20 @@ a:focus {
   text-align: center;
   vertical-align: middle;
   padding: 0.6rem 0.5rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(190, 140, 156, 0.2);
   font-size: 0.9rem;
 }
 
 .table tbody tr:nth-child(even) {
-  background-color: var(--background-accent);
+  background-color: rgba(168, 158, 211, 0.08);
 }
 
 .table tbody tr:hover {
-  background-color: var(--background-secondary);
-  background: linear-gradient(90deg, var(--background-accent) 0%, var(--background-secondary) 100%);
+  background-color: rgba(150, 165, 216, 0.15);
 }
 
 .table tbody td strong {
-  color: #000;
+  color: #8899D9;
   font-weight: 700;
 }
 
@@ -924,6 +924,8 @@ a:focus {
   /* Mobile adjustments */
   body {
     font-size: 14px;
+    /* Prevent wide content (tables / long URLs) from being clipped on small screens */
+    overflow-x: auto;
   }
   
   .container {
@@ -954,6 +956,8 @@ a:focus {
   .table-container {
     margin: 1rem 0;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
   }
   
   .table {
@@ -1014,9 +1018,11 @@ a:focus {
   }
   
   .tabs.is-centered ul {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
-    width: 100%;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .tabs.is-centered li {
@@ -1027,6 +1033,14 @@ a:focus {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     white-space: nowrap;
+  }
+
+  /* Long strings (e.g., GitHub URLs) should wrap instead of forcing horizontal overflow */
+  .section.hero.is-light a,
+  .section.hero.is-light code,
+  .section.hero.is-light pre {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   
   /* Grid demo content mobile */
@@ -1081,8 +1095,10 @@ a:focus {
   .tabs ul {
     flex-wrap: wrap;
     justify-content: center;
-    display: flex;
-    width: 100%;
+    display: inline-flex;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .tabs li {

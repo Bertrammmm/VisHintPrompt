@@ -6,7 +6,7 @@
 
 const SITE_CONFIG = {
   // ========== 版本信息 ==========
-  version: "2.4",  // 页面版本号，会显示在footer底部
+  version: "2.5",  // 页面版本号，会显示在footer底部
 
   // ========== 域名和基础URL ==========
   domain: {
@@ -31,7 +31,7 @@ const SITE_CONFIG = {
     // 补充材料PDF路径
     supplementaryPdf: "static/pdfs/supplementary_material.pdf",
     // 论文海报PDF路径
-    posterPdf: "static/pdfs/sample.pdf"
+    posterPdf: "VisHintPrompt_TVCG/VisHintPrompt_TVCG.pdf"
   },
 
   // ========== 代码和数据仓库 ==========

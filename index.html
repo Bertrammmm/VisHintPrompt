@@ -58,8 +58,8 @@
   <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
   
   <!-- Additional SEO -->
-  <meta name="theme-color" content="#8899D9">
-  <meta name="msapplication-TileColor" content="#8899D9">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   
@@ -381,22 +381,20 @@
 </section>
 
 
-<!-- Teaser video-->
+<!-- Teaser image-->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
+      <figure class="image">
+        <img src="VisHintPrompt_TVCG/figs/teaser.png" alt="VisHintPrompt overview" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      </figure>
       <h2 class="subtitle has-text-centered">
         VisHintPrompt: A scaffolded visual hint prompting strategy for fine-grained numerical inference from charts using pretrained MLLMs, without requiring additional training. The method progressively narrows the search region and supplies structured visual cues to guide accurate quantitative interpretation.
       </h2>
     </div>
   </div>
 </section>
-<!-- End teaser video -->
+<!-- End teaser image -->
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -589,7 +587,7 @@
             </div>
           </div>
 
-          <div class="box" style="margin-top: 2rem; background-color: var(--background-accent);">
+          <div class="box" style="margin-top: 2rem; background-color: #f5f5f5;">
             <h4 class="title is-5" data-en="Data Sources" data-zh="数据来源">数据来源</h4>
             <p data-en="All charts are programmatically rendered within a unified pipeline. The &quot;Real&quot; and &quot;Synthetic&quot; labels refer only to the provenance of the underlying numeric data, not visual rendering. Real charts are generated from real-world numeric tables, whereas synthetic charts rely on randomly sampled distributions with controlled statistical patterns. This design ensures consistent visual rendering while preserving semantic variability across data sources." data-zh="所有图表都在统一的管道中程序化渲染。&quot;真实&quot;和&quot;合成&quot;标签仅指底层数值数据的来源，而非视觉渲染。真实图表从真实世界的数值表格生成，而合成图表依赖于具有受控统计模式的随机采样分布。这种设计确保了视觉渲染的一致性，同时保留了跨数据源的语义可变性。">
               所有图表都在统一的管道中程序化渲染。"真实"和"合成"标签仅指底层数值数据的来源，
@@ -727,7 +725,7 @@
               <div class="box" style="margin-bottom: 1rem;">
                 <h4 class="title is-5" data-en="Point-wise Range-normalized Error (RNE)" data-zh="点级范围归一化误差 (RNE)">点级范围归一化误差 (RNE)</h4>
                 <p data-en="For a chart $c$ with ground truth values $\{v_i\}$ and predictions $\{\hat{v}_i\}$:" data-zh="对于具有真值 $\{v_i\}$ 和预测 $\{\hat{v}_i\}$ 的图表 $c$：">对于具有真值 $\{v_i\}$ 和预测 $\{\hat{v}_i\}$ 的图表 $c$：</p>
-                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center;">
+                <div style="background: linear-gradient(135deg, rgba(168, 158, 211, 0.15) 0%, rgba(150, 165, 216, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #8899D9;">
                   e<sup>RNE</sup><sub>c,i</sub> = |v̂<sub>i</sub> - v<sub>i</sub>| / (v<sub>max,c</sub> - v<sub>min,c</sub>)
                 </div>
                 <p style="margin-top: 0.5rem;" data-en="This normalization maps all errors into the [0,1] interval, enabling fair cross-chart comparison." data-zh="这种归一化将所有错误映射到 [0,1] 区间，实现跨图表的公平比较。">
@@ -738,7 +736,7 @@
               <div class="box">
                 <h4 class="title is-5" data-en="Point-wise Relative Error (RE)" data-zh="点级相对误差 (RE)">点级相对误差 (RE)</h4>
                 <p data-en="Relative error with respect to the ground truth value:" data-zh="相对于真值的相对误差：">相对于真值的相对误差：</p>
-                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center;">
+                <div style="background: linear-gradient(135deg, rgba(190, 140, 156, 0.15) 0%, rgba(193, 154, 139, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #BE8C9C;">
                   e<sup>RE</sup><sub>c,i</sub> = |v̂<sub>i</sub> - v<sub>i</sub>| / max(|v<sub>i</sub>|, ε)
                 </div>
                 <p style="margin-top: 0.5rem;" data-en="Captures the relative deviation from the true value, particularly informative when charts contain values with different magnitudes." data-zh="捕获相对于真值的相对偏差，当图表包含不同量级的数值时特别有用。">
@@ -753,7 +751,7 @@
               <div class="box" style="margin-bottom: 1rem;">
                 <h4 class="title is-5" data-en="Chart-level Error" data-zh="图表级错误">图表级错误</h4>
                 <p data-en="For a given point-wise error metric m ∈ {RNE, RE}:" data-zh="对于给定的点级错误指标 m ∈ {RNE, RE}：">对于给定的点级错误指标 m ∈ {RNE, RE}：</p>
-                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center;">
+                <div style="background: linear-gradient(135deg, rgba(193, 151, 99, 0.15) 0%, rgba(150, 165, 216, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #C29763;">
                   E<sup>(m)</sup><sub>c</sub> = (1/K<sub>c</sub>) Σ e<sup>(m)</sup><sub>c,i</sub>
                 </div>
                 <p style="margin-top: 0.5rem;" data-en="where K<sub>c</sub> denotes the number of data points in chart c. This produces a single error measure per chart." data-zh="其中 K<sub>c</sub> 表示图表 c 中的数据点数量。这为每个图表产生单一的错误度量。">
@@ -764,7 +762,7 @@
               <div class="box">
                 <h4 class="title is-5" data-en="Type-level Error" data-zh="类型级错误">类型级错误</h4>
                 <p data-en="For each chart type, the final score is computed by averaging the chart-level errors over all charts of that type:" data-zh="对于每个图表类型，最终分数通过对该类型所有图表的图表级错误求平均得到：">对于每个图表类型，最终分数通过对该类型所有图表的图表级错误求平均得到：</p>
-                <div style="background-color: #f9f9f9; padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center;">
+                <div style="background: linear-gradient(135deg, rgba(168, 158, 211, 0.15) 0%, rgba(193, 151, 99, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #A89ED3;">
                   E<sup>(m)</sup><sub>type</sub> = (1/C<sub>type</sub>) Σ E<sup>(m)</sup><sub>c</sub>
                 </div>
                 <p style="margin-top: 0.5rem;" data-en="where C<sub>type</sub> denotes the number of charts of that type. We report type-specific aggregates, avoiding cross-type mixing." data-zh="其中 C<sub>type</sub> 表示该类型的图表数量。我们报告类型特定的聚合结果，避免跨类型混合。">
@@ -774,7 +772,7 @@
             </div>
           </div>
 
-          <div class="box" style="margin-top: 2rem; background: linear-gradient(135deg, var(--background-accent) 0%, var(--background-secondary) 100%);">
+          <div class="box" style="margin-top: 2rem; background-color: #e8f4f8;">
             <h3 class="title is-4" data-en="Model Selection" data-zh="模型选择">模型选择</h3>
             <div class="columns">
               <div class="column is-half">
@@ -1103,8 +1101,8 @@
             Ablation study of major elicitation components. We report RNE and RE (lower is better) on one representative chart type from each coordinate family. All variants are evaluated using Gemini-2.0-Flash.
           </p>
 
-          <div class="box" style="margin-top: 2rem; background: linear-gradient(135deg, var(--background-accent) 0%, var(--background-secondary) 100%);">
-            <h4 class="title is-5" data-en="Component Contributions" data-zh="组件贡献">Component Contributions</h4>
+          <div class="box" style="margin-top: 2rem; background: linear-gradient(135deg, rgba(190, 140, 156, 0.12) 0%, rgba(193, 154, 139, 0.12) 100%); border-left: 4px solid #BE8C9C;">
+            <h4 class="title is-5" data-en="Component Contributions" data-zh="组件贡献" style="color: #BE8C9C;">Component Contributions</h4>
             <ul>
               <li data-en="<strong>Progressive zoom-in refinement</strong> is the dominant contributor to numerical accuracy. Disabling it results in the most pronounced performance drop across all chart types." data-zh="<strong>渐进式放大细化</strong>是数值准确性的主要贡献者。禁用它会导致所有图表类型上最显著的性能下降。"><strong>渐进式放大细化</strong>是数值准确性的主要贡献者。禁用它会导致所有图表类型上最显著的性能下降。</li>
               <li data-en="<strong>Axis-aware grid enhancement</strong> provides complementary benefits with varying strength across chart geometries." data-zh="<strong>轴感知网格增强</strong>提供互补的益处，在不同图表几何结构中的强度不同。"><strong>轴感知网格增强</strong>提供互补的益处，在不同图表几何结构中的强度不同。</li>
