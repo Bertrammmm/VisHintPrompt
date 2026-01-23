@@ -1,23 +1,38 @@
 /* Modern CSS Variables for consistent theming */
 :root {
-  --primary-color: #2563eb;
-  --primary-hover: #1d4ed8;
-  --secondary-color: #64748b;
-  --accent-color: #0ea5e9;
-  --text-primary: #1e293b;
-  --text-secondary: #64748b;
-  --text-light: #94a3b8;
+  /* Primary colors from paper palette */
+  --primary-color: #8899D9;
+  --primary-hover: #6B7FC4;
+  --secondary-color: #A89ED3;
+  --accent-color: #BE8C9C;
+  --accent-secondary: #C19A8B;
+  --accent-tertiary: #C29763;
+  --accent-blue: #96A5D8;
+  
+  /* Text colors - maintaining readability */
+  --text-primary: #2D2D3A;
+  --text-secondary: #5A5A6B;
+  --text-light: #8B8B9E;
+  
+  /* Background colors - using light tints from palette */
   --background-primary: #ffffff;
-  --background-secondary: #f8fafc;
-  --background-accent: #f1f5f9;
-  --border-color: #e2e8f0;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-subtle: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  --background-secondary: #F8F7FC;
+  --background-accent: #F3F2F8;
+  --background-warm: #FDF8F6;
+  
+  /* Border and shadow */
+  --border-color: #E5E3ED;
+  --shadow-sm: 0 1px 2px 0 rgba(136, 153, 217, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(136, 153, 217, 0.12), 0 2px 4px -2px rgba(136, 153, 217, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(136, 153, 217, 0.15), 0 4px 6px -4px rgba(136, 153, 217, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(136, 153, 217, 0.18), 0 8px 10px -6px rgba(136, 153, 217, 0.12);
+  
+  /* Gradients using palette colors */
+  --gradient-primary: linear-gradient(135deg, #8899D9 0%, #A89ED3 100%);
+  --gradient-accent: linear-gradient(135deg, #BE8C9C 0%, #C19A8B 100%);
+  --gradient-subtle: linear-gradient(135deg, #F8F7FC 0%, #F3F2F8 100%);
+  --gradient-warm: linear-gradient(135deg, #FDF8F6 0%, #F8F4F0 100%);
+  
   --border-radius: 12px;
   --border-radius-lg: 16px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -76,7 +91,7 @@ figure.image img {
 .button.is-dark:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  background: var(--primary-color) !important;
+  background: var(--secondary-color) !important;
 }
 
 .button.is-dark:active {
@@ -114,6 +129,7 @@ figure.image img {
   background: var(--background-secondary);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+  background-image: linear-gradient(to bottom, var(--background-secondary), var(--background-accent));
 }
 
 .hero-body {
@@ -205,7 +221,7 @@ figure.image img {
     height: 2px;
     bottom: -2px;
     left: 0;
-    background: var(--gradient-accent);
+    background: var(--gradient-primary);
     transition: var(--transition);
 }
 
@@ -309,13 +325,13 @@ figure.image img {
 
 /* Pagination and Misc Improvements */
 .slider-pagination .slider-page {
-  background: var(--primary-color);
+  background: var(--accent-color);
   border-radius: 50%;
   transition: var(--transition);
 }
 
 .slider-pagination .slider-page.is-active {
-  background: var(--primary-hover);
+  background: var(--primary-color);
   transform: scale(1.2);
 }
 
@@ -343,7 +359,7 @@ figure.image img {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: var(--gradient-accent);
+  background: var(--gradient-primary);
   border-radius: 2px;
 }
 
@@ -428,7 +444,7 @@ code {
 }
 
 .copy-bibtex-btn.copied {
-  background: #10b981;
+  background: var(--accent-secondary);
 }
 
 .copy-bibtex-btn.copied .copy-text::after {
@@ -781,7 +797,7 @@ a:focus {
 
 .tab-item.is-active a {
   color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
+  border-bottom-color: var(--secondary-color);
   font-weight: 600;
 }
 
@@ -793,8 +809,23 @@ a:focus {
 .grid-demo-content {
   margin-top: 2rem;
   padding: 1.5rem;
-  background-color: var(--background-secondary);
+  background-color: var(--background-accent);
   border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+/* Box styling with new color scheme */
+.box {
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.box:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
 }
 
 /* Section subtitle spacing - consistent with other sections */
@@ -815,17 +846,17 @@ a:focus {
 }
 
 .table-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--background-accent);
   border-radius: 4px;
 }
 
 .table-container::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--secondary-color);
   border-radius: 4px;
 }
 
 .table-container::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--primary-color);
 }
 
 .table {
@@ -835,12 +866,12 @@ a:focus {
 }
 
 .table thead th {
-  background-color: #f5f5f5;
-  color: #333;
+  background: linear-gradient(135deg, var(--background-accent) 0%, var(--background-secondary) 100%);
+  color: var(--text-primary);
   font-weight: 600;
   text-align: center !important;
   vertical-align: middle;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   padding: 0.75rem 0.5rem;
   font-size: 0.9rem;
 }
@@ -857,16 +888,17 @@ a:focus {
   text-align: center;
   vertical-align: middle;
   padding: 0.6rem 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   font-size: 0.9rem;
 }
 
 .table tbody tr:nth-child(even) {
-  background-color: #f8f8f8;
+  background-color: var(--background-accent);
 }
 
 .table tbody tr:hover {
-  background-color: #f0f0f0;
+  background-color: var(--background-secondary);
+  background: linear-gradient(90deg, var(--background-accent) 0%, var(--background-secondary) 100%);
 }
 
 .table tbody td strong {
