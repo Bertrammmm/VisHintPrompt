@@ -1,41 +1,5 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
-// More Works Dropdown Functionality
-function toggleMoreWorks() {
-    const dropdown = document.getElementById('moreWorksDropdown');
-    const button = document.querySelector('.more-works-btn');
-    
-    if (dropdown.classList.contains('show')) {
-        dropdown.classList.remove('show');
-        button.classList.remove('active');
-    } else {
-        dropdown.classList.add('show');
-        button.classList.add('active');
-    }
-}
-
-// Close dropdown when clicking outside
-document.addEventListener('click', function(event) {
-    const container = document.querySelector('.more-works-container');
-    const dropdown = document.getElementById('moreWorksDropdown');
-    const button = document.querySelector('.more-works-btn');
-    
-    if (container && !container.contains(event.target)) {
-        dropdown.classList.remove('show');
-        button.classList.remove('active');
-    }
-});
-
-// Close dropdown on escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        const dropdown = document.getElementById('moreWorksDropdown');
-        const button = document.querySelector('.more-works-btn');
-        dropdown.classList.remove('show');
-        button.classList.remove('active');
-    }
-});
-
 // Copy BibTeX to clipboard
 function copyBibTeX() {
     const bibtexElement = document.getElementById('bibtex-code');
@@ -162,35 +126,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Video carousel autoplay when in view
-function setupVideoCarouselAutoplay() {
-    const carouselVideos = document.querySelectorAll('.results-carousel video');
-    
-    if (carouselVideos.length === 0) return;
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            if (entry.isIntersecting) {
-                // Video is in view, play it
-                video.play().catch(e => {
-                    // Autoplay failed, probably due to browser policy
-                    console.log('Autoplay prevented:', e);
-                });
-            } else {
-                // Video is out of view, pause it
-                video.pause();
-            }
-        });
-    }, {
-        threshold: 0.5 // Trigger when 50% of the video is visible
-    });
-    
-    carouselVideos.forEach(video => {
-        observer.observe(video);
-    });
-}
-
 // 从配置文件更新所有链接和版本信息
 function updateLinksFromConfig() {
     if (typeof SITE_CONFIG === 'undefined') {
@@ -282,22 +217,6 @@ function updateLinksFromConfig() {
         youtubeIframe.setAttribute('src', config.videos.youtubeUrl);
     }
 
-    // 更新相关论文链接
-    const workLinks = document.querySelectorAll('.work-item');
-    workLinks.forEach((link, index) => {
-        const workKey = 'work' + (index + 1);
-        if (config.relatedWorks[workKey]) {
-            const work = config.relatedWorks[workKey];
-            link.setAttribute('href', work.link);
-            const titleEl = link.querySelector('h5');
-            if (titleEl) titleEl.textContent = work.title;
-            const descEl = link.querySelector('p');
-            if (descEl) descEl.textContent = work.description;
-            const venueEl = link.querySelector('.work-venue');
-            if (venueEl) venueEl.textContent = work.venue;
-        }
-    });
-
     // 更新BibTeX中的URL
     const bibtexCode = document.querySelector('#bibtex-code code');
     if (bibtexCode) {
@@ -335,8 +254,5 @@ $(document).ready(function() {
     var carousels = bulmaCarousel.attach('.carousel', options);
 	
     bulmaSlider.attach();
-    
-    // Setup video autoplay for carousel
-    setupVideoCarouselAutoplay();
 
 })

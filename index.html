@@ -246,54 +246,6 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-        <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab" data-en-title="View More Works from Our Lab" data-zh-title="查看更多实验室工作">
-      <i class="fas fa-flask"></i>
-      <span data-en="More Works" data-zh="更多作品">More Works</span>
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4 data-en="More Works from Our Lab" data-zh="我们实验室的更多工作">More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()" title="Close" aria-label="Close dropdown">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank" rel="noopener">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2025</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank" rel="noopener">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2025</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank" rel="noopener">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2025</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <main id="main-content">
   <section class="hero">
     <div class="hero-body">
@@ -386,7 +338,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <figure class="image">
-        <img src="VisHintPrompt_TVCG/figs/teaser.png" alt="VisHintPrompt overview" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <img src="VisHintPrompt_TVCG/figs/Introduction.png" alt="Examples of scatterplot data inference with an MLLM" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
       </figure>
       <h2 class="subtitle has-text-centered">
         VisHintPrompt: A scaffolded visual hint prompting strategy for fine-grained numerical inference from charts using pretrained MLLMs, without requiring additional training. The method progressively narrows the search region and supplies structured visual cues to guide accurate quantitative interpretation.
@@ -416,29 +368,6 @@
 </section>
 <!-- End paper abstract -->
 
-<!-- Introduction Figure Section -->
-<section class="section hero">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <div class="content has-text-justified">
-          <!-- Introduction Figure -->
-          <div class="columns is-centered">
-            <div class="column is-full">
-              <figure class="image">
-                <img src="VisHintPrompt_TVCG/figs/Introduction.png" alt="Examples of scatterplot data inference with an MLLM" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-              </figure>
-              <p class="has-text-centered" style="margin-top: 1rem; color: #666; font-style: italic;" data-en="An illustrative example of scatterplot data inference using an MLLM with or without visual hints (i.e., the grid here). Black text represents the ground truth, red text highlights large numerical extraction errors, and green text indicates accurate extraction with minimal deviation from the ground truth. Grid hints substantially improve extraction performance." data-zh="使用 MLLM 进行散点图数据推理的示例，展示了有无视觉提示（即网格）的效果。黑色文本表示真值，红色文本突出显示大的数值提取错误，绿色文本表示准确提取，与真值偏差最小。网格提示显著提高了提取性能。">
-                An illustrative example of scatterplot data inference using an MLLM with or without visual hints (i.e., the grid here). Black text represents the ground truth, red text highlights large numerical extraction errors, and green text indicates accurate extraction with minimal deviation from the ground truth. Grid hints substantially improve extraction performance.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Introduction Figure Section -->
 
 <!-- Method Overview -->
 <section class="section hero">
@@ -706,13 +635,18 @@
 </section>
 <!-- End Grid Generation Tool Demo Section -->
 
-<!-- Evaluation Methodology Demo Section -->
+<!-- Quantitative Results Section -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full">
-        <h2 class="title is-3 has-text-centered" data-en="Evaluation Methodology" data-zh="评估实验的基本逻辑和方法">评估实验的基本逻辑和方法</h2>
+        <h2 class="title is-3 has-text-centered" data-en="Quantitative Results" data-zh="定量评估">定量评估</h2>
         <div class="content has-text-justified">
+          <p data-en="This section presents the quantitative performance of MLLMs under VisHintPrompt. The evaluation covers more than 4,000 point-level prediction instances across Cartesian and polar chart families. All reported errors are Range-Normalized Error (RNE) and Relative Error (RE) as percentages, with lower values indicating better performance." data-zh="本节展示了 MLLM 在 VisHintPrompt 下的定量性能。评估涵盖超过 4,000 个点级预测实例，跨越直角坐标系和极坐标系图表家族。所有报告的错误均为范围归一化误差（RNE）和相对误差（RE），以百分比表示，数值越低表示性能越好。">
+            This section presents the quantitative performance of MLLMs under VisHintPrompt. The evaluation covers more than 4,000 point-level prediction instances across Cartesian and polar chart families. All reported errors are Range-Normalized Error (RNE) and Relative Error (RE) as percentages, with lower values indicating better performance.
+          </p>
+
+          <h3 class="title is-4 section-subtitle" data-en="Evaluation Methodology" data-zh="评估方法">评估方法</h3>
           <p data-en="To comprehensively evaluate the performance of <strong>VisHintPrompt</strong>, we adopt a hierarchical evaluation framework, from point-level errors to chart-level aggregation, and finally to type-level summaries." data-zh="为了全面评估 <strong>VisHintPrompt</strong> 的性能，我们采用分层评估框架，从点级错误到图表级聚合，再到类型级汇总。">
             为了全面评估 <strong>VisHintPrompt</strong> 的性能，我们采用分层评估框架，
             从点级错误到图表级聚合，再到类型级汇总。
@@ -720,10 +654,10 @@
 
           <div class="columns" style="margin-top: 2rem;">
             <div class="column is-half">
-              <h3 class="title is-4" data-en="Evaluation Metrics" data-zh="评估指标">评估指标</h3>
+              <h4 class="title is-5" data-en="Evaluation Metrics" data-zh="评估指标">评估指标</h4>
               
               <div class="box" style="margin-bottom: 1rem;">
-                <h4 class="title is-5" data-en="Point-wise Range-normalized Error (RNE)" data-zh="点级范围归一化误差 (RNE)">点级范围归一化误差 (RNE)</h4>
+                <h5 class="title is-6" data-en="Point-wise Range-normalized Error (RNE)" data-zh="点级范围归一化误差 (RNE)">点级范围归一化误差 (RNE)</h5>
                 <p data-en="For a chart $c$ with ground truth values $\{v_i\}$ and predictions $\{\hat{v}_i\}$:" data-zh="对于具有真值 $\{v_i\}$ 和预测 $\{\hat{v}_i\}$ 的图表 $c$：">对于具有真值 $\{v_i\}$ 和预测 $\{\hat{v}_i\}$ 的图表 $c$：</p>
                 <div style="background: linear-gradient(135deg, rgba(168, 158, 211, 0.15) 0%, rgba(150, 165, 216, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #8899D9;">
                   e<sup>RNE</sup><sub>c,i</sub> = |v̂<sub>i</sub> - v<sub>i</sub>| / (v<sub>max,c</sub> - v<sub>min,c</sub>)
@@ -734,7 +668,7 @@
               </div>
 
               <div class="box">
-                <h4 class="title is-5" data-en="Point-wise Relative Error (RE)" data-zh="点级相对误差 (RE)">点级相对误差 (RE)</h4>
+                <h5 class="title is-6" data-en="Point-wise Relative Error (RE)" data-zh="点级相对误差 (RE)">点级相对误差 (RE)</h5>
                 <p data-en="Relative error with respect to the ground truth value:" data-zh="相对于真值的相对误差：">相对于真值的相对误差：</p>
                 <div style="background: linear-gradient(135deg, rgba(190, 140, 156, 0.15) 0%, rgba(193, 154, 139, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #BE8C9C;">
                   e<sup>RE</sup><sub>c,i</sub> = |v̂<sub>i</sub> - v<sub>i</sub>| / max(|v<sub>i</sub>|, ε)
@@ -746,10 +680,10 @@
             </div>
 
             <div class="column is-half">
-              <h3 class="title is-4" data-en="Evaluation Hierarchy" data-zh="评估层次">评估层次</h3>
+              <h4 class="title is-5" data-en="Evaluation Hierarchy" data-zh="评估层次">评估层次</h4>
               
               <div class="box" style="margin-bottom: 1rem;">
-                <h4 class="title is-5" data-en="Chart-level Error" data-zh="图表级错误">图表级错误</h4>
+                <h5 class="title is-6" data-en="Chart-level Error" data-zh="图表级错误">图表级错误</h5>
                 <p data-en="For a given point-wise error metric m ∈ {RNE, RE}:" data-zh="对于给定的点级错误指标 m ∈ {RNE, RE}：">对于给定的点级错误指标 m ∈ {RNE, RE}：</p>
                 <div style="background: linear-gradient(135deg, rgba(193, 151, 99, 0.15) 0%, rgba(150, 165, 216, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #C29763;">
                   E<sup>(m)</sup><sub>c</sub> = (1/K<sub>c</sub>) Σ e<sup>(m)</sup><sub>c,i</sub>
@@ -760,7 +694,7 @@
               </div>
 
               <div class="box">
-                <h4 class="title is-5" data-en="Type-level Error" data-zh="类型级错误">类型级错误</h4>
+                <h5 class="title is-6" data-en="Type-level Error" data-zh="类型级错误">类型级错误</h5>
                 <p data-en="For each chart type, the final score is computed by averaging the chart-level errors over all charts of that type:" data-zh="对于每个图表类型，最终分数通过对该类型所有图表的图表级错误求平均得到：">对于每个图表类型，最终分数通过对该类型所有图表的图表级错误求平均得到：</p>
                 <div style="background: linear-gradient(135deg, rgba(168, 158, 211, 0.15) 0%, rgba(193, 151, 99, 0.15) 100%); padding: 1rem; border-radius: 4px; margin-top: 0.5rem; font-family: 'Courier New', monospace; text-align: center; border-left: 3px solid #A89ED3;">
                   E<sup>(m)</sup><sub>type</sub> = (1/C<sub>type</sub>) Σ E<sup>(m)</sup><sub>c</sub>
@@ -773,10 +707,10 @@
           </div>
 
           <div class="box" style="margin-top: 2rem; background-color: #e8f4f8;">
-            <h3 class="title is-4" data-en="Model Selection" data-zh="模型选择">模型选择</h3>
+            <h4 class="title is-5" data-en="Model Selection" data-zh="模型选择">模型选择</h4>
             <div class="columns">
               <div class="column is-half">
-                <h4 class="title is-5" data-en="Closed-source MLLMs" data-zh="闭源 MLLM">闭源 MLLM</h4>
+                <h5 class="title is-6" data-en="Closed-source MLLMs" data-zh="闭源 MLLM">闭源 MLLM</h5>
                 <ul>
                   <li data-en="<strong>GPT-4o</strong> — A general-purpose vision-language model with robust perception and reasoning capabilities" data-zh="<strong>GPT-4o</strong> — 具有强大感知和推理能力的通用视觉-语言模型"><strong>GPT-4o</strong> — 具有强大感知和推理能力的通用视觉-语言模型</li>
                   <li data-en="<strong>Gemini 2.0 Flash</strong> — An efficient high-throughput model with competitive visual understanding" data-zh="<strong>Gemini 2.0 Flash</strong> — 高效高吞吐量模型，具有竞争力的视觉理解能力"><strong>Gemini 2.0 Flash</strong> — 高效高吞吐量模型，具有竞争力的视觉理解能力</li>
@@ -784,7 +718,7 @@
                 </ul>
               </div>
               <div class="column is-half">
-                <h4 class="title is-5" data-en="Open-source MLLMs" data-zh="开源 MLLM">开源 MLLM</h4>
+                <h5 class="title is-6" data-en="Open-source MLLMs" data-zh="开源 MLLM">开源 MLLM</h5>
                 <ul>
                   <li data-en="<strong>InternVL3-78B</strong> — A large high-capacity open-source VLM with strong visual recognition" data-zh="<strong>InternVL3-78B</strong> — 大型高容量开源 VLM，具有强大的视觉识别能力"><strong>InternVL3-78B</strong> — 大型高容量开源 VLM，具有强大的视觉识别能力</li>
                   <li data-en="<strong>Pixtral-12B-2409</strong> — A transformer-based multimodal model with competitive image understanding" data-zh="<strong>Pixtral-12B-2409</strong> — 基于 Transformer 的多模态模型，具有竞争力的图像理解能力"><strong>Pixtral-12B-2409</strong> — 基于 Transformer 的多模态模型，具有竞争力的图像理解能力</li>
@@ -797,24 +731,6 @@
               VisHintPrompt 提供结构化的图表特定视觉提示，使这些能力能够更有效地被激活和利用。
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Evaluation Methodology Demo Section -->
-
-
-<!-- Quantitative Results Section -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full">
-        <h2 class="title is-3 has-text-centered" data-en="Quantitative Results" data-zh="定量结果">Quantitative Results</h2>
-        <div class="content has-text-justified">
-          <p data-en="This section presents the quantitative performance of MLLMs under VisHintPrompt. The evaluation covers more than 4,000 point-level prediction instances across Cartesian and polar chart families. All reported errors are Range-Normalized Error (RNE) and Relative Error (RE) as percentages, with lower values indicating better performance." data-zh="本节展示了 MLLM 在 VisHintPrompt 下的定量性能。评估涵盖超过 4,000 个点级预测实例，跨越直角坐标系和极坐标系图表家族。所有报告的错误均为范围归一化误差（RNE）和相对误差（RE），以百分比表示，数值越低表示性能越好。">
-            This section presents the quantitative performance of MLLMs under VisHintPrompt. The evaluation covers more than 4,000 point-level prediction instances across Cartesian and polar chart families. All reported errors are Range-Normalized Error (RNE) and Relative Error (RE) as percentages, with lower values indicating better performance.
-          </p>
 
           <h3 class="title is-4 section-subtitle" data-en="Overall Performance" data-zh="整体性能">Overall Performance</h3>
           <p data-en="Averaged over five MLLMs and nine chart types, VisHintPrompt leads to overall reductions in numerical error (RNE and RE) compared to the baseline. These reductions are observed across all five evaluated MLLMs. Specifically, across all model–chart type combinations, type-level RNE and RE decrease in 32 of the 45 cases, with closed-source MLLMs achieving improvements on at least 7 of the 9 chart types, while open-source MLLMs also improve on at least 5 of the 9." data-zh="在五个 MLLM 和九种图表类型上平均，VisHintPrompt 相比基线方法在数值误差（RNE 和 RE）上实现了整体降低。这些降低在所有五个评估的 MLLM 中都观察到。具体而言，在所有模型-图表类型组合中，类型级 RNE 和 RE 在 45 个案例中有 32 个降低，闭源 MLLM 在至少 7 种图表类型上实现改进，而开源 MLLM 也在至少 5 种图表类型上实现改进。">
@@ -853,7 +769,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr class="baseline-row">
                   <td rowspan="2">GPT-4o</td>
                   <td>Baseline</td>
                   <td>6.72</td><td>4.69</td>
@@ -867,7 +783,7 @@
                   <td><strong>2.64</strong></td><td><strong>30.93</strong></td>
                   <td>8.94</td><td>26.5</td>
                 </tr>
-                <tr>
+                <tr class="method-row">
                   <td><strong>VisHintPrompt</strong></td>
                   <td><strong>3.44</strong></td><td><strong>2.23</strong></td>
                   <td><strong>3.38</strong></td><td><strong>10.90</strong></td>
@@ -880,7 +796,7 @@
                   <td>7.94</td><td>67.15</td>
                   <td><strong>6.25</strong></td><td><strong>21.1</strong></td>
                 </tr>
-                <tr>
+                <tr class="baseline-row">
                   <td rowspan="2">Gemini 2.0 Flash</td>
                   <td>Baseline</td>
                   <td>3.08</td><td>13.43</td>
@@ -894,7 +810,7 @@
                   <td>2.81</td><td>27.84</td>
                   <td>6.52</td><td>18.78</td>
                 </tr>
-                <tr>
+                <tr class="method-row">
                   <td><strong>VisHintPrompt</strong></td>
                   <td><strong>1.38</strong></td><td><strong>4.30</strong></td>
                   <td><strong>1.41</strong></td><td><strong>4.06</strong></td>
@@ -907,7 +823,7 @@
                   <td><strong>1.75</strong></td><td><strong>16.92</strong></td>
                   <td><strong>3.18</strong></td><td><strong>9.23</strong></td>
                 </tr>
-                <tr>
+                <tr class="baseline-row">
                   <td rowspan="2">Gemini 2.5 Flash</td>
                   <td>Baseline</td>
                   <td>3.19</td><td>9.44</td>
@@ -921,7 +837,7 @@
                   <td>2.45</td><td>21.56</td>
                   <td>6.41</td><td>19.79</td>
                 </tr>
-                <tr>
+                <tr class="method-row">
                   <td><strong>VisHintPrompt</strong></td>
                   <td><strong>2.62</strong></td><td><strong>7.20</strong></td>
                   <td><strong>3.10</strong></td><td><strong>7.89</strong></td>
@@ -934,7 +850,7 @@
                   <td><strong>1.47</strong></td><td><strong>13.38</strong></td>
                   <td><strong>2.94</strong></td><td><strong>9.04</strong></td>
                 </tr>
-                <tr>
+                <tr class="baseline-row">
                   <td rowspan="2">InternVL3-78B</td>
                   <td>Baseline</td>
                   <td>3.30</td><td>2.19</td>
@@ -948,7 +864,7 @@
                   <td><strong>2.28</strong></td><td>29.89</td>
                   <td>5.52</td><td>16.37</td>
                 </tr>
-                <tr>
+                <tr class="method-row">
                   <td><strong>VisHintPrompt</strong></td>
                   <td><strong>1.45</strong></td><td><strong>1.01</strong></td>
                   <td><strong>3.79</strong></td><td><strong>9.95</strong></td>
@@ -961,7 +877,7 @@
                   <td>3.02</td><td><strong>26.95</strong></td>
                   <td><strong>3.64</strong></td><td><strong>11.0</strong></td>
                 </tr>
-                <tr>
+                <tr class="baseline-row">
                   <td rowspan="2">Pixtral-12B-2409</td>
                   <td>Baseline</td>
                   <td>7.38</td><td>4.86</td>
@@ -975,7 +891,7 @@
                   <td>9.73</td><td>84.60</td>
                   <td>12.14</td><td>37.4</td>
                 </tr>
-                <tr>
+                <tr class="method-row">
                   <td><strong>VisHintPrompt</strong></td>
                   <td><strong>4.73</strong></td><td><strong>3.22</strong></td>
                   <td><strong>6.36</strong></td><td><strong>9.32</strong></td>
@@ -988,7 +904,7 @@
                   <td><strong>6.15</strong></td><td><strong>44.82</strong></td>
                   <td><strong>9.50</strong></td><td><strong>26.32</strong></td>
                 </tr>
-                <tr style="border-top: 2px solid #333;">
+                <tr class="avg-row baseline-row">
                   <td rowspan="2"><strong>Avg.</strong></td>
                   <td>Baseline</td>
                   <td>4.73</td><td>6.92</td>
@@ -1002,7 +918,7 @@
                   <td><strong>3.98</strong></td><td>38.96</td>
                   <td>7.91</td><td>23.77</td>
                 </tr>
-                <tr style="border-top: 2px solid #333;">
+                <tr class="avg-row method-row">
                   <td><strong>VisHintPrompt</strong></td>
                   <td><strong>2.72</strong></td><td><strong>3.59</strong></td>
                   <td><strong>3.61</strong></td><td><strong>8.42</strong></td>
@@ -1018,7 +934,7 @@
               </tbody>
             </table>
           </div>
-          <p class="has-text-centered" style="margin-top: 1rem; color: #666; font-size: 0.9rem;" data-en="Main experimental results across five MLLMs on nine chart types. We report Range-Normalized Error (RNE) and Relative Error (RE; lower is better) for both the baseline (original charts) and our VisHintPrompt method. Bold numbers indicate improvements over baseline." data-zh="五个 MLLM 在九种图表类型上的主要实验结果。我们报告了基线方法（原始图表）和我们的 VisHintPrompt 方法的范围归一化误差（RNE）和相对误差（RE；越低越好）。加粗数字表示相比基线的改进。">
+          <p class="has-text-centered" style="margin-top: 1.5rem; color: #6b7280; font-size: 0.875rem; font-style: italic; line-height: 1.6;" data-en="Main experimental results across five MLLMs on nine chart types. We report Range-Normalized Error (RNE) and Relative Error (RE; lower is better) for both the baseline (original charts) and our VisHintPrompt method. Bold numbers indicate improvements over baseline." data-zh="五个 MLLM 在九种图表类型上的主要实验结果。我们报告了基线方法（原始图表）和我们的 VisHintPrompt 方法的范围归一化误差（RNE）和相对误差（RE；越低越好）。加粗数字表示相比基线的改进。">
             Main experimental results across five MLLMs on nine chart types. We report Range-Normalized Error (RNE) and Relative Error (RE; lower is better) for both the baseline (original charts) and our VisHintPrompt method. Bold numbers indicate improvements over baseline.
           </p>
 
@@ -1097,7 +1013,7 @@
               </tbody>
             </table>
           </div>
-          <p class="has-text-centered" style="margin-top: 1rem; color: #666; font-size: 0.9rem;" data-en="Ablation study of major elicitation components. We report RNE and RE (lower is better) on one representative chart type from each coordinate family. All variants are evaluated using Gemini-2.0-Flash." data-zh="主要启发组件的消融研究。我们报告了每个坐标系家族中一个代表性图表类型的 RNE 和 RE（越低越好）。所有变体均使用 Gemini-2.0-Flash 进行评估。">
+          <p class="has-text-centered" style="margin-top: 1.5rem; color: #6b7280; font-size: 0.875rem; font-style: italic; line-height: 1.6;" data-en="Ablation study of major elicitation components. We report RNE and RE (lower is better) on one representative chart type from each coordinate family. All variants are evaluated using Gemini-2.0-Flash." data-zh="主要启发组件的消融研究。我们报告了每个坐标系家族中一个代表性图表类型的 RNE 和 RE（越低越好）。所有变体均使用 Gemini-2.0-Flash 进行评估。">
             Ablation study of major elicitation components. We report RNE and RE (lower is better) on one representative chart type from each coordinate family. All variants are evaluated using Gemini-2.0-Flash.
           </p>
 
@@ -1121,31 +1037,58 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full">
-        <h2 class="title is-3 has-text-centered" data-en="Qualitative Results" data-zh="定性结果">Qualitative Results</h2>
+        <h2 class="title is-3 has-text-centered" data-en="Qualitative Analysis" data-zh="定性分析">Qualitative Analysis</h2>
         <div class="content has-text-justified">
-          <p data-en="Qualitative examples illustrating grid-aware enhancement and iterative visual feedback on different chart types." data-zh="展示网格感知增强和迭代视觉反馈在不同图表类型上的定性示例。">
-            Qualitative examples illustrating grid-aware enhancement and iterative visual feedback on different chart types.
+          <p data-en="To illustrate how <strong>VisHintPrompt</strong> operates and how its components contribute to numerical inference, we present a qualitative analysis with two representative cases. <strong>Case 1</strong> examines the effect of axis-aware grid enhancement and iterative visual feedback, showing how structured visual scaffolds progressively reduce localization ambiguity and stabilize value estimation. <strong>Case 2</strong> focuses on the zoom-in refinement mechanism, illustrating how progressive amplification enables increasingly fine-grained value discrimination." data-zh="为了说明 <strong>VisHintPrompt</strong> 如何工作以及其组件如何促进数值推理，我们提出了两个代表性案例的定性分析。<strong>案例1</strong> 检验轴感知网格增强和迭代视觉反馈的效果，展示结构化视觉支架如何逐步减少定位模糊性并稳定数值估计。<strong>案例2</strong> 关注放大细化机制，说明渐进式放大如何实现越来越细粒度的数值判别。">
+            To illustrate how <strong>VisHintPrompt</strong> operates and how its components contribute to numerical inference, we present a qualitative analysis with two representative cases. <strong>Case 1</strong> examines the effect of axis-aware grid enhancement and iterative visual feedback, showing how structured visual scaffolds progressively reduce localization ambiguity and stabilize value estimation. <strong>Case 2</strong> focuses on the zoom-in refinement mechanism, illustrating how progressive amplification enables increasingly fine-grained value discrimination.
           </p>
-          
-          <!-- Case Study Figures -->
-          <div class="columns is-centered" style="margin-top: 2rem;">
-            <div class="column is-full">
-              <figure class="image">
-                <img src="VisHintPrompt_TVCG/figs/case1.png" alt="Case study examples" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-              </figure>
-              <p class="has-text-centered" style="margin-top: 1rem; color: #666; font-style: italic;" data-en="Qualitative examples showing the effectiveness of VisHintPrompt across different chart types." data-zh="展示 VisHintPrompt 在不同图表类型上有效性的定性示例。">
-                Qualitative examples showing the effectiveness of VisHintPrompt across different chart types.
-              </p>
-            </div>
+
+          <h3 class="title is-4 section-subtitle" data-en="Case 1: Grid-aware Enhancement and Iterative Visual Feedback" data-zh="案例1：网格感知增强和迭代视觉反馈">Case 1: Grid-aware Enhancement and Iterative Visual Feedback</h3>
+          <p data-en="We qualitatively examine the effects of grid-aware enhancement and iterative visual feedback using three representative chart instances: a bubble chart, a horizontal bar chart, and a donut chart. Predictions are encoded as colored crosshairs by inference stage: <strong>baseline (blue)</strong>, <strong>grid-aware enhancement as the initial (round-0) visual feedback (red)</strong>, followed by the <strong>first and second rounds of visual feedback (purple and yellow)</strong>." data-zh="我们使用三个代表性图表实例定性检验网格感知增强和迭代视觉反馈的效果：气泡图、水平柱状图和甜甜圈图。预测通过推理阶段编码为彩色十字线：<strong>基线（蓝色）</strong>、<strong>网格感知增强作为初始（第0轮）视觉反馈（红色）</strong>，随后是<strong>第一轮和第二轮视觉反馈（紫色和黄色）</strong>。">
+            We qualitatively examine the effects of grid-aware enhancement and iterative visual feedback using three representative chart instances: a bubble chart, a horizontal bar chart, and a donut chart. Predictions are encoded as colored crosshairs by inference stage: <strong>baseline (blue)</strong>, <strong>grid-aware enhancement as the initial (round-0) visual feedback (red)</strong>, followed by the <strong>first and second rounds of visual feedback (purple and yellow)</strong>.
+          </p>
+
+          <div class="box" style="margin-top: 1.5rem; margin-bottom: 1.5rem; background-color: #f8f9fa; border-left: 4px solid #2563eb;">
+            <h4 class="title is-5" data-en="Key Observations" data-zh="主要观察">Key Observations</h4>
+            <ul style="margin-top: 0.5rem;">
+              <li data-en="<strong>Bubble Chart:</strong> Grid-enhanced predictions are consistently closer to the true bubble centers than baseline predictions, indicating that all examined data points benefit from grid augmentation. After visual feedback, final predictions (purple/yellow) are closer to the true centers of most bubbles than grid-enhanced predictions. Representative examples include bubbles <em>E08</em> and <em>D05</em>, where visual feedback effectively corrects substantial deviations that persist after the grid-based step." data-zh="<strong>气泡图：</strong>网格增强预测比基线预测更接近真实气泡中心，表明所有检查的数据点都从网格增强中受益。视觉反馈后，最终预测（紫色/黄色）比网格增强预测更接近大多数气泡的真实中心。代表性示例包括气泡 <em>E08</em> 和 <em>D05</em>，其中视觉反馈有效纠正了网格步骤后仍存在的大偏差。"><strong>Bubble Chart:</strong> Grid-enhanced predictions are consistently closer to the true bubble centers than baseline predictions, indicating that all examined data points benefit from grid augmentation. After visual feedback, final predictions (purple/yellow) are closer to the true centers of most bubbles than grid-enhanced predictions. Representative examples include bubbles <em>E08</em> and <em>D05</em>, where visual feedback effectively corrects substantial deviations that persist after the grid-based step.</li>
+              <li data-en="<strong>Horizontal Bar Chart:</strong> The grid-enhanced predictions align more closely with the true bar endpoints than the baseline, particularly for bars that exhibit larger estimation errors under the baseline setting. For example, bars corresponding to labels <em>C</em> and <em>I</em> show noticeable over-estimation in the baseline predictions, while grid augmentation stabilizes these predictions within a much narrower error range. Most bars already converge to stable predictions after the grid-based step, so visual feedback yields limited additional improvements." data-zh="<strong>水平柱状图：</strong>网格增强预测比基线更接近真实柱状端点，特别是对于在基线设置下表现出较大估计误差的柱状。例如，标签 <em>C</em> 和 <em>I</em> 对应的柱状在基线预测中显示出明显的过度估计，而网格增强将这些预测稳定在更窄的误差范围内。大多数柱状在网格步骤后已经收敛到稳定预测，因此视觉反馈产生的额外改进有限。"><strong>Horizontal Bar Chart:</strong> The grid-enhanced predictions align more closely with the true bar endpoints than the baseline, particularly for bars that exhibit larger estimation errors under the baseline setting. For example, bars corresponding to labels <em>C</em> and <em>I</em> show noticeable over-estimation in the baseline predictions, while grid augmentation stabilizes these predictions within a much narrower error range. Most bars already converge to stable predictions after the grid-based step, so visual feedback yields limited additional improvements.</li>
+              <li data-en="<strong>Donut Chart:</strong> Visual feedback further refines angle-based proportion inference by addressing several characteristic error patterns. Feedback mitigates large angular errors (e.g., Sector <em>B</em>) and reduces confusion between start and end angles in Sectors such as <em>C</em> and <em>E</em>, which can arise under the newly introduced angle-based numerical inference setting." data-zh="<strong>甜甜圈图：</strong>视觉反馈通过解决几个特征性错误模式进一步细化基于角度的比例推理。反馈减轻了大角度误差（例如扇形 <em>B</em>），并减少了扇形 <em>C</em> 和 <em>E</em> 中起始角和结束角之间的混淆，这可能在新的基于角度的数值推理设置下出现。"><strong>Donut Chart:</strong> Visual feedback further refines angle-based proportion inference by addressing several characteristic error patterns. Feedback mitigates large angular errors (e.g., Sector <em>B</em>) and reduces confusion between start and end angles in Sectors such as <em>C</em> and <em>E</em>, which can arise under the newly introduced angle-based numerical inference setting.</li>
+            </ul>
           </div>
 
           <div class="columns is-centered" style="margin-top: 2rem;">
             <div class="column is-full">
               <figure class="image">
-                <img src="VisHintPrompt_TVCG/figs/case1-1.png" alt="Case study with feedback rounds" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <img src="VisHintPrompt_TVCG/figs/case1-1.png" alt="Case 1: Grid-aware enhancement and iterative visual feedback" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
               </figure>
-              <p class="has-text-centered" style="margin-top: 1rem; color: #666; font-style: italic;" data-en="Qualitative examples illustrating grid-aware enhancement and iterative visual feedback (Case 1) on three chart types: bubble, horizontal bar, and donut. Colored crosshairs denote predictions from different stages: baseline (blue), grid-aware enhancement (red, also the round-0 of visual feedback), and the first and second feedback rounds (purple and yellow)." data-zh="展示网格感知增强和迭代视觉反馈（案例1）在三种图表类型上的定性示例：气泡图、水平柱状图和甜甜圈图。彩色十字线表示不同阶段的预测：基线（蓝色）、网格感知增强（红色，也是视觉反馈的第0轮）、第一轮和第二轮反馈（紫色和黄色）。">
-                Qualitative examples illustrating grid-aware enhancement and iterative visual feedback (Case 1) on three chart types: bubble, horizontal bar, and donut. Colored crosshairs denote predictions from different stages: baseline (blue), grid-aware enhancement (red, also the round-0 of visual feedback), and the first and second feedback rounds (purple and yellow).
+              <p class="has-text-centered" style="margin-top: 1rem; color: #6b7280; font-size: 0.875rem; font-style: italic; line-height: 1.6;" data-en="Qualitative examples illustrating grid-aware enhancement and iterative visual feedback (Case 1) on three chart types: bubble, horizontal bar, and donut. Colored crosshairs denote predictions from different stages: baseline (blue), grid-aware enhancement (red, also the round-0 of visual feedback), and the first and second feedback rounds (purple and yellow). Grid enhancement reduces coarse localization ambiguity, while iterative feedback further corrects large residual deviations and stabilizes predictions across chart types." data-zh="展示网格感知增强和迭代视觉反馈（案例1）在三种图表类型上的定性示例：气泡图、水平柱状图和甜甜圈图。彩色十字线表示不同阶段的预测：基线（蓝色）、网格感知增强（红色，也是视觉反馈的第0轮）、第一轮和第二轮反馈（紫色和黄色）。网格增强减少了粗定位模糊性，而迭代反馈进一步纠正了大的残余偏差并稳定了跨图表类型的预测。">
+                Qualitative examples illustrating grid-aware enhancement and iterative visual feedback (Case 1) on three chart types: bubble, horizontal bar, and donut. Colored crosshairs denote predictions from different stages: baseline (blue), grid-aware enhancement (red, also the round-0 of visual feedback), and the first and second feedback rounds (purple and yellow). Grid enhancement reduces coarse localization ambiguity, while iterative feedback further corrects large residual deviations and stabilizes predictions across chart types.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="title is-4 section-subtitle" style="margin-top: 3rem;" data-en="Case 2: Progressive Zoom-in Refinement" data-zh="案例2：渐进式放大细化">Case 2: Progressive Zoom-in Refinement</h3>
+          <p data-en="Four chart types are used to illustrate progressive zoom-in refinement: a horizontal bar chart, a scatterplot, a donut chart, and a rose chart. The refinement crop is generated around the model's prediction from the previous round. For horizontal bar charts, scatterplots, and rose charts, correctness is indicated when the target mark lies near the geometric center of the cropped region. For donut charts, correctness is indicated when the target sector is centered in the cropped view." data-zh="使用四种图表类型来说明渐进式放大细化：水平柱状图、散点图、甜甜圈图和玫瑰图。细化裁剪围绕模型上一轮的预测生成。对于水平柱状图、散点图和玫瑰图，当目标标记位于裁剪区域的几何中心附近时表示正确。对于甜甜圈图，当目标扇形在裁剪视图中居中时表示正确。">
+            Four chart types are used to illustrate progressive zoom-in refinement: a horizontal bar chart, a scatterplot, a donut chart, and a rose chart. The refinement crop is generated around the model's prediction from the previous round. For horizontal bar charts, scatterplots, and rose charts, correctness is indicated when the target mark lies near the geometric center of the cropped region. For donut charts, correctness is indicated when the target sector is centered in the cropped view.
+          </p>
+
+          <div class="box" style="margin-top: 1.5rem; margin-bottom: 1.5rem; background-color: #f8f9fa; border-left: 4px solid #2563eb;">
+            <h4 class="title is-5" data-en="Key Observations" data-zh="主要观察">Key Observations</h4>
+            <ul style="margin-top: 0.5rem;">
+              <li data-en="<strong>Progressive Convergence:</strong> For all four chart types, refinement starts from the model's feedback-based prediction in the previous round, and successive zoom-in steps progressively move the prediction closer to the geometric center of the cropped region, even when the initial feedback prediction exhibits large deviations." data-zh="<strong>渐进收敛：</strong>对于所有四种图表类型，细化从模型上一轮的基于反馈的预测开始，连续的放大步骤逐步将预测移近裁剪区域的几何中心，即使初始反馈预测表现出大偏差也是如此。"><strong>Progressive Convergence:</strong> For all four chart types, refinement starts from the model's feedback-based prediction in the previous round, and successive zoom-in steps progressively move the prediction closer to the geometric center of the cropped region, even when the initial feedback prediction exhibits large deviations.</li>
+              <li data-en="<strong>Spatial Uncertainty Reduction:</strong> The progressive zoom-in process visibly reduces spatial uncertainty in the qualitative trajectories, while the corresponding numerical improvements after fine-grained refinement are reflected in the quantitative results." data-zh="<strong>空间不确定性减少：</strong>渐进式放大过程明显减少了定性轨迹中的空间不确定性，而细粒度细化后的相应数值改进反映在定量结果中。"><strong>Spatial Uncertainty Reduction:</strong> The progressive zoom-in process visibly reduces spatial uncertainty in the qualitative trajectories, while the corresponding numerical improvements after fine-grained refinement are reflected in the quantitative results.</li>
+              <li data-en="<strong>Cross-family Applicability:</strong> These qualitative and quantitative observations demonstrate the robustness, generality, and cross-family applicability of VisHintPrompt under progressive zoom-in refinement across both Cartesian and polar coordinate systems." data-zh="<strong>跨家族适用性：</strong>这些定性和定量观察证明了 VisHintPrompt 在跨直角坐标系和极坐标系的渐进式放大细化下的鲁棒性、通用性和跨家族适用性。"><strong>Cross-family Applicability:</strong> These qualitative and quantitative observations demonstrate the robustness, generality, and cross-family applicability of VisHintPrompt under progressive zoom-in refinement across both Cartesian and polar coordinate systems.</li>
+            </ul>
+          </div>
+
+          <div class="columns is-centered" style="margin-top: 2rem;">
+            <div class="column is-full">
+              <figure class="image">
+                <img src="VisHintPrompt_TVCG/figs/case1.png" alt="Case 2: Progressive zoom-in refinement" loading="lazy" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+              </figure>
+              <p class="has-text-centered" style="margin-top: 1rem; color: #6b7280; font-size: 0.875rem; font-style: italic; line-height: 1.6;" data-en="Qualitative examples of VisHintPrompt on four chart families: horizontal bar, scatterplot, donut, and rose. Each dashed red box highlights the iterative zoom-in process guided by the feedback prediction, illustrating how the model progressively converges to the correct region in the final refinement component." data-zh="VisHintPrompt 在四种图表家族上的定性示例：水平柱状图、散点图、甜甜圈图和玫瑰图。每个红色虚线框突出显示由反馈预测引导的迭代放大过程，说明模型如何在最终细化组件中逐步收敛到正确区域。">
+                Qualitative examples of VisHintPrompt on four chart families: horizontal bar, scatterplot, donut, and rose. Each dashed red box highlights the iterative zoom-in process guided by the feedback prediction, illustrating how the model progressively converges to the correct region in the final refinement component.
               </p>
             </div>
           </div>
@@ -1180,58 +1123,6 @@
 <!-- End youtube video -->
 
 
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3" data-en="Another Carousel" data-zh="其他轮播">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title" data-en="Poster" data-zh="海报">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe src="static/pdfs/sample.pdf" width="100%" height="550" title="Paper Poster">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
 
 
 

@@ -6,7 +6,7 @@
 
 const SITE_CONFIG = {
   // ========== 版本信息 ==========
-  version: "2.5",  // 页面版本号，会显示在footer底部
+  version: "2.6",  // 页面版本号，会显示在footer底部
 
   // ========== 域名和基础URL ==========
   domain: {
