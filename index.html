@@ -80,6 +80,7 @@
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="static/css/static-demo.css">
   
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -107,6 +108,7 @@
   <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
+  <script defer src="static/js/static-demo.js"></script>
   
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
@@ -627,6 +629,74 @@
               <p><strong data-en="Applicable Chart Types:" data-zh="适用图表类型：">适用图表类型：</strong><span data-en="Pie charts, donut charts (polar division), radar charts, rose charts (concentric rings)" data-zh="饼图、甜甜圈图（极角分割）、雷达图、玫瑰图（同心环）">饼图、甜甜圈图（极角分割）、雷达图、玫瑰图（同心环）</span></p>
             </div>
           </div>
+
+          <div class="cached-demo-bridge" id="cached-demo" aria-live="polite">
+            <div class="cached-demo-intro">
+              <div>
+                <p class="cached-demo-eyebrow">Interactive grid-hint gallery</p>
+                <h3 class="title is-4" data-en="From axis priors to rendered grid hints" data-zh="从轴先验到渲染后的网格提示">From axis priors to rendered grid hints</h3>
+                <p data-en="Select a cached chart to see how axis prior extraction and tick-to-pixel alignment become an explicit geometry-aligned grid hint. Use the controls below to switch between the original chart, the grid hint, and the colored inspection overlay when available." data-zh="选择一个缓存图表，查看轴先验提取和刻度到像素的对齐如何转化为显式的几何对齐网格提示。使用下方控件可在原图、网格提示和彩色检查叠加图之间切换。">
+                  Select a cached chart to see how axis prior extraction and tick-to-pixel alignment become an explicit geometry-aligned grid hint. Use the controls below to switch between the original chart, the grid hint, and the colored inspection overlay when available.
+                </p>
+                <p class="cached-demo-note" data-en="This page is deployed as a static GitHub Pages site. Because GitHub Pages cannot provide backend services, custom image upload and on-page processing are not available here. Instead, we provide the complete cached paper dataset generated from local full runs for reproducibility and demonstration; all cached results are produced with the VisHintPrompt framework using Gemini-2.5-flash-lite." data-zh="当前页面运行在 GitHub Pages 静态部署环境。GitHub Pages 不能提供后端服务，因此无法在页面上处理自定义上传图片。我们已如实提供本地完整运行后的论文数据集缓存，用于论文完整性与功能演示；这些缓存均基于 VisHintPrompt 框架和 Gemini-2.5-flash-lite 得到。">
+                  This page is deployed as a static GitHub Pages site. Because GitHub Pages cannot provide backend services, custom image upload and on-page processing are not available here. Instead, we provide the complete cached paper dataset generated from local full runs for reproducibility and demonstration; all cached results are produced with the VisHintPrompt framework using Gemini-2.5-flash-lite.
+                </p>
+              </div>
+            </div>
+
+            <div class="cached-demo-gallery">
+              <div class="cached-demo-controls">
+                <div class="cached-demo-source" id="cached-demo-sources" role="group" aria-label="Dataset source"></div>
+                <div class="cached-demo-category" id="cached-demo-categories" role="group" aria-label="Chart category"></div>
+              </div>
+
+              <div class="cached-demo-workspace">
+                <section class="cached-demo-showcase">
+                  <div class="cached-demo-showcase-header">
+                    <div>
+                      <h4 id="cached-demo-title">Cached sample</h4>
+                    </div>
+                    <div class="cached-demo-showcase-tools">
+                      <div class="cached-demo-views" id="cached-demo-views" role="group" aria-label="Grid hint mode">
+                        <button type="button" data-view="original">Original</button>
+                        <button type="button" data-view="standard">Grid</button>
+                        <button type="button" data-view="colored">Colored</button>
+                      </div>
+                      <div class="cached-demo-meta" id="cached-demo-stats"></div>
+                    </div>
+                  </div>
+                  <div class="cached-demo-figure-frame" id="cached-demo-figure">
+                    <div class="cached-demo-empty">Choose a cached sample to preview the chart.</div>
+                  </div>
+                  <p class="cached-demo-caption" id="cached-demo-caption"></p>
+                </section>
+
+                <section class="cached-demo-result-panel">
+                  <div class="cached-demo-panel-heading">
+                    <div>
+                      <h4>Evaluation prediction</h4>
+                      <p>Reader-facing axis priors and cached prediction values.</p>
+                    </div>
+                    <div class="cached-demo-result-tabs" id="cached-demo-result-tabs" role="group" aria-label="Evaluation result view">
+                      <button type="button" data-result-view="summary">Summary</button>
+                      <button type="button" data-result-view="objects">Objects</button>
+                    </div>
+                  </div>
+                  <div class="cached-demo-result" id="cached-demo-results">
+                    <div class="cached-demo-empty">Cached prediction results will appear after selecting a sample.</div>
+                  </div>
+                </section>
+              </div>
+
+              <section class="cached-demo-sample-panel">
+                <div class="cached-demo-panel-heading">
+                  <h4>Choose an example</h4>
+                  <p>Browse representative cached charts from the selected family.</p>
+                </div>
+                <div class="cached-demo-samples" id="cached-demo-samples"></div>
+              </section>
+            </div>
+          </div>
           
         </div>
       </div>
@@ -1098,30 +1168,6 @@
   </div>
 </section>
 <!-- End Qualitative Results Section -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3" data-en="Video Presentation" data-zh="视频演示">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen title="VisHintPrompt Video Presentation"></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End youtube video -->
-
 
 
 
